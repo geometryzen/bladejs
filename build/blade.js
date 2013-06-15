@@ -4,7 +4,7 @@
   CARTESIAN_2 = "Cartesian2";
   CARTESIAN_3 = "Cartesian3";
   BLADE = {
-    VERSION: "1.0.1"
+    VERSION: "0.0.0"
   };
   strFromCartesian2 = function(w, x, y, xy) {
     var append, sb, str;
