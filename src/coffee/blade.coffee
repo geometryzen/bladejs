@@ -3,7 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = VERSION: "0.0.0" 
+  BLADE = VERSION: "1.0.1" 
   
   strFromCartesian2 = (w, x, y, xy) ->
     sb = []
