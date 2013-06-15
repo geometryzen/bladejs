@@ -3,7 +3,37 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = VERSION: "1.0.0" 
+  BLADE = VERSION: "0.0.0" 
+  
+  strFromCartesian2 = (w, x, y, xy) ->
+    sb = []
+    append = (number, label) ->
+      if number isnt 0
+        # Determine and conditionally add a sign.
+        if number >= 0
+          if sb.length > 0
+            sb.push "+"
+        else
+          sb.push "-"
+        # If the absolute value of the number is unity then we only need the label.
+        n = Math.abs number
+        if n is 1
+          sb.push label
+        else
+          sb.push n.toString()
+          # We only need the label if it contributes under multiplication.
+          if label isnt "1"
+            sb.push "*"
+            sb.push label
+    append(w,  "1")
+    append(x,  "i")
+    append(y,  "j")
+    append(xy, "I")
+    if sb.length > 0
+      str = sb.join ""
+    else
+      str = "0"
+    return str
 
   ###
     Cartesian2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
@@ -13,7 +43,7 @@
     constructor: (@w, @x, @y, @xy) ->
 
     toString: () ->
-      "Under construction"
+      strFromCartesian2(@w, @x, @y, @xy)
 
   BLADE[CARTESIAN_2] = Cartesian2
 

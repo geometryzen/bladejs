@@ -10,6 +10,6 @@ describe('Cartesian2', function() {
 
   it('Cartesian2 toString()', function() {
     var a = new BLADE.Cartesian2(1, 2, 3, 4);
-    expect(a.toString()).toBe("Under construction");
+    expect(a.toString()).toBe("1+2*i+3*j+4*I");
   });
 });
