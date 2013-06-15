@@ -93,7 +93,7 @@ module.exports = function (grunt) {
 
     watch: {
       app: {
-        files: ['src/**/*.coffee'],
+        files: ['src/**/*.coffee', 'spec/**/*.js'],
         tasks: ['coffee:myproject', 'jshint:myproject', 'concat:myproject', 'uglify:myproject', 'jasmine:myproject']
       }
     },

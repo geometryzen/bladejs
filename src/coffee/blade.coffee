@@ -3,7 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = VERSION: "0.1.1" 
+  BLADE = VERSION: "1.0.0" 
 
   ###
     Cartesian2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
@@ -11,6 +11,9 @@
   ###
   class Cartesian2
     constructor: (@w, @x, @y, @xy) ->
+
+    toString: () ->
+      "Under construction"
 
   BLADE[CARTESIAN_2] = Cartesian2
 

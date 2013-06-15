@@ -4,7 +4,7 @@
   CARTESIAN_2 = "Cartesian2";
   CARTESIAN_3 = "Cartesian3";
   BLADE = {
-    VERSION: "0.1.1"
+    VERSION: "1.0.0"
   };
   /*
     Cartesian2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
@@ -18,6 +18,10 @@
       this.y = y;
       this.xy = xy;
     }
+
+    Cartesian2.prototype.toString = function() {
+      return "Under construction";
+    };
 
     return Cartesian2;
 
