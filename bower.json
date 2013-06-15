@@ -1,7 +1,7 @@
 {
   "name": "bladejs",
-  "version": "0.1.0",
-  "main": "./src/js/blade.js",
+  "version": "0.1.1",
+  "main": "./build/blade.min.js",
   "description": "JavaScript Geometric Algebra library",
   "author": {
     "name": "David Holmes",
@@ -21,5 +21,8 @@
     }
   ],
   "dependencies": {
-  }
+  },
+  "ignore": [
+    "node_modules"
+  ]
 }

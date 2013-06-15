@@ -3,7 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = VERSION: "0.1.0" 
+  BLADE = VERSION: "0.1.1" 
 
   ###
     Cartesian2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.

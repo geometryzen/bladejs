@@ -43,7 +43,7 @@ module.exports = function (grunt) {
     concat: {
       myproject: {
         src: ['src/js/blade.js'],
-        dest: 'build/<%= pkg.name %>.js',
+        dest: 'build/blade.js',
         separator: ';'
       }
     },
@@ -56,14 +56,14 @@ module.exports = function (grunt) {
         codegen: {quote_keys: true}
       },
       myproject: {
-        src: 'build/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        src: 'build/blade.js',
+        dest: 'build/blade.min.js'
       }
     },
 
     jasmine: {
       myproject: {
-        src: 'build/**/<%= pkg.name %>.min.js',
+        src: 'build/**/blade.min.js',
         options: {
           specs: 'spec/**/*.spec.js'
         }
@@ -76,13 +76,6 @@ module.exports = function (grunt) {
         ignoreLeaks: false,
         grep: 'food',
         reporter: 'spec'
-      },
-    },
-
-    min: {
-      app: {
-        src: ['src/js/<%= pkg.name %>.js'],
-        dest: 'src/js/<%= pkg.name %>.min.js'
       },
     },
 
