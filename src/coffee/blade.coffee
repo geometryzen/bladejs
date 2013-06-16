@@ -3,7 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = VERSION: "0.0.5"
+  BLADE = version: "0.0.5", description: "JavaScript Geometric Algebra library"
 
   stringFromMultivector = (m, labels) ->
     sb = []
@@ -42,7 +42,7 @@
       @xs = [w, x, y, xy]
       @length = 4
 
-    coordinates: -> [xs[0], xs[1], xs[2], xs[3]]
+    coordinates: -> [@xs[0], @xs[1], @xs[2], @xs[3]]
 
     coordinate: (index) ->
       switch(index)

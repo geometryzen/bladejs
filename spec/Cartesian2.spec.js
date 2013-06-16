@@ -12,6 +12,11 @@ describe('Cartesian2', function() {
     expect(a.coordinate(1)).toBe(x);
     expect(a.coordinate(2)).toBe(y);
     expect(a.coordinate(3)).toBe(xy);
+
+    expect(a.coordinates()[0]).toBe(w);
+    expect(a.coordinates()[1]).toBe(x);
+    expect(a.coordinates()[2]).toBe(y);
+    expect(a.coordinates()[3]).toBe(xy);
   });
 
   it('Should implement toString()', function() {

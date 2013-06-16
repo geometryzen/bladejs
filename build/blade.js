@@ -4,7 +4,8 @@
   CARTESIAN_2 = "Cartesian2";
   CARTESIAN_3 = "Cartesian3";
   BLADE = {
-    VERSION: "0.0.5"
+    version: "0.0.5",
+    description: "JavaScript Geometric Algebra library"
   };
   stringFromMultivector = function(m, labels) {
     var append, i, sb, str, _i, _ref;
@@ -53,7 +54,7 @@
     }
 
     Cartesian2.prototype.coordinates = function() {
-      return [xs[0], xs[1], xs[2], xs[3]];
+      return [this.xs[0], this.xs[1], this.xs[2], this.xs[3]];
     };
 
     Cartesian2.prototype.coordinate = function(index) {
