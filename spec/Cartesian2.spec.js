@@ -308,4 +308,91 @@ describe('Cartesian2', function() {
     expect(I.lshift(I).coordinate(2)).toBe(0);
     expect(I.lshift(I).coordinate(3)).toBe(0);
   });
+
+  it('Should implement rshift function', function() {
+    var u = new BLADE.Cartesian2(1, 0, 0, 0)
+    var i = new BLADE.Cartesian2(0, 1, 0, 0)
+    var j = new BLADE.Cartesian2(0, 0, 1, 0)
+    var I = new BLADE.Cartesian2(0, 0, 0, 1)
+
+    expect(u.rshift(u).coordinate(0)).toBe(1);
+    expect(u.rshift(u).coordinate(1)).toBe(0);
+    expect(u.rshift(u).coordinate(2)).toBe(0);
+    expect(u.rshift(u).coordinate(3)).toBe(0);
+
+    expect(u.rshift(i).coordinate(0)).toBe(0);
+    expect(u.rshift(i).coordinate(1)).toBe(0);
+    expect(u.rshift(i).coordinate(2)).toBe(0);
+    expect(u.rshift(i).coordinate(3)).toBe(0);
+
+    expect(u.rshift(j).coordinate(0)).toBe(0);
+    expect(u.rshift(j).coordinate(1)).toBe(0);
+    expect(u.rshift(j).coordinate(2)).toBe(0);
+    expect(u.rshift(j).coordinate(3)).toBe(0);
+
+    expect(u.rshift(I).coordinate(0)).toBe(0);
+    expect(u.rshift(I).coordinate(1)).toBe(0);
+    expect(u.rshift(I).coordinate(2)).toBe(0);
+    expect(u.rshift(I).coordinate(3)).toBe(0);
+
+    expect(i.rshift(u).coordinate(0)).toBe(0);
+    expect(i.rshift(u).coordinate(1)).toBe(-1);
+    expect(i.rshift(u).coordinate(2)).toBe(0);
+    expect(i.rshift(u).coordinate(3)).toBe(0);
+
+    expect(i.rshift(i).coordinate(0)).toBe(1);
+    expect(i.rshift(i).coordinate(1)).toBe(0);
+    expect(i.rshift(i).coordinate(2)).toBe(0);
+    expect(i.rshift(i).coordinate(3)).toBe(0);
+
+    expect(i.rshift(j).coordinate(0)).toBe(0);
+    expect(i.rshift(j).coordinate(1)).toBe(0);
+    expect(i.rshift(j).coordinate(2)).toBe(0);
+    expect(i.rshift(j).coordinate(3)).toBe(0);
+
+    expect(i.rshift(I).coordinate(0)).toBe(0);
+    expect(i.rshift(I).coordinate(1)).toBe(0);
+    expect(i.rshift(I).coordinate(2)).toBe(0);
+    expect(i.rshift(I).coordinate(3)).toBe(0);
+
+    expect(j.rshift(u).coordinate(0)).toBe(0);
+    expect(j.rshift(u).coordinate(1)).toBe(0);
+    expect(j.rshift(u).coordinate(2)).toBe(-1);
+    expect(j.rshift(u).coordinate(3)).toBe(0);
+
+    expect(j.rshift(i).coordinate(0)).toBe(0);
+    expect(j.rshift(i).coordinate(1)).toBe(0);
+    expect(j.rshift(i).coordinate(2)).toBe(0);
+    expect(j.rshift(i).coordinate(3)).toBe(0);
+
+    expect(j.rshift(j).coordinate(0)).toBe(1);
+    expect(j.rshift(j).coordinate(1)).toBe(0);
+    expect(j.rshift(j).coordinate(2)).toBe(0);
+    expect(j.rshift(j).coordinate(3)).toBe(0);
+
+    expect(j.rshift(I).coordinate(0)).toBe(0);
+    expect(j.rshift(I).coordinate(1)).toBe(0);
+    expect(j.rshift(I).coordinate(2)).toBe(0);
+    expect(j.rshift(I).coordinate(3)).toBe(0);
+
+    expect(I.rshift(u).coordinate(0)).toBe(0);
+    expect(I.rshift(u).coordinate(1)).toBe(0);
+    expect(I.rshift(u).coordinate(2)).toBe(0);
+    expect(I.rshift(u).coordinate(3)).toBe(1);
+
+    expect(I.rshift(i).coordinate(0)).toBe(0);
+    expect(I.rshift(i).coordinate(1)).toBe(0);
+    expect(I.rshift(i).coordinate(2)).toBe(1);
+    expect(I.rshift(i).coordinate(3)).toBe(0);
+
+    expect(I.rshift(j).coordinate(0)).toBe(0);
+    expect(I.rshift(j).coordinate(1)).toBe(-1);
+    expect(I.rshift(j).coordinate(2)).toBe(0);
+    expect(I.rshift(j).coordinate(3)).toBe(0);
+
+    expect(I.rshift(I).coordinate(0)).toBe(-1);
+    expect(I.rshift(I).coordinate(1)).toBe(0);
+    expect(I.rshift(I).coordinate(2)).toBe(0);
+    expect(I.rshift(I).coordinate(3)).toBe(0);
+  });
 });

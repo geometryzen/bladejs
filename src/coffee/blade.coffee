@@ -3,7 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = version: "0.0.7", description: "JavaScript Geometric Algebra library"
+  BLADE = version: "0.0.8", description: "JavaScript Geometric Algebra library"
 
   stringFromMultivector = (m, labels) ->
     sb = []
@@ -103,6 +103,18 @@
 
     lshift: (rhs) ->
       xs = Cartesian2.lshift(@.xs, rhs.xs)
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3])
+
+    @rshift: (a, b) ->
+      xs = [0, 0, 0, 0]
+      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3]
+      xs[1] =             - a[1] * b[0]               - a[3] * b[2]
+      xs[2] =                           - a[2] * b[0] + a[3] * b[1]
+      xs[3] =                                           a[3] * b[0]
+      return xs
+
+    rshift: (rhs) ->
+      xs = Cartesian2.rshift(@.xs, rhs.xs)
       return new Cartesian2(xs[0], xs[1], xs[2], xs[3])
 
     toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e12"])
