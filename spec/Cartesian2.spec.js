@@ -1,16 +1,26 @@
 describe('Cartesian2', function() {
 
   it('Should initialize the coordinates', function() {
-    var a = new BLADE.Cartesian2(1, 2, 3, 4);
-    expect(a.w).toBe(1);
-    expect(a.x).toBe(2);
-    expect(a.y).toBe(3);
-    expect(a.xy).toBe(4);
+    var w = Math.random();
+    var x = Math.random();
+    var y = Math.random();
+    var xy = Math.random();
+
+    var a = new BLADE.Cartesian2(w, x, y, xy);
+
+    expect(a.coordinate(0)).toBe(w);
+    expect(a.coordinate(1)).toBe(x);
+    expect(a.coordinate(2)).toBe(y);
+    expect(a.coordinate(3)).toBe(xy);
+    expect(a.w).toBe(w);
+    expect(a.x).toBe(x);
+    expect(a.y).toBe(y);
+    expect(a.xy).toBe(xy);
   });
 
   it('Should implement toString()', function() {
     var a = new BLADE.Cartesian2(1, 2, 3, 4);
-    expect(a.toString()).toBe("1+2*e_{1}+3*e_{2}+4*e_{12}");
+    expect(a.toString()).toBe("1+2*i+3*j+4*I");
   });
 
   it('Should implement add function', function() {

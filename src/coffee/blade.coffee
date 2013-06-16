@@ -3,7 +3,35 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = VERSION: "0.0.1"
+  BLADE = VERSION: "0.0.2"
+
+  stringFromMultivector = (m, labels) ->
+    sb = []
+    append = (number, label) ->
+      if number isnt 0
+        # Determine and conditionally add a sign.
+        if number >= 0
+          if sb.length > 0
+            sb.push "+"
+        else
+          sb.push "-"
+        # If the absolute value of the number is unity then we only need the label.
+        n = Math.abs number
+        if n is 1
+          sb.push label
+        else
+          sb.push n.toString()
+          # We only need the label if it contributes under multiplication.
+          if label isnt "1"
+            sb.push "*"
+            sb.push label
+    for i in [0..m.length - 1]
+      append m.coordinate(i), labels[i]
+    if sb.length > 0
+      str = sb.join ""
+    else
+      str = "0"
+    return str
 
   ###
     Cartesian2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
@@ -11,40 +39,38 @@
   ###
   class Cartesian2
     constructor: (@w, @x, @y, @xy) ->
+      @length = 4
 
-    add: (rhs) -> new Cartesian2(@w + rhs.w, @x + rhs.x, @y + rhs.y, @xy + rhs.xy)
+    coordinate: (index) ->
+      switch(index)
+        when 0
+          return @w
+        when 1
+          return @x
+        when 2
+          return @y
+        when 3
+          return @xy
+        else
+          throw new Error "index must be in the range [0..3]"
 
-    sub: (rhs) -> new Cartesian2(@w - rhs.w, @x - rhs.x, @y - rhs.y, @xy - rhs.xy)
+    add: (rhs) -> new Cartesian2(
+      @w + rhs.w,
+      @x + rhs.x,
+      @y + rhs.y,
+      @xy + rhs.xy
+    )
 
-    toString: () ->
-      sb = []
-      append = (number, label) ->
-        if number isnt 0
-          # Determine and conditionally add a sign.
-          if number >= 0
-            if sb.length > 0
-              sb.push "+"
-          else
-            sb.push "-"
-          # If the absolute value of the number is unity then we only need the label.
-          n = Math.abs number
-          if n is 1
-            sb.push label
-          else
-            sb.push n.toString()
-            # We only need the label if it contributes under multiplication.
-            if label isnt "1"
-              sb.push "*"
-              sb.push label
-      append @w, "1"
-      append @x, "e_{1}"
-      append @y, "e_{2}"
-      append @xy, "e_{12}"
-      if sb.length > 0
-        str = sb.join ""
-      else
-        str = "0"
-      return str
+    sub: (rhs) -> new Cartesian2(
+      @w - rhs.w,
+      @x - rhs.x,
+      @y - rhs.y,
+      @xy - rhs.xy
+    )
+
+    toString: () -> stringFromMultivector(@, ["1", "i", "j", "I"])
+
+    toStringLATEX: () -> stringFromMultivector(@, ["1", "e_{1}", "e_{2}", "e_{12}"])
 
   BLADE[CARTESIAN_2] = Cartesian2
 
@@ -53,40 +79,54 @@
   ###
   class Cartesian3
     constructor: (@w, @x, @y, @z, @xy, @yz, @zx, @xyz) ->
+      @length = 8
 
-    toString: () ->
-      sb = []
-      append = (number, label) ->
-        if number isnt 0
-          # Determine and conditionally add a sign.
-          if number >= 0
-            if sb.length > 0
-              sb.push "+"
-          else
-            sb.push "-"
-          # If the absolute value of the number is unity then we only need the label.
-          n = Math.abs number
-          if n is 1
-            sb.push label
-          else
-            sb.push n.toString()
-            # We only need the label if it contributes under multiplication.
-            if label isnt "1"
-              sb.push "*"
-              sb.push label
-      append @w, "1"
-      append @x, "e_{1}"
-      append @y, "e_{2}"
-      append @z, "e_{3}"
-      append @xy, "e_{12}"
-      append @yz, "e_{23}"
-      append @zx,  "e_{31}"
-      append @xyz, "e_{123}"
-      if sb.length > 0
-        str = sb.join ""
-      else
-        str = "0"
-      return str
+    coordinate: (index) ->
+      switch(index)
+        when 0
+          return @w
+        when 1
+          return @x
+        when 2
+          return @y
+        when 3
+          return @z
+        when 4
+          return @xy
+        when 5
+          return @yz
+        when 6
+          return @zx
+        when 7
+          return @xyz
+        else
+          throw new Error "index must be in the range [0..7]"
+
+    add: (rhs) -> new Cartesian3(
+      @w + rhs.w,
+      @x + rhs.x,
+      @y + rhs.y,
+      @z + rhs.z,
+      @xy + rhs.xy,
+      @yz + rhs.yz,
+      @zx + rhs.zx,
+      @xyz + rhs.xyz
+    )
+
+    sub: (rhs) -> new Cartesian3(
+      @w - rhs.w,
+      @x - rhs.x,
+      @y - rhs.y,
+      @z - rhs.z,
+      @xy - rhs.xy,
+      @yz - rhs.yz,
+      @zx - rhs.zx,
+      @xyz - rhs.xyz
+    )
+
+    toString: () -> stringFromMultivector(@, ["1", "i", "j", "k", "ij", "jk", "ki", "I"])
+
+    toStringLATEX: () -> stringFromMultivector(@, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"])
 
   BLADE[CARTESIAN_3] = Cartesian3
 
