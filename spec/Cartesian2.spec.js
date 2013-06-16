@@ -43,7 +43,7 @@ describe('Cartesian2', function() {
     expect(c.coordinate(3)).toBe(a.coordinate(3) - b.coordinate(3));
   });
 
-  it('Should implement sub function', function() {
+  it('Should implement mul function', function() {
     var u = new BLADE.Cartesian2(1, 0, 0, 0)
     var i = new BLADE.Cartesian2(0, 1, 0, 0)
     var j = new BLADE.Cartesian2(0, 0, 1, 0)
@@ -128,5 +128,92 @@ describe('Cartesian2', function() {
     expect(I.mul(I).coordinate(1)).toBe(0);
     expect(I.mul(I).coordinate(2)).toBe(0);
     expect(I.mul(I).coordinate(3)).toBe(0);
+  });
+
+  it('Should implement wedge function', function() {
+    var u = new BLADE.Cartesian2(1, 0, 0, 0)
+    var i = new BLADE.Cartesian2(0, 1, 0, 0)
+    var j = new BLADE.Cartesian2(0, 0, 1, 0)
+    var I = new BLADE.Cartesian2(0, 0, 0, 1)
+
+    expect(u.wedge(u).coordinate(0)).toBe(1);
+    expect(u.wedge(u).coordinate(1)).toBe(0);
+    expect(u.wedge(u).coordinate(2)).toBe(0);
+    expect(u.wedge(u).coordinate(3)).toBe(0);
+
+    expect(u.wedge(i).coordinate(0)).toBe(0);
+    expect(u.wedge(i).coordinate(1)).toBe(1);
+    expect(u.wedge(i).coordinate(2)).toBe(0);
+    expect(u.wedge(i).coordinate(3)).toBe(0);
+
+    expect(u.wedge(j).coordinate(0)).toBe(0);
+    expect(u.wedge(j).coordinate(1)).toBe(0);
+    expect(u.wedge(j).coordinate(2)).toBe(1);
+    expect(u.wedge(j).coordinate(3)).toBe(0);
+
+    expect(u.wedge(I).coordinate(0)).toBe(0);
+    expect(u.wedge(I).coordinate(1)).toBe(0);
+    expect(u.wedge(I).coordinate(2)).toBe(0);
+    expect(u.wedge(I).coordinate(3)).toBe(1);
+
+    expect(i.wedge(u).coordinate(0)).toBe(0);
+    expect(i.wedge(u).coordinate(1)).toBe(1);
+    expect(i.wedge(u).coordinate(2)).toBe(0);
+    expect(i.wedge(u).coordinate(3)).toBe(0);
+
+    expect(i.wedge(i).coordinate(0)).toBe(0);
+    expect(i.wedge(i).coordinate(1)).toBe(0);
+    expect(i.wedge(i).coordinate(2)).toBe(0);
+    expect(i.wedge(i).coordinate(3)).toBe(0);
+
+    expect(i.wedge(j).coordinate(0)).toBe(0);
+    expect(i.wedge(j).coordinate(1)).toBe(0);
+    expect(i.wedge(j).coordinate(2)).toBe(0);
+    expect(i.wedge(j).coordinate(3)).toBe(1);
+
+    expect(i.wedge(I).coordinate(0)).toBe(0);
+    expect(i.wedge(I).coordinate(1)).toBe(0);
+    expect(i.wedge(I).coordinate(2)).toBe(0);
+    expect(i.wedge(I).coordinate(3)).toBe(0);
+
+    expect(j.wedge(u).coordinate(0)).toBe(0);
+    expect(j.wedge(u).coordinate(1)).toBe(0);
+    expect(j.wedge(u).coordinate(2)).toBe(1);
+    expect(j.wedge(u).coordinate(3)).toBe(0);
+
+    expect(j.wedge(i).coordinate(0)).toBe(0);
+    expect(j.wedge(i).coordinate(1)).toBe(0);
+    expect(j.wedge(i).coordinate(2)).toBe(0);
+    expect(j.wedge(i).coordinate(3)).toBe(-1);
+
+    expect(j.wedge(j).coordinate(0)).toBe(0);
+    expect(j.wedge(j).coordinate(1)).toBe(0);
+    expect(j.wedge(j).coordinate(2)).toBe(0);
+    expect(j.wedge(j).coordinate(3)).toBe(0);
+
+    expect(j.wedge(I).coordinate(0)).toBe(0);
+    expect(j.wedge(I).coordinate(1)).toBe(0);
+    expect(j.wedge(I).coordinate(2)).toBe(0);
+    expect(j.wedge(I).coordinate(3)).toBe(0);
+
+    expect(I.wedge(u).coordinate(0)).toBe(0);
+    expect(I.wedge(u).coordinate(1)).toBe(0);
+    expect(I.wedge(u).coordinate(2)).toBe(0);
+    expect(I.wedge(u).coordinate(3)).toBe(1);
+
+    expect(I.wedge(i).coordinate(0)).toBe(0);
+    expect(I.wedge(i).coordinate(1)).toBe(0);
+    expect(I.wedge(i).coordinate(2)).toBe(0);
+    expect(I.wedge(i).coordinate(3)).toBe(0);
+
+    expect(I.wedge(j).coordinate(0)).toBe(0);
+    expect(I.wedge(j).coordinate(1)).toBe(0);
+    expect(I.wedge(j).coordinate(2)).toBe(0);
+    expect(I.wedge(j).coordinate(3)).toBe(0);
+
+    expect(I.wedge(I).coordinate(0)).toBe(0);
+    expect(I.wedge(I).coordinate(1)).toBe(0);
+    expect(I.wedge(I).coordinate(2)).toBe(0);
+    expect(I.wedge(I).coordinate(3)).toBe(0);
   });
 });

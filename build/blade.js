@@ -4,7 +4,7 @@
   CARTESIAN_2 = "Cartesian2";
   CARTESIAN_3 = "Cartesian3";
   BLADE = {
-    VERSION: "0.0.4"
+    VERSION: "0.0.5"
   };
   stringFromMultivector = function(m, labels) {
     var append, i, sb, str, _i, _ref;
@@ -52,6 +52,10 @@
       this.length = 4;
     }
 
+    Cartesian2.prototype.coordinates = function() {
+      return [xs[0], xs[1], xs[2], xs[3]];
+    };
+
     Cartesian2.prototype.coordinate = function(index) {
       switch (index) {
         case 0:
@@ -88,6 +92,22 @@
     Cartesian2.prototype.mul = function(rhs) {
       var xs;
       xs = Cartesian2.mul(this.xs, rhs.xs);
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3]);
+    };
+
+    Cartesian2.wedge = function(a, b) {
+      var xs;
+      xs = [0, 0, 0, 0];
+      xs[0] = a[0] * b[0];
+      xs[1] = a[0] * b[1] + a[1] * b[0];
+      xs[2] = a[0] * b[2] + a[2] * b[0];
+      xs[3] = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0];
+      return xs;
+    };
+
+    Cartesian2.prototype.wedge = function(rhs) {
+      var xs;
+      xs = Cartesian2.wedge(this.xs, rhs.xs);
       return new Cartesian2(xs[0], xs[1], xs[2], xs[3]);
     };
 
