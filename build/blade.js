@@ -4,7 +4,7 @@
   CARTESIAN_2 = "Cartesian2";
   CARTESIAN_3 = "Cartesian3";
   BLADE = {
-    VERSION: "0.0.2"
+    VERSION: "0.0.3"
   };
   stringFromMultivector = function(m, labels) {
     var append, i, sb, str, _i, _ref;

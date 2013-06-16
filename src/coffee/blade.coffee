@@ -3,7 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = VERSION: "0.0.2"
+  BLADE = VERSION: "0.0.3"
 
   stringFromMultivector = (m, labels) ->
     sb = []
