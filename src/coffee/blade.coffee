@@ -3,37 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = VERSION: "0.0.0" 
-  
-  strFromCartesian2 = (w, x, y, xy) ->
-    sb = []
-    append = (number, label) ->
-      if number isnt 0
-        # Determine and conditionally add a sign.
-        if number >= 0
-          if sb.length > 0
-            sb.push "+"
-        else
-          sb.push "-"
-        # If the absolute value of the number is unity then we only need the label.
-        n = Math.abs number
-        if n is 1
-          sb.push label
-        else
-          sb.push n.toString()
-          # We only need the label if it contributes under multiplication.
-          if label isnt "1"
-            sb.push "*"
-            sb.push label
-    append(w,  "1")
-    append(x,  "i")
-    append(y,  "j")
-    append(xy, "I")
-    if sb.length > 0
-      str = sb.join ""
-    else
-      str = "0"
-    return str
+  BLADE = VERSION: "0.0.1"
 
   ###
     Cartesian2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
@@ -42,8 +12,39 @@
   class Cartesian2
     constructor: (@w, @x, @y, @xy) ->
 
+    add: (rhs) -> new Cartesian2(@w + rhs.w, @x + rhs.x, @y + rhs.y, @xy + rhs.xy)
+
+    sub: (rhs) -> new Cartesian2(@w - rhs.w, @x - rhs.x, @y - rhs.y, @xy - rhs.xy)
+
     toString: () ->
-      strFromCartesian2(@w, @x, @y, @xy)
+      sb = []
+      append = (number, label) ->
+        if number isnt 0
+          # Determine and conditionally add a sign.
+          if number >= 0
+            if sb.length > 0
+              sb.push "+"
+          else
+            sb.push "-"
+          # If the absolute value of the number is unity then we only need the label.
+          n = Math.abs number
+          if n is 1
+            sb.push label
+          else
+            sb.push n.toString()
+            # We only need the label if it contributes under multiplication.
+            if label isnt "1"
+              sb.push "*"
+              sb.push label
+      append @w, "1"
+      append @x, "e_{1}"
+      append @y, "e_{2}"
+      append @xy, "e_{12}"
+      if sb.length > 0
+        str = sb.join ""
+      else
+        str = "0"
+      return str
 
   BLADE[CARTESIAN_2] = Cartesian2
 
@@ -52,6 +53,40 @@
   ###
   class Cartesian3
     constructor: (@w, @x, @y, @z, @xy, @yz, @zx, @xyz) ->
+
+    toString: () ->
+      sb = []
+      append = (number, label) ->
+        if number isnt 0
+          # Determine and conditionally add a sign.
+          if number >= 0
+            if sb.length > 0
+              sb.push "+"
+          else
+            sb.push "-"
+          # If the absolute value of the number is unity then we only need the label.
+          n = Math.abs number
+          if n is 1
+            sb.push label
+          else
+            sb.push n.toString()
+            # We only need the label if it contributes under multiplication.
+            if label isnt "1"
+              sb.push "*"
+              sb.push label
+      append @w, "1"
+      append @x, "e_{1}"
+      append @y, "e_{2}"
+      append @z, "e_{3}"
+      append @xy, "e_{12}"
+      append @yz, "e_{23}"
+      append @zx,  "e_{31}"
+      append @xyz, "e_{123}"
+      if sb.length > 0
+        str = sb.join ""
+      else
+        str = "0"
+      return str
 
   BLADE[CARTESIAN_3] = Cartesian3
 
