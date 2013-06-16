@@ -48,20 +48,20 @@
 
   Cartesian2 = (function() {
     function Cartesian2(w, x, y, xy) {
-      this.vector = [w, x, y, xy];
+      this.xs = [w, x, y, xy];
       this.length = 4;
     }
 
     Cartesian2.prototype.coordinate = function(index) {
       switch (index) {
         case 0:
-          return this.vector[0];
+          return this.xs[0];
         case 1:
-          return this.vector[1];
+          return this.xs[1];
         case 2:
-          return this.vector[2];
+          return this.xs[2];
         case 3:
-          return this.vector[3];
+          return this.xs[3];
         default:
           throw new Error("index must be in the range [0..3]");
       }
@@ -73,6 +73,22 @@
 
     Cartesian2.prototype.sub = function(rhs) {
       return new Cartesian2(this.coordinate(0) - rhs.coordinate(0), this.coordinate(1) - rhs.coordinate(1), this.coordinate(2) - rhs.coordinate(2), this.coordinate(3) - rhs.coordinate(3));
+    };
+
+    Cartesian2.mul = function(a, b) {
+      var xs;
+      xs = [0, 0, 0, 0];
+      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
+      xs[1] = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
+      xs[2] = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
+      xs[3] = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0];
+      return xs;
+    };
+
+    Cartesian2.prototype.mul = function(rhs) {
+      var xs;
+      xs = Cartesian2.mul(this.xs, rhs.xs);
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3]);
     };
 
     Cartesian2.prototype.toString = function() {
@@ -97,28 +113,28 @@
 
   Cartesian3 = (function() {
     function Cartesian3(w, x, y, z, xy, yz, zx, xyz) {
-      this.vector = [w, x, y, z, xy, yz, zx, xyz];
+      this.xs = [w, x, y, z, xy, yz, zx, xyz];
       this.length = 8;
     }
 
     Cartesian3.prototype.coordinate = function(index) {
       switch (index) {
         case 0:
-          return this.vector[0];
+          return this.xs[0];
         case 1:
-          return this.vector[1];
+          return this.xs[1];
         case 2:
-          return this.vector[2];
+          return this.xs[2];
         case 3:
-          return this.vector[3];
+          return this.xs[3];
         case 4:
-          return this.vector[4];
+          return this.xs[4];
         case 5:
-          return this.vector[5];
+          return this.xs[5];
         case 6:
-          return this.vector[6];
+          return this.xs[6];
         case 7:
-          return this.vector[7];
+          return this.xs[7];
         default:
           throw new Error("index must be in the range [0..7]");
       }

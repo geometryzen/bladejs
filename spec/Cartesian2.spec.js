@@ -42,4 +42,91 @@ describe('Cartesian2', function() {
     expect(c.coordinate(2)).toBe(a.coordinate(2) - b.coordinate(2));
     expect(c.coordinate(3)).toBe(a.coordinate(3) - b.coordinate(3));
   });
+
+  it('Should implement sub function', function() {
+    var u = new BLADE.Cartesian2(1, 0, 0, 0)
+    var i = new BLADE.Cartesian2(0, 1, 0, 0)
+    var j = new BLADE.Cartesian2(0, 0, 1, 0)
+    var I = new BLADE.Cartesian2(0, 0, 0, 1)
+
+    expect(u.mul(u).coordinate(0)).toBe(1);
+    expect(u.mul(u).coordinate(1)).toBe(0);
+    expect(u.mul(u).coordinate(2)).toBe(0);
+    expect(u.mul(u).coordinate(3)).toBe(0);
+
+    expect(u.mul(i).coordinate(0)).toBe(0);
+    expect(u.mul(i).coordinate(1)).toBe(1);
+    expect(u.mul(i).coordinate(2)).toBe(0);
+    expect(u.mul(i).coordinate(3)).toBe(0);
+
+    expect(u.mul(j).coordinate(0)).toBe(0);
+    expect(u.mul(j).coordinate(1)).toBe(0);
+    expect(u.mul(j).coordinate(2)).toBe(1);
+    expect(u.mul(j).coordinate(3)).toBe(0);
+
+    expect(u.mul(I).coordinate(0)).toBe(0);
+    expect(u.mul(I).coordinate(1)).toBe(0);
+    expect(u.mul(I).coordinate(2)).toBe(0);
+    expect(u.mul(I).coordinate(3)).toBe(1);
+
+    expect(i.mul(u).coordinate(0)).toBe(0);
+    expect(i.mul(u).coordinate(1)).toBe(1);
+    expect(i.mul(u).coordinate(2)).toBe(0);
+    expect(i.mul(u).coordinate(3)).toBe(0);
+
+    expect(i.mul(i).coordinate(0)).toBe(1);
+    expect(i.mul(i).coordinate(1)).toBe(0);
+    expect(i.mul(i).coordinate(2)).toBe(0);
+    expect(i.mul(i).coordinate(3)).toBe(0);
+
+    expect(i.mul(j).coordinate(0)).toBe(0);
+    expect(i.mul(j).coordinate(1)).toBe(0);
+    expect(i.mul(j).coordinate(2)).toBe(0);
+    expect(i.mul(j).coordinate(3)).toBe(1);
+
+    expect(i.mul(I).coordinate(0)).toBe(0);
+    expect(i.mul(I).coordinate(1)).toBe(0);
+    expect(i.mul(I).coordinate(2)).toBe(1);
+    expect(i.mul(I).coordinate(3)).toBe(0);
+
+    expect(j.mul(u).coordinate(0)).toBe(0);
+    expect(j.mul(u).coordinate(1)).toBe(0);
+    expect(j.mul(u).coordinate(2)).toBe(1);
+    expect(j.mul(u).coordinate(3)).toBe(0);
+
+    expect(j.mul(i).coordinate(0)).toBe(0);
+    expect(j.mul(i).coordinate(1)).toBe(0);
+    expect(j.mul(i).coordinate(2)).toBe(0);
+    expect(j.mul(i).coordinate(3)).toBe(-1);
+
+    expect(j.mul(j).coordinate(0)).toBe(1);
+    expect(j.mul(j).coordinate(1)).toBe(0);
+    expect(j.mul(j).coordinate(2)).toBe(0);
+    expect(j.mul(j).coordinate(3)).toBe(0);
+
+    expect(j.mul(I).coordinate(0)).toBe(0);
+    expect(j.mul(I).coordinate(1)).toBe(-1);
+    expect(j.mul(I).coordinate(2)).toBe(0);
+    expect(j.mul(I).coordinate(3)).toBe(0);
+
+    expect(I.mul(u).coordinate(0)).toBe(0);
+    expect(I.mul(u).coordinate(1)).toBe(0);
+    expect(I.mul(u).coordinate(2)).toBe(0);
+    expect(I.mul(u).coordinate(3)).toBe(1);
+
+    expect(I.mul(i).coordinate(0)).toBe(0);
+    expect(I.mul(i).coordinate(1)).toBe(0);
+    expect(I.mul(i).coordinate(2)).toBe(-1);
+    expect(I.mul(i).coordinate(3)).toBe(0);
+
+    expect(I.mul(j).coordinate(0)).toBe(0);
+    expect(I.mul(j).coordinate(1)).toBe(1);
+    expect(I.mul(j).coordinate(2)).toBe(0);
+    expect(I.mul(j).coordinate(3)).toBe(0);
+
+    expect(I.mul(I).coordinate(0)).toBe(-1);
+    expect(I.mul(I).coordinate(1)).toBe(0);
+    expect(I.mul(I).coordinate(2)).toBe(0);
+    expect(I.mul(I).coordinate(3)).toBe(0);
+  });
 });

@@ -39,19 +39,19 @@
   ###
   class Cartesian2
     constructor: (w, x, y, xy) ->
-      @vector = [w, x, y, xy]
+      @xs = [w, x, y, xy]
       @length = 4
 
     coordinate: (index) ->
       switch(index)
         when 0
-          return @vector[0]
+          return @xs[0]
         when 1
-          return @vector[1]
+          return @xs[1]
         when 2
-          return @vector[2]
+          return @xs[2]
         when 3
-          return @vector[3]
+          return @xs[3]
         else
           throw new Error "index must be in the range [0..3]"
 
@@ -59,15 +59,25 @@
       @coordinate(0) + rhs.coordinate(0),
       @coordinate(1) + rhs.coordinate(1),
       @coordinate(2) + rhs.coordinate(2),
-      @coordinate(3) + rhs.coordinate(3)
-    )
+      @coordinate(3) + rhs.coordinate(3))
 
     sub: (rhs) -> new Cartesian2(
       @coordinate(0) - rhs.coordinate(0),
       @coordinate(1) - rhs.coordinate(1),
       @coordinate(2) - rhs.coordinate(2),
-      @coordinate(3) - rhs.coordinate(3)
-    )
+      @coordinate(3) - rhs.coordinate(3))
+
+    @mul: (a, b) ->
+      xs = [0, 0, 0, 0]
+      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3]
+      xs[1] = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2]
+      xs[2] = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1]
+      xs[3] = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0]
+      return xs
+
+    mul: (rhs) ->
+      xs = Cartesian2.mul(@.xs, rhs.xs)
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3])
 
     toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e12"])
     toStringIJK: () -> stringFromMultivector(@, ["1", "i", "j", "I"])
@@ -80,27 +90,27 @@
   ###
   class Cartesian3
     constructor: (w, x, y, z, xy, yz, zx, xyz) ->
-      @vector = [w, x, y, z, xy, yz, zx, xyz]
+      @xs = [w, x, y, z, xy, yz, zx, xyz]
       @length = 8
 
     coordinate: (index) ->
       switch(index)
         when 0
-          return @vector[0]
+          return @xs[0]
         when 1
-          return @vector[1]
+          return @xs[1]
         when 2
-          return @vector[2]
+          return @xs[2]
         when 3
-          return @vector[3]
+          return @xs[3]
         when 4
-          return @vector[4]
+          return @xs[4]
         when 5
-          return @vector[5]
+          return @xs[5]
         when 6
-          return @vector[6]
+          return @xs[6]
         when 7
-          return @vector[7]
+          return @xs[7]
         else
           throw new Error "index must be in the range [0..7]"
 
