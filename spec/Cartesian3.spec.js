@@ -20,20 +20,11 @@ describe('Cartesian3', function() {
     expect(a.coordinate(5)).toBe(yz);
     expect(a.coordinate(6)).toBe(zx);
     expect(a.coordinate(7)).toBe(xyz);
-
-    expect(a.w).toBe(w);
-    expect(a.x).toBe(x);
-    expect(a.y).toBe(y);
-    expect(a.z).toBe(z);
-    expect(a.xy).toBe(xy);
-    expect(a.yz).toBe(yz);
-    expect(a.zx).toBe(zx);
-    expect(a.xyz).toBe(xyz);
   });
 
   it('Should implement toString()', function() {
     var a = new BLADE.Cartesian3(1, 2, 3, 4, 5, 6, 7, 8);
-    expect(a.toString()).toBe("1+2*i+3*j+4*k+5*ij+6*jk+7*ki+8*I");
+    expect(a.toStringIJK()).toBe("1+2*i+3*j+4*k+5*ij+6*jk+7*ki+8*I");
   });
 
   it('Should implement add function', function() {
@@ -42,14 +33,14 @@ describe('Cartesian3', function() {
     
     var c = a.add(b);
 
-    expect(c.w).toBe(a.w + b.w);
-    expect(c.x).toBe(a.x + b.x);
-    expect(c.y).toBe(a.y + b.y);
-    expect(c.z).toBe(a.z + b.z);
-    expect(c.xy).toBe(a.xy + b.xy);
-    expect(c.yz).toBe(a.yz + b.yz);
-    expect(c.zx).toBe(a.zx + b.zx);
-    expect(c.xyz).toBe(a.xyz + b.xyz);
+    expect(c.coordinate(0)).toBe(a.coordinate(0) + b.coordinate(0));
+    expect(c.coordinate(1)).toBe(a.coordinate(1) + b.coordinate(1));
+    expect(c.coordinate(2)).toBe(a.coordinate(2) + b.coordinate(2));
+    expect(c.coordinate(3)).toBe(a.coordinate(3) + b.coordinate(3));
+    expect(c.coordinate(4)).toBe(a.coordinate(4) + b.coordinate(4));
+    expect(c.coordinate(5)).toBe(a.coordinate(5) + b.coordinate(5));
+    expect(c.coordinate(6)).toBe(a.coordinate(6) + b.coordinate(6));
+    expect(c.coordinate(7)).toBe(a.coordinate(7) + b.coordinate(7));
   });
 
   it('Should implement sub function', function() {
@@ -58,13 +49,13 @@ describe('Cartesian3', function() {
     
     var c = a.sub(b);
 
-    expect(c.w).toBe(a.w - b.w);
-    expect(c.x).toBe(a.x - b.x);
-    expect(c.y).toBe(a.y - b.y);
-    expect(c.z).toBe(a.z - b.z);
-    expect(c.xy).toBe(a.xy - b.xy);
-    expect(c.yz).toBe(a.yz - b.yz);
-    expect(c.zx).toBe(a.zx - b.zx);
-    expect(c.xyz).toBe(a.xyz - b.xyz);
+    expect(c.coordinate(0)).toBe(a.coordinate(0) - b.coordinate(0));
+    expect(c.coordinate(1)).toBe(a.coordinate(1) - b.coordinate(1));
+    expect(c.coordinate(2)).toBe(a.coordinate(2) - b.coordinate(2));
+    expect(c.coordinate(3)).toBe(a.coordinate(3) - b.coordinate(3));
+    expect(c.coordinate(4)).toBe(a.coordinate(4) - b.coordinate(4));
+    expect(c.coordinate(5)).toBe(a.coordinate(5) - b.coordinate(5));
+    expect(c.coordinate(6)).toBe(a.coordinate(6) - b.coordinate(6));
+    expect(c.coordinate(7)).toBe(a.coordinate(7) - b.coordinate(7));
   });
 });

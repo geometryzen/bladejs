@@ -12,15 +12,11 @@ describe('Cartesian2', function() {
     expect(a.coordinate(1)).toBe(x);
     expect(a.coordinate(2)).toBe(y);
     expect(a.coordinate(3)).toBe(xy);
-    expect(a.w).toBe(w);
-    expect(a.x).toBe(x);
-    expect(a.y).toBe(y);
-    expect(a.xy).toBe(xy);
   });
 
   it('Should implement toString()', function() {
     var a = new BLADE.Cartesian2(1, 2, 3, 4);
-    expect(a.toString()).toBe("1+2*i+3*j+4*I");
+    expect(a.toStringIJK()).toBe("1+2*i+3*j+4*I");
   });
 
   it('Should implement add function', function() {
@@ -29,10 +25,10 @@ describe('Cartesian2', function() {
     
     var c = a.add(b);
 
-    expect(c.w).toBe(a.w + b.w);
-    expect(c.x).toBe(a.x + b.x);
-    expect(c.y).toBe(a.y + b.y);
-    expect(c.xy).toBe(a.xy + b.xy);
+    expect(c.coordinate(0)).toBe(a.coordinate(0) + b.coordinate(0));
+    expect(c.coordinate(1)).toBe(a.coordinate(1) + b.coordinate(1));
+    expect(c.coordinate(2)).toBe(a.coordinate(2) + b.coordinate(2));
+    expect(c.coordinate(3)).toBe(a.coordinate(3) + b.coordinate(3));
   });
 
   it('Should implement sub function', function() {
@@ -41,9 +37,9 @@ describe('Cartesian2', function() {
     
     var c = a.sub(b);
 
-    expect(c.w).toBe(a.w - b.w);
-    expect(c.x).toBe(a.x - b.x);
-    expect(c.y).toBe(a.y - b.y);
-    expect(c.xy).toBe(a.xy - b.xy);
+    expect(c.coordinate(0)).toBe(a.coordinate(0) - b.coordinate(0));
+    expect(c.coordinate(1)).toBe(a.coordinate(1) - b.coordinate(1));
+    expect(c.coordinate(2)).toBe(a.coordinate(2) - b.coordinate(2));
+    expect(c.coordinate(3)).toBe(a.coordinate(3) - b.coordinate(3));
   });
 });

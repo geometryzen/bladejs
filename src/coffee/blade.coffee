@@ -38,38 +38,39 @@
     The even subalgebra of this Geometric Algebra is isomorphic to the complex numbers.
   ###
   class Cartesian2
-    constructor: (@w, @x, @y, @xy) ->
+    constructor: (w, x, y, xy) ->
+      @vector = [w, x, y, xy]
       @length = 4
 
     coordinate: (index) ->
       switch(index)
         when 0
-          return @w
+          return @vector[0]
         when 1
-          return @x
+          return @vector[1]
         when 2
-          return @y
+          return @vector[2]
         when 3
-          return @xy
+          return @vector[3]
         else
           throw new Error "index must be in the range [0..3]"
 
     add: (rhs) -> new Cartesian2(
-      @w + rhs.w,
-      @x + rhs.x,
-      @y + rhs.y,
-      @xy + rhs.xy
+      @coordinate(0) + rhs.coordinate(0),
+      @coordinate(1) + rhs.coordinate(1),
+      @coordinate(2) + rhs.coordinate(2),
+      @coordinate(3) + rhs.coordinate(3)
     )
 
     sub: (rhs) -> new Cartesian2(
-      @w - rhs.w,
-      @x - rhs.x,
-      @y - rhs.y,
-      @xy - rhs.xy
+      @coordinate(0) - rhs.coordinate(0),
+      @coordinate(1) - rhs.coordinate(1),
+      @coordinate(2) - rhs.coordinate(2),
+      @coordinate(3) - rhs.coordinate(3)
     )
 
-    toString: () -> stringFromMultivector(@, ["1", "i", "j", "I"])
-
+    toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e12"])
+    toStringIJK: () -> stringFromMultivector(@, ["1", "i", "j", "I"])
     toStringLATEX: () -> stringFromMultivector(@, ["1", "e_{1}", "e_{2}", "e_{12}"])
 
   BLADE[CARTESIAN_2] = Cartesian2
@@ -78,54 +79,55 @@
     Cartesian3 is a multivector for the Geometric Algebra of 3D Euclidean space with Cartesian coordinates.
   ###
   class Cartesian3
-    constructor: (@w, @x, @y, @z, @xy, @yz, @zx, @xyz) ->
+    constructor: (w, x, y, z, xy, yz, zx, xyz) ->
+      @vector = [w, x, y, z, xy, yz, zx, xyz]
       @length = 8
 
     coordinate: (index) ->
       switch(index)
         when 0
-          return @w
+          return @vector[0]
         when 1
-          return @x
+          return @vector[1]
         when 2
-          return @y
+          return @vector[2]
         when 3
-          return @z
+          return @vector[3]
         when 4
-          return @xy
+          return @vector[4]
         when 5
-          return @yz
+          return @vector[5]
         when 6
-          return @zx
+          return @vector[6]
         when 7
-          return @xyz
+          return @vector[7]
         else
           throw new Error "index must be in the range [0..7]"
 
     add: (rhs) -> new Cartesian3(
-      @w + rhs.w,
-      @x + rhs.x,
-      @y + rhs.y,
-      @z + rhs.z,
-      @xy + rhs.xy,
-      @yz + rhs.yz,
-      @zx + rhs.zx,
-      @xyz + rhs.xyz
+      @coordinate(0) + rhs.coordinate(0),
+      @coordinate(1) + rhs.coordinate(1),
+      @coordinate(2) + rhs.coordinate(2),
+      @coordinate(3) + rhs.coordinate(3),
+      @coordinate(4) + rhs.coordinate(4),
+      @coordinate(5) + rhs.coordinate(5),
+      @coordinate(6) + rhs.coordinate(6),
+      @coordinate(7) + rhs.coordinate(7)
     )
 
     sub: (rhs) -> new Cartesian3(
-      @w - rhs.w,
-      @x - rhs.x,
-      @y - rhs.y,
-      @z - rhs.z,
-      @xy - rhs.xy,
-      @yz - rhs.yz,
-      @zx - rhs.zx,
-      @xyz - rhs.xyz
+      @coordinate(0) - rhs.coordinate(0),
+      @coordinate(1) - rhs.coordinate(1),
+      @coordinate(2) - rhs.coordinate(2),
+      @coordinate(3) - rhs.coordinate(3),
+      @coordinate(4) - rhs.coordinate(4),
+      @coordinate(5) - rhs.coordinate(5),
+      @coordinate(6) - rhs.coordinate(6),
+      @coordinate(7) - rhs.coordinate(7)
     )
 
-    toString: () -> stringFromMultivector(@, ["1", "i", "j", "k", "ij", "jk", "ki", "I"])
-
+    toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"])
+    toStringIJK: () -> stringFromMultivector(@, ["1", "i", "j", "k", "ij", "jk", "ki", "I"])
     toStringLATEX: () -> stringFromMultivector(@, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"])
 
   BLADE[CARTESIAN_3] = Cartesian3

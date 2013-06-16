@@ -48,37 +48,38 @@
 
   Cartesian2 = (function() {
     function Cartesian2(w, x, y, xy) {
-      this.w = w;
-      this.x = x;
-      this.y = y;
-      this.xy = xy;
+      this.vector = [w, x, y, xy];
       this.length = 4;
     }
 
     Cartesian2.prototype.coordinate = function(index) {
       switch (index) {
         case 0:
-          return this.w;
+          return this.vector[0];
         case 1:
-          return this.x;
+          return this.vector[1];
         case 2:
-          return this.y;
+          return this.vector[2];
         case 3:
-          return this.xy;
+          return this.vector[3];
         default:
           throw new Error("index must be in the range [0..3]");
       }
     };
 
     Cartesian2.prototype.add = function(rhs) {
-      return new Cartesian2(this.w + rhs.w, this.x + rhs.x, this.y + rhs.y, this.xy + rhs.xy);
+      return new Cartesian2(this.coordinate(0) + rhs.coordinate(0), this.coordinate(1) + rhs.coordinate(1), this.coordinate(2) + rhs.coordinate(2), this.coordinate(3) + rhs.coordinate(3));
     };
 
     Cartesian2.prototype.sub = function(rhs) {
-      return new Cartesian2(this.w - rhs.w, this.x - rhs.x, this.y - rhs.y, this.xy - rhs.xy);
+      return new Cartesian2(this.coordinate(0) - rhs.coordinate(0), this.coordinate(1) - rhs.coordinate(1), this.coordinate(2) - rhs.coordinate(2), this.coordinate(3) - rhs.coordinate(3));
     };
 
     Cartesian2.prototype.toString = function() {
+      return stringFromMultivector(this, ["1", "e1", "e2", "e12"]);
+    };
+
+    Cartesian2.prototype.toStringIJK = function() {
       return stringFromMultivector(this, ["1", "i", "j", "I"]);
     };
 
@@ -96,49 +97,46 @@
 
   Cartesian3 = (function() {
     function Cartesian3(w, x, y, z, xy, yz, zx, xyz) {
-      this.w = w;
-      this.x = x;
-      this.y = y;
-      this.z = z;
-      this.xy = xy;
-      this.yz = yz;
-      this.zx = zx;
-      this.xyz = xyz;
+      this.vector = [w, x, y, z, xy, yz, zx, xyz];
       this.length = 8;
     }
 
     Cartesian3.prototype.coordinate = function(index) {
       switch (index) {
         case 0:
-          return this.w;
+          return this.vector[0];
         case 1:
-          return this.x;
+          return this.vector[1];
         case 2:
-          return this.y;
+          return this.vector[2];
         case 3:
-          return this.z;
+          return this.vector[3];
         case 4:
-          return this.xy;
+          return this.vector[4];
         case 5:
-          return this.yz;
+          return this.vector[5];
         case 6:
-          return this.zx;
+          return this.vector[6];
         case 7:
-          return this.xyz;
+          return this.vector[7];
         default:
           throw new Error("index must be in the range [0..7]");
       }
     };
 
     Cartesian3.prototype.add = function(rhs) {
-      return new Cartesian3(this.w + rhs.w, this.x + rhs.x, this.y + rhs.y, this.z + rhs.z, this.xy + rhs.xy, this.yz + rhs.yz, this.zx + rhs.zx, this.xyz + rhs.xyz);
+      return new Cartesian3(this.coordinate(0) + rhs.coordinate(0), this.coordinate(1) + rhs.coordinate(1), this.coordinate(2) + rhs.coordinate(2), this.coordinate(3) + rhs.coordinate(3), this.coordinate(4) + rhs.coordinate(4), this.coordinate(5) + rhs.coordinate(5), this.coordinate(6) + rhs.coordinate(6), this.coordinate(7) + rhs.coordinate(7));
     };
 
     Cartesian3.prototype.sub = function(rhs) {
-      return new Cartesian3(this.w - rhs.w, this.x - rhs.x, this.y - rhs.y, this.z - rhs.z, this.xy - rhs.xy, this.yz - rhs.yz, this.zx - rhs.zx, this.xyz - rhs.xyz);
+      return new Cartesian3(this.coordinate(0) - rhs.coordinate(0), this.coordinate(1) - rhs.coordinate(1), this.coordinate(2) - rhs.coordinate(2), this.coordinate(3) - rhs.coordinate(3), this.coordinate(4) - rhs.coordinate(4), this.coordinate(5) - rhs.coordinate(5), this.coordinate(6) - rhs.coordinate(6), this.coordinate(7) - rhs.coordinate(7));
     };
 
     Cartesian3.prototype.toString = function() {
+      return stringFromMultivector(this, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"]);
+    };
+
+    Cartesian3.prototype.toStringIJK = function() {
       return stringFromMultivector(this, ["1", "i", "j", "k", "ij", "jk", "ki", "I"]);
     };
 
