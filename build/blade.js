@@ -4,7 +4,7 @@
   CARTESIAN_2 = "Cartesian2";
   CARTESIAN_3 = "Cartesian3";
   BLADE = {
-    version: "0.0.6",
+    version: "0.0.7",
     description: "JavaScript Geometric Algebra library"
   };
   stringFromMultivector = function(m, labels) {
@@ -109,6 +109,22 @@
     Cartesian2.prototype.wedge = function(rhs) {
       var xs;
       xs = Cartesian2.wedge(this.xs, rhs.xs);
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3]);
+    };
+
+    Cartesian2.lshift = function(a, b) {
+      var xs;
+      xs = [0, 0, 0, 0];
+      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
+      xs[1] = a[0] * b[1] - a[2] * b[3];
+      xs[2] = a[0] * b[2] + a[1] * b[3];
+      xs[3] = a[0] * b[3];
+      return xs;
+    };
+
+    Cartesian2.prototype.lshift = function(rhs) {
+      var xs;
+      xs = Cartesian2.lshift(this.xs, rhs.xs);
       return new Cartesian2(xs[0], xs[1], xs[2], xs[3]);
     };
 

@@ -1,6 +1,6 @@
 {
   "name": "bladejs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "./build/blade.min.js",
   "description": "JavaScript Geometric Algebra library",
   "author": {
