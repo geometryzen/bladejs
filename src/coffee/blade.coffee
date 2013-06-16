@@ -3,7 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = version: "0.0.5", description: "JavaScript Geometric Algebra library"
+  BLADE = version: "0.0.6", description: "JavaScript Geometric Algebra library"
 
   stringFromMultivector = (m, labels) ->
     sb = []

@@ -4,7 +4,7 @@
   CARTESIAN_2 = "Cartesian2";
   CARTESIAN_3 = "Cartesian3";
   BLADE = {
-    version: "0.0.5",
+    version: "0.0.6",
     description: "JavaScript Geometric Algebra library"
   };
   stringFromMultivector = function(m, labels) {
