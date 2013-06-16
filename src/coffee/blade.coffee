@@ -3,7 +3,7 @@
   CARTESIAN_2 = "Cartesian2"
   CARTESIAN_3 = "Cartesian3"
 
-  BLADE = version: "0.0.8", description: "JavaScript Geometric Algebra library"
+  BLADE = version: "0.0.9", description: "JavaScript Geometric Algebra library"
 
   stringFromMultivector = (m, labels) ->
     sb = []
@@ -57,17 +57,29 @@
         else
           throw new Error "index must be in the range [0..3]"
 
-    add: (rhs) -> new Cartesian2(
-      @coordinate(0) + rhs.coordinate(0),
-      @coordinate(1) + rhs.coordinate(1),
-      @coordinate(2) + rhs.coordinate(2),
-      @coordinate(3) + rhs.coordinate(3))
+    @add: (a, b) ->
+      xs = [0, 0, 0, 0]
+      xs[0] = a[0] + b[0]
+      xs[1] = a[1] + b[1]
+      xs[2] = a[2] + b[2]
+      xs[3] = a[3] + b[3]
+      return xs
 
-    sub: (rhs) -> new Cartesian2(
-      @coordinate(0) - rhs.coordinate(0),
-      @coordinate(1) - rhs.coordinate(1),
-      @coordinate(2) - rhs.coordinate(2),
-      @coordinate(3) - rhs.coordinate(3))
+    add: (rhs) ->
+      xs = Cartesian2.add(@.xs, rhs.xs)
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3])
+
+    @sub: (a, b) ->
+      xs = [0, 0, 0, 0]
+      xs[0] = a[0] - b[0]
+      xs[1] = a[1] - b[1]
+      xs[2] = a[2] - b[2]
+      xs[3] = a[3] - b[3]
+      return xs
+
+    sub: (rhs) ->
+      xs = Cartesian2.sub(@.xs, rhs.xs)
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3])
 
     @mul: (a, b) ->
       xs = [0, 0, 0, 0]

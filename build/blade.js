@@ -4,7 +4,7 @@
   CARTESIAN_2 = "Cartesian2";
   CARTESIAN_3 = "Cartesian3";
   BLADE = {
-    version: "0.0.8",
+    version: "0.0.9",
     description: "JavaScript Geometric Algebra library"
   };
   stringFromMultivector = function(m, labels) {
@@ -72,12 +72,36 @@
       }
     };
 
+    Cartesian2.add = function(a, b) {
+      var xs;
+      xs = [0, 0, 0, 0];
+      xs[0] = a[0] + b[0];
+      xs[1] = a[1] + b[1];
+      xs[2] = a[2] + b[2];
+      xs[3] = a[3] + b[3];
+      return xs;
+    };
+
     Cartesian2.prototype.add = function(rhs) {
-      return new Cartesian2(this.coordinate(0) + rhs.coordinate(0), this.coordinate(1) + rhs.coordinate(1), this.coordinate(2) + rhs.coordinate(2), this.coordinate(3) + rhs.coordinate(3));
+      var xs;
+      xs = Cartesian2.add(this.xs, rhs.xs);
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3]);
+    };
+
+    Cartesian2.sub = function(a, b) {
+      var xs;
+      xs = [0, 0, 0, 0];
+      xs[0] = a[0] - b[0];
+      xs[1] = a[1] - b[1];
+      xs[2] = a[2] - b[2];
+      xs[3] = a[3] - b[3];
+      return xs;
     };
 
     Cartesian2.prototype.sub = function(rhs) {
-      return new Cartesian2(this.coordinate(0) - rhs.coordinate(0), this.coordinate(1) - rhs.coordinate(1), this.coordinate(2) - rhs.coordinate(2), this.coordinate(3) - rhs.coordinate(3));
+      var xs;
+      xs = Cartesian2.sub(this.xs, rhs.xs);
+      return new Cartesian2(xs[0], xs[1], xs[2], xs[3]);
     };
 
     Cartesian2.mul = function(a, b) {
