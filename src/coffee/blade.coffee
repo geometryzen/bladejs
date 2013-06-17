@@ -72,7 +72,7 @@
       return xs
 
     add: (rhs) ->
-      xs = Euclidean2.add(@.xs, rhs.xs)
+      xs = Euclidean2.add(@xs, rhs.xs)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @sub: (a, b) ->
@@ -84,7 +84,7 @@
       return xs
 
     sub: (rhs) ->
-      xs = Euclidean2.sub(@.xs, rhs.xs)
+      xs = Euclidean2.sub(@xs, rhs.xs)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @mul: (a, b) ->
@@ -96,7 +96,7 @@
       return xs
 
     mul: (rhs) ->
-      xs = Euclidean2.mul(@.xs, rhs.xs)
+      xs = Euclidean2.mul(@xs, rhs.xs)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @wedge: (a, b) ->
@@ -108,7 +108,7 @@
       return xs
 
     wedge: (rhs) ->
-      xs = Euclidean2.wedge(@.xs, rhs.xs)
+      xs = Euclidean2.wedge(@xs, rhs.xs)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @lshift: (a, b) ->
@@ -120,7 +120,7 @@
       return xs
 
     lshift: (rhs) ->
-      xs = Euclidean2.lshift(@.xs, rhs.xs)
+      xs = Euclidean2.lshift(@xs, rhs.xs)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @rshift: (a, b) ->
@@ -132,7 +132,7 @@
       return xs
 
     rshift: (rhs) ->
-      xs = Euclidean2.rshift(@.xs, rhs.xs)
+      xs = Euclidean2.rshift(@xs, rhs.xs)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e12"])
@@ -188,7 +188,7 @@
       return xs
 
     add: (rhs) ->
-      xs = Euclidean3.add(@.xs, rhs.xs)
+      xs = Euclidean3.add(@xs, rhs.xs)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
     @sub: (a, b) ->
@@ -204,7 +204,23 @@
       return xs
 
     sub: (rhs) ->
-      xs = Euclidean3.sub(@.xs, rhs.xs)
+      xs = Euclidean3.sub(@xs, rhs.xs)
+      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
+
+    @mul: (a, b) ->
+      xs = [0, 0, 0, 0, 0, 0, 0, 0]
+      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7]
+      xs[1] = a[0] * b[1] + a[1] * b[0] - a[2] * b[4] + a[3] * b[6] + a[4] * b[2] - a[5] * b[7] - a[6] * b[3] - a[7] * b[5]
+      xs[2] = a[0] * b[2] + a[1] * b[4] + a[2] * b[0] - a[3] * b[5] - a[4] * b[1] + a[5] * b[3] - a[6] * b[7] - a[7] * b[6]
+      xs[3] = a[0] * b[3] - a[1] * b[6] + a[2] * b[5] + a[3] * b[0] - a[4] * b[7] - a[5] * b[2] + a[6] * b[1] - a[7] * b[4]
+      xs[4] = a[0] * b[4] + a[1] * b[2] - a[2] * b[1] + a[3] * b[7] + a[4] * b[0] - a[5] * b[6] + a[6] * b[5] + a[7] * b[3]
+      xs[5] = a[0] * b[5] + a[1] * b[7] + a[2] * b[3] - a[3] * b[2] + a[4] * b[6] + a[5] * b[0] - a[6] * b[4] + a[7] * b[1]
+      xs[6] = a[0] * b[6] - a[1] * b[3] + a[2] * b[7] + a[3] * b[1] - a[4] * b[5] + a[5] * b[4] + a[6] * b[0] + a[7] * b[2]
+      xs[7] = a[0] * b[7] + a[1] * b[5] + a[2] * b[6] + a[3] * b[4] + a[4] * b[3] + a[5] * b[1] + a[6] * b[2] + a[7] * b[0]
+      return xs
+
+    mul: (rhs) ->
+      xs = Euclidean3.mul(@xs, rhs.xs)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
     grade: (index) ->
