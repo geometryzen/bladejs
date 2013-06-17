@@ -203,6 +203,10 @@
       return new Euclidean3(w, x, y, z, xy, yz, zx, xyz);
     };
 
+    Euclidean3.prototype.coordinates = function() {
+      return [this.xs[0], this.xs[1], this.xs[2], this.xs[3], this.xs[4], this.xs[5], this.xs[6], this.xs[7]];
+    };
+
     Euclidean3.prototype.coordinate = function(index) {
       switch (index) {
         case 0:
