@@ -336,7 +336,7 @@ describe("Euclidean3", function() {
       expect(i.rshift(ki)).toBeNear(zero);            // 15
       expect(i.rshift(I)).toBeNear(zero);             // 16
 
-      expect(j.rshift(one)).toBeNear(zero);           // 17
+      expect(j.rshift(one)).toBeNear(j);              // 17
       expect(j.rshift(i)).toBeNear(zero);             // 18
       expect(j.rshift(j)).toBeNear(one);              // 19
       expect(j.rshift(k)).toBeNear(zero);             // 20
@@ -345,7 +345,7 @@ describe("Euclidean3", function() {
       expect(j.rshift(ki)).toBeNear(zero);            // 23
       expect(j.rshift(I)).toBeNear(zero);             // 24
 
-      expect(k.rshift(one)).toBeNear(zero);           // 25
+      expect(k.rshift(one)).toBeNear(k);              // 25
       expect(k.rshift(i)).toBeNear(zero);             // 26
       expect(k.rshift(j)).toBeNear(zero);             // 27
       expect(k.rshift(k)).toBeNear(one);              // 28
