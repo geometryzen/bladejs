@@ -155,7 +155,7 @@
     coordinates: -> [@xs[0], @xs[1], @xs[2], @xs[3], @xs[4], @xs[5], @xs[6], @xs[7]]
 
     coordinate: (index) ->
-      switch(index)
+      switch index
         when 0
           return @xs[0]
         when 1
@@ -206,6 +206,19 @@
     sub: (rhs) ->
       xs = Euclidean3.sub(@.xs, rhs.xs)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
+
+    grade: (index) ->
+      switch index
+        when 0
+          return Euclidean3.fromCartesian(@xs[0], 0, 0, 0, 0, 0, 0, 0)
+        when 1
+          return Euclidean3.fromCartesian(0, @xs[1], @xs[2], @xs[3], 0, 0, 0, 0)
+        when 2
+          return Euclidean3.fromCartesian(0, 0, 0, 0, @xs[4], @xs[5], @xs[6], 0)
+        when 3
+          return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, @xs[7])
+        else
+          return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, 0, 0)
 
     toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"])
     toStringIJK: () -> stringFromMultivector(@, ["1", "i", "j", "k", "ij", "jk", "ki", "I"])

@@ -270,6 +270,21 @@
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
     };
 
+    Euclidean3.prototype.grade = function(index) {
+      switch (index) {
+        case 0:
+          return Euclidean3.fromCartesian(this.xs[0], 0, 0, 0, 0, 0, 0, 0);
+        case 1:
+          return Euclidean3.fromCartesian(0, this.xs[1], this.xs[2], this.xs[3], 0, 0, 0, 0);
+        case 2:
+          return Euclidean3.fromCartesian(0, 0, 0, 0, this.xs[4], this.xs[5], this.xs[6], 0);
+        case 3:
+          return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, this.xs[7]);
+        default:
+          return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, 0, 0);
+      }
+    };
+
     Euclidean3.prototype.toString = function() {
       return stringFromMultivector(this, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"]);
     };

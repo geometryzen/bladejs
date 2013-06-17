@@ -1,4 +1,4 @@
-describe('Euclidean3', function() {
+describe("Euclidean3 suite", function() {
 
   it('Should initialize coordinates', function() {
     var w = Math.random();
@@ -66,5 +66,64 @@ describe('Euclidean3', function() {
     expect(c.coordinate(5)).toBe(a.coordinate(5) - b.coordinate(5));
     expect(c.coordinate(6)).toBe(a.coordinate(6) - b.coordinate(6));
     expect(c.coordinate(7)).toBe(a.coordinate(7) - b.coordinate(7));
+  });
+
+  it('grade(index) function', function() {
+    var m = new BLADE.Euclidean3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
+
+    var w = m.grade(0);
+
+    expect(w.coordinate(0)).toBe(m.coordinate(0));
+    expect(w.coordinate(1)).toBe(0);
+    expect(w.coordinate(2)).toBe(0);
+    expect(w.coordinate(3)).toBe(0);
+    expect(w.coordinate(4)).toBe(0);
+    expect(w.coordinate(5)).toBe(0);
+    expect(w.coordinate(6)).toBe(0);
+    expect(w.coordinate(7)).toBe(0);
+
+    var v = m.grade(1);
+
+    expect(v.coordinate(0)).toEqual(0);
+    expect(v.coordinate(1)).toEqual(m.coordinate(1));
+    expect(v.coordinate(2)).toEqual(m.coordinate(2));
+    expect(v.coordinate(3)).toEqual(m.coordinate(3));
+    expect(v.coordinate(4)).toBe(0);
+    expect(v.coordinate(5)).toBe(0);
+    expect(v.coordinate(6)).toBe(0);
+    expect(v.coordinate(7)).toBe(0);
+
+    var b = m.grade(2);
+
+    expect(b.coordinate(0)).toEqual(0);
+    expect(b.coordinate(1)).toBe(0);
+    expect(b.coordinate(2)).toBe(0);
+    expect(b.coordinate(3)).toBe(0);
+    expect(b.coordinate(4)).toEqual(m.coordinate(4));
+    expect(b.coordinate(5)).toEqual(m.coordinate(5));
+    expect(b.coordinate(6)).toEqual(m.coordinate(6));
+    expect(b.coordinate(7)).toBe(0);
+
+    var s = m.grade(3);
+
+    expect(s.coordinate(0)).toEqual(0);
+    expect(s.coordinate(1)).toBe(0);
+    expect(s.coordinate(2)).toBe(0);
+    expect(s.coordinate(3)).toBe(0);
+    expect(s.coordinate(4)).toEqual(0);
+    expect(s.coordinate(5)).toEqual(0);
+    expect(s.coordinate(6)).toEqual(0);
+    expect(s.coordinate(7)).toBe(m.coordinate(7));
+
+    var z = m.grade(4);
+
+    expect(z.coordinate(0)).toEqual(0);
+    expect(z.coordinate(1)).toBe(0);
+    expect(z.coordinate(2)).toBe(0);
+    expect(z.coordinate(3)).toBe(0);
+    expect(z.coordinate(4)).toEqual(0);
+    expect(z.coordinate(5)).toEqual(0);
+    expect(z.coordinate(6)).toEqual(0);
+    expect(z.coordinate(7)).toEqual(0);
   });
 });
