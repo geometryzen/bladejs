@@ -239,6 +239,22 @@
       xs = Euclidean3.wedge(@xs, rhs.xs)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
+    @lshift: (a, b) ->
+      xs = [0, 0, 0, 0, 0, 0, 0, 0]
+      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7]
+      xs[1] = a[0] * b[1]               - a[2] * b[4] + a[3] * b[6]               - a[5] * b[7]
+      xs[2] = a[0] * b[2] + a[1] * b[4]               - a[3] * b[5]                             - a[6] * b[7]
+      xs[3] = a[0] * b[3] - a[1] * b[6] + a[2] * b[5]               - a[4] * b[7]
+      xs[4] = a[0] * b[4]                             + a[3] * b[7]
+      xs[5] = a[0] * b[5] + a[1] * b[7]
+      xs[6] = a[0] * b[6]               + a[2] * b[7]
+      xs[7] = a[0] * b[7]
+      return xs
+
+    lshift: (rhs) ->
+      xs = Euclidean3.lshift(@xs, rhs.xs)
+      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
+
     grade: (index) ->
       switch index
         when 0
