@@ -1,4 +1,41 @@
-describe("Euclidean3 suite", function() {
+describe("Euclidean3", function() {
+
+  var random = function() {
+    var w = Math.random();
+    var x = Math.random();
+    var y = Math.random();
+    var z = Math.random();
+    return new BLADE.Euclidean3(w, x, y, z, Math.random(), Math.random(), Math.random(), Math.random());
+  }
+
+  var ZERO = new BLADE.Euclidean3(0, 0, 0, 0, 0, 0, 0, 0);
+
+  beforeEach(function() {
+    this.addMatchers({
+      toBeNearZero: function() {
+        var tolerance = (Math.pow(10, -2) / 2);
+        return (Math.abs(this.actual.coordinate(0)) < tolerance) &&
+            (Math.abs(this.actual.coordinate(1)) < tolerance) &&
+            (Math.abs(this.actual.coordinate(2)) < tolerance) &&
+            (Math.abs(this.actual.coordinate(3)) < tolerance) &&
+            (Math.abs(this.actual.coordinate(4)) < tolerance) &&
+            (Math.abs(this.actual.coordinate(5)) < tolerance) &&
+            (Math.abs(this.actual.coordinate(6)) < tolerance) &&
+            (Math.abs(this.actual.coordinate(7)) < tolerance);
+      },
+      toBeNear: function(m) {
+        var tolerance = (Math.pow(10, -2) / 2);
+        return (Math.abs(this.actual.coordinate(0) - m.coordinate(0)) < tolerance) &&
+               (Math.abs(this.actual.coordinate(1) - m.coordinate(1)) < tolerance) &&
+               (Math.abs(this.actual.coordinate(2) - m.coordinate(2)) < tolerance) &&
+               (Math.abs(this.actual.coordinate(3) - m.coordinate(3)) < tolerance) &&
+               (Math.abs(this.actual.coordinate(4) - m.coordinate(4)) < tolerance) &&
+               (Math.abs(this.actual.coordinate(5) - m.coordinate(5)) < tolerance) &&
+               (Math.abs(this.actual.coordinate(6) - m.coordinate(6)) < tolerance) &&
+               (Math.abs(this.actual.coordinate(7) - m.coordinate(7)) < tolerance);
+      }
+    });
+  });
 
   it('Should initialize coordinates', function() {
     var w = Math.random();
@@ -126,4 +163,73 @@ describe("Euclidean3 suite", function() {
     expect(z.coordinate(6)).toEqual(0);
     expect(z.coordinate(7)).toEqual(0);
   });
+
+  describe("multiplication", function() {
+    it("associative", function() {
+      var a = random();
+      var b = random();
+      var c = random();
+
+      var ab = a.mul(b);
+      var bc = b.mul(c);
+      var lhs = ab.mul(c);
+      var rhs = a.mul(bc);
+
+      expect(lhs.coordinate(0)).toBeCloseTo(rhs.coordinate(0));
+      expect(lhs.coordinate(1)).toBeCloseTo(rhs.coordinate(1));
+      expect(lhs.coordinate(2)).toBeCloseTo(rhs.coordinate(2));
+      expect(lhs.coordinate(3)).toBeCloseTo(rhs.coordinate(3));
+      expect(lhs.coordinate(4)).toBeCloseTo(rhs.coordinate(4));
+      expect(lhs.coordinate(5)).toBeCloseTo(rhs.coordinate(5));
+      expect(lhs.coordinate(6)).toBeCloseTo(rhs.coordinate(6));
+      expect(lhs.coordinate(7)).toBeCloseTo(rhs.coordinate(7));
+    });
+    it("left distributive", function() {
+      var x = random();
+      var y = random();
+      var z = random();
+
+      var xy = x.mul(y);
+      var xz = x.mul(z);
+      var lhs = x.mul(y.add(z));
+      var rhs = xy.add(xz);
+
+      expect(lhs.coordinate(0)).toBeCloseTo(rhs.coordinate(0));
+      expect(lhs.coordinate(1)).toBeCloseTo(rhs.coordinate(1));
+      expect(lhs.coordinate(2)).toBeCloseTo(rhs.coordinate(2));
+      expect(lhs.coordinate(3)).toBeCloseTo(rhs.coordinate(3));
+      expect(lhs.coordinate(4)).toBeCloseTo(rhs.coordinate(4));
+      expect(lhs.coordinate(5)).toBeCloseTo(rhs.coordinate(5));
+      expect(lhs.coordinate(6)).toBeCloseTo(rhs.coordinate(6));
+      expect(lhs.coordinate(7)).toBeCloseTo(rhs.coordinate(7));
+    });
+    it("right distributive over addition", function() {
+      var x = random();
+      var y = random();
+      var z = random();
+
+      var yx = y.mul(x);
+      var zx = z.mul(x);
+      var lhs = (y.add(z)).mul(x);
+      var rhs = yx.add(zx);
+
+      expect(lhs.coordinate(0)).toBeCloseTo(rhs.coordinate(0));
+      expect(lhs.coordinate(1)).toBeCloseTo(rhs.coordinate(1));
+      expect(lhs.coordinate(2)).toBeCloseTo(rhs.coordinate(2));
+      expect(lhs.coordinate(3)).toBeCloseTo(rhs.coordinate(3));
+      expect(lhs.coordinate(4)).toBeCloseTo(rhs.coordinate(4));
+      expect(lhs.coordinate(5)).toBeCloseTo(rhs.coordinate(5));
+      expect(lhs.coordinate(6)).toBeCloseTo(rhs.coordinate(6));
+      expect(lhs.coordinate(7)).toBeCloseTo(rhs.coordinate(7));
+    });
+    it("square of any vector is a real scalar", function() {
+      var a = random().grade(1);
+      var b = a.mul(a);
+
+      expect(b.grade(1)).toBeNear(ZERO);
+      expect(b.grade(2)).toBeNear(ZERO);
+      expect(b.grade(3)).toBeNear(ZERO);
+    });
+  });
+
 });

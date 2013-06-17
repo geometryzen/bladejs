@@ -290,6 +290,26 @@
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
     };
 
+    Euclidean3.wedge = function(a, b) {
+      var xs;
+      xs = [0, 0, 0, 0, 0, 0, 0, 0];
+      xs[0] = a[0] * b[0];
+      xs[1] = a[0] * b[1] + a[1] * b[0];
+      xs[2] = a[0] * b[2] + a[2] * b[0];
+      xs[3] = a[0] * b[3] + a[3] * b[0];
+      xs[4] = a[0] * b[4] + a[1] * b[2] - a[2] * b[1] + a[4] * b[0];
+      xs[5] = a[0] * b[5] + a[2] * b[3] - a[3] * b[2] + a[5] * b[0];
+      xs[6] = a[0] * b[6] - a[1] * b[3] + a[3] * b[1] + a[6] * b[0];
+      xs[7] = a[0] * b[7] + a[1] * b[5] + a[2] * b[6] + a[3] * b[4] + a[4] * b[3] + a[5] * b[1] + a[6] * b[2] + a[7] * b[0];
+      return xs;
+    };
+
+    Euclidean3.prototype.wedge = function(rhs) {
+      var xs;
+      xs = Euclidean3.wedge(this.xs, rhs.xs);
+      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
+    };
+
     Euclidean3.prototype.grade = function(index) {
       switch (index) {
         case 0:
