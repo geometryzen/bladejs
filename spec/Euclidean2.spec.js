@@ -395,4 +395,36 @@ describe("Euclidean2 suite", function() {
     expect(I.rshift(I).coordinate(2)).toBe(0);
     expect(I.rshift(I).coordinate(3)).toBe(0);
   });
+
+  it('grade(index) function', function() {
+    var m = new BLADE.Euclidean2(Math.random(), Math.random(), Math.random(), Math.random());
+
+    var w = m.grade(0);
+
+    expect(w.coordinate(0)).toEqual(m.coordinate(0));
+    expect(w.coordinate(1)).toEqual(0);
+    expect(w.coordinate(2)).toEqual(0);
+    expect(w.coordinate(3)).toEqual(0);
+
+    var v = m.grade(1);
+
+    expect(v.coordinate(0)).toEqual(0);
+    expect(v.coordinate(1)).toEqual(m.coordinate(1));
+    expect(v.coordinate(2)).toEqual(m.coordinate(2));
+    expect(v.coordinate(3)).toEqual(0);
+
+    var b = m.grade(2);
+
+    expect(b.coordinate(0)).toEqual(0);
+    expect(b.coordinate(1)).toEqual(0);
+    expect(b.coordinate(2)).toEqual(0);
+    expect(b.coordinate(3)).toEqual(m.coordinate(3));
+
+    var z = m.grade(3);
+
+    expect(z.coordinate(0)).toEqual(0);
+    expect(z.coordinate(1)).toEqual(0);
+    expect(z.coordinate(2)).toEqual(0);
+    expect(z.coordinate(3)).toEqual(0);
+  });
 });

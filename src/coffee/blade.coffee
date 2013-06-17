@@ -25,8 +25,9 @@
           if label isnt "1"
             sb.push "*"
             sb.push label
-    for i in [0..m.length - 1]
-      append m.coordinate(i), labels[i]
+    coordinates = m.coordinates()
+    for i in [0..coordinates.length - 1]
+      append coordinates[i], labels[i]
     if sb.length > 0
       str = sb.join ""
     else
@@ -39,8 +40,7 @@
   ###
   class Euclidean2
     constructor: (w, x, y, xy) ->
-      @xs = [w, x, y, xy]
-      @length = 4
+      @_coordinates = [w, x, y, xy]
 
     @fromCartesian: (w, x, y, xy) ->
       return new Euclidean2(w, x, y, xy)
@@ -48,18 +48,18 @@
     @fromPolar: (w, r, theta, s) ->
       return new Euclidean2(w, r * Math.cos(theta), r * Math.sin(theta), s)
 
-    coordinates: -> [@xs[0], @xs[1], @xs[2], @xs[3]]
+    coordinates: -> [@_coordinates[0], @_coordinates[1], @_coordinates[2], @_coordinates[3]]
 
     coordinate: (index) ->
       switch(index)
         when 0
-          return @xs[0]
+          return @_coordinates[0]
         when 1
-          return @xs[1]
+          return @_coordinates[1]
         when 2
-          return @xs[2]
+          return @_coordinates[2]
         when 3
-          return @xs[3]
+          return @_coordinates[3]
         else
           throw new Error "index must be in the range [0..3]"
 
@@ -72,7 +72,7 @@
       return xs
 
     add: (rhs) ->
-      xs = Euclidean2.add(@xs, rhs.xs)
+      xs = Euclidean2.add(@_coordinates, rhs._coordinates)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @sub: (a, b) ->
@@ -84,7 +84,7 @@
       return xs
 
     sub: (rhs) ->
-      xs = Euclidean2.sub(@xs, rhs.xs)
+      xs = Euclidean2.sub(@_coordinates, rhs._coordinates)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @mul: (a, b) ->
@@ -96,7 +96,7 @@
       return xs
 
     mul: (rhs) ->
-      xs = Euclidean2.mul(@xs, rhs.xs)
+      xs = Euclidean2.mul(@_coordinates, rhs._coordinates)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @wedge: (a, b) ->
@@ -108,7 +108,7 @@
       return xs
 
     wedge: (rhs) ->
-      xs = Euclidean2.wedge(@xs, rhs.xs)
+      xs = Euclidean2.wedge(@_coordinates, rhs._coordinates)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @lshift: (a, b) ->
@@ -120,7 +120,7 @@
       return xs
 
     lshift: (rhs) ->
-      xs = Euclidean2.lshift(@xs, rhs.xs)
+      xs = Euclidean2.lshift(@_coordinates, rhs._coordinates)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @rshift: (a, b) ->
@@ -132,8 +132,19 @@
       return xs
 
     rshift: (rhs) ->
-      xs = Euclidean2.rshift(@xs, rhs.xs)
+      xs = Euclidean2.rshift(@_coordinates, rhs._coordinates)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
+
+    grade: (index) ->
+      switch index
+        when 0
+          return Euclidean2.fromCartesian(@_coordinates[0], 0, 0, 0)
+        when 1
+          return Euclidean2.fromCartesian(0, @_coordinates[1], @_coordinates[2], 0)
+        when 2
+          return Euclidean2.fromCartesian(0, 0, 0, @_coordinates[3])
+        else
+          return Euclidean2.fromCartesian(0, 0, 0, 0)
 
     toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e12"])
     toStringIJK: () -> stringFromMultivector(@, ["1", "i", "j", "I"])
@@ -146,32 +157,31 @@
   ###
   class Euclidean3
     constructor: (w, x, y, z, xy, yz, zx, xyz) ->
-      @xs = [w, x, y, z, xy, yz, zx, xyz]
-      @length = 8
+      @_coordinates = [w, x, y, z, xy, yz, zx, xyz]
 
     @fromCartesian: (w, x, y, z, xy, yz, zx, xyz) ->
       return new Euclidean3(w, x, y, z, xy, yz, zx, xyz)
 
-    coordinates: -> [@xs[0], @xs[1], @xs[2], @xs[3], @xs[4], @xs[5], @xs[6], @xs[7]]
+    coordinates: -> [@_coordinates[0], @_coordinates[1], @_coordinates[2], @_coordinates[3], @_coordinates[4], @_coordinates[5], @_coordinates[6], @_coordinates[7]]
 
     coordinate: (index) ->
       switch index
         when 0
-          return @xs[0]
+          return @_coordinates[0]
         when 1
-          return @xs[1]
+          return @_coordinates[1]
         when 2
-          return @xs[2]
+          return @_coordinates[2]
         when 3
-          return @xs[3]
+          return @_coordinates[3]
         when 4
-          return @xs[4]
+          return @_coordinates[4]
         when 5
-          return @xs[5]
+          return @_coordinates[5]
         when 6
-          return @xs[6]
+          return @_coordinates[6]
         when 7
-          return @xs[7]
+          return @_coordinates[7]
         else
           throw new Error "index must be in the range [0..7]"
 
@@ -188,7 +198,7 @@
       return xs
 
     add: (rhs) ->
-      xs = Euclidean3.add(@xs, rhs.xs)
+      xs = Euclidean3.add(@_coordinates, rhs._coordinates)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
     @sub: (a, b) ->
@@ -204,7 +214,7 @@
       return xs
 
     sub: (rhs) ->
-      xs = Euclidean3.sub(@xs, rhs.xs)
+      xs = Euclidean3.sub(@_coordinates, rhs._coordinates)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
     @mul: (a, b) ->
@@ -220,7 +230,7 @@
       return xs
 
     mul: (rhs) ->
-      xs = Euclidean3.mul(@xs, rhs.xs)
+      xs = Euclidean3.mul(@_coordinates, rhs._coordinates)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
     @wedge: (a, b) ->
@@ -236,7 +246,7 @@
       return xs
 
     wedge: (rhs) ->
-      xs = Euclidean3.wedge(@xs, rhs.xs)
+      xs = Euclidean3.wedge(@_coordinates, rhs._coordinates)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
     @lshift: (a, b) ->
@@ -252,7 +262,7 @@
       return xs
 
     lshift: (rhs) ->
-      xs = Euclidean3.lshift(@xs, rhs.xs)
+      xs = Euclidean3.lshift(@_coordinates, rhs._coordinates)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
     @rshift: (a, b) ->
@@ -268,19 +278,19 @@
       return xs
 
     rshift: (rhs) ->
-      xs = Euclidean3.rshift(@xs, rhs.xs)
+      xs = Euclidean3.rshift(@_coordinates, rhs._coordinates)
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
 
     grade: (index) ->
       switch index
         when 0
-          return Euclidean3.fromCartesian(@xs[0], 0, 0, 0, 0, 0, 0, 0)
+          return Euclidean3.fromCartesian(@_coordinates[0], 0, 0, 0, 0, 0, 0, 0)
         when 1
-          return Euclidean3.fromCartesian(0, @xs[1], @xs[2], @xs[3], 0, 0, 0, 0)
+          return Euclidean3.fromCartesian(0, @_coordinates[1], @_coordinates[2], @_coordinates[3], 0, 0, 0, 0)
         when 2
-          return Euclidean3.fromCartesian(0, 0, 0, 0, @xs[4], @xs[5], @xs[6], 0)
+          return Euclidean3.fromCartesian(0, 0, 0, 0, @_coordinates[4], @_coordinates[5], @_coordinates[6], 0)
         when 3
-          return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, @xs[7])
+          return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, @_coordinates[7])
         else
           return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, 0, 0)
 
