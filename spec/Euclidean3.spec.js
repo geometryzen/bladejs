@@ -1,4 +1,4 @@
-describe('Cartesian3', function() {
+describe('Euclidean3', function() {
 
   it('Should initialize coordinates', function() {
     var w = Math.random();
@@ -10,7 +10,7 @@ describe('Cartesian3', function() {
     var zx = Math.random();
     var xyz = Math.random();
 
-    var a = new BLADE.Cartesian3(w, x, y, z, xy, yz, zx, xyz);
+    var a = new BLADE.Euclidean3(w, x, y, z, xy, yz, zx, xyz);
 
     expect(a.coordinate(0)).toBe(w);
     expect(a.coordinate(1)).toBe(x);
@@ -23,13 +23,13 @@ describe('Cartesian3', function() {
   });
 
   it('Should implement toString()', function() {
-    var a = new BLADE.Cartesian3(1, 2, 3, 4, 5, 6, 7, 8);
+    var a = new BLADE.Euclidean3(1, 2, 3, 4, 5, 6, 7, 8);
     expect(a.toStringIJK()).toBe("1+2*i+3*j+4*k+5*ij+6*jk+7*ki+8*I");
   });
 
   it('Should implement add function', function() {
-    var a = new BLADE.Cartesian3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
-    var b = new BLADE.Cartesian3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
+    var a = new BLADE.Euclidean3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
+    var b = new BLADE.Euclidean3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
     
     var c = a.add(b);
 
@@ -44,8 +44,8 @@ describe('Cartesian3', function() {
   });
 
   it('Should implement sub function', function() {
-    var a = new BLADE.Cartesian3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
-    var b = new BLADE.Cartesian3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
+    var a = new BLADE.Euclidean3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
+    var b = new BLADE.Euclidean3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
     
     var c = a.sub(b);
 

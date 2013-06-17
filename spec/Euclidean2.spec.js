@@ -1,32 +1,32 @@
-describe('Cartesian2', function() {
+describe('Euclidean2', function() {
 
   it('Should initialize the coordinates', function() {
-    var w = Math.random();
-    var x = Math.random();
-    var y = Math.random();
-    var xy = Math.random();
+    var x0 = Math.random();
+    var x1 = Math.random();
+    var x2 = Math.random();
+    var x3 = Math.random();
 
-    var a = new BLADE.Cartesian2(w, x, y, xy);
+    var a = new BLADE.Euclidean2(x0, x1, x2, x3);
 
-    expect(a.coordinate(0)).toBe(w);
-    expect(a.coordinate(1)).toBe(x);
-    expect(a.coordinate(2)).toBe(y);
-    expect(a.coordinate(3)).toBe(xy);
+    expect(a.coordinate(0)).toBe(x0);
+    expect(a.coordinate(1)).toBe(x1);
+    expect(a.coordinate(2)).toBe(x2);
+    expect(a.coordinate(3)).toBe(x3);
 
-    expect(a.coordinates()[0]).toBe(w);
-    expect(a.coordinates()[1]).toBe(x);
-    expect(a.coordinates()[2]).toBe(y);
-    expect(a.coordinates()[3]).toBe(xy);
+    expect(a.coordinates()[0]).toBe(x0);
+    expect(a.coordinates()[1]).toBe(x1);
+    expect(a.coordinates()[2]).toBe(x2);
+    expect(a.coordinates()[3]).toBe(x3);
   });
 
   it('Should implement toString()', function() {
-    var a = new BLADE.Cartesian2(1, 2, 3, 4);
+    var a = new BLADE.Euclidean2(1, 2, 3, 4);
     expect(a.toStringIJK()).toBe("1+2*i+3*j+4*I");
   });
 
   it('Should implement add function', function() {
-    var a = new BLADE.Cartesian2(Math.random(), Math.random(), Math.random(), Math.random());
-    var b = new BLADE.Cartesian2(Math.random(), Math.random(), Math.random(), Math.random());
+    var a = new BLADE.Euclidean2(Math.random(), Math.random(), Math.random(), Math.random());
+    var b = new BLADE.Euclidean2(Math.random(), Math.random(), Math.random(), Math.random());
     
     var c = a.add(b);
 
@@ -37,8 +37,8 @@ describe('Cartesian2', function() {
   });
 
   it('Should implement sub function', function() {
-    var a = new BLADE.Cartesian2(Math.random(), Math.random(), Math.random(), Math.random());
-    var b = new BLADE.Cartesian2(Math.random(), Math.random(), Math.random(), Math.random());
+    var a = new BLADE.Euclidean2(Math.random(), Math.random(), Math.random(), Math.random());
+    var b = new BLADE.Euclidean2(Math.random(), Math.random(), Math.random(), Math.random());
     
     var c = a.sub(b);
 
@@ -49,10 +49,10 @@ describe('Cartesian2', function() {
   });
 
   it('Should implement mul function', function() {
-    var u = new BLADE.Cartesian2(1, 0, 0, 0)
-    var i = new BLADE.Cartesian2(0, 1, 0, 0)
-    var j = new BLADE.Cartesian2(0, 0, 1, 0)
-    var I = new BLADE.Cartesian2(0, 0, 0, 1)
+    var u = new BLADE.Euclidean2(1, 0, 0, 0)
+    var i = new BLADE.Euclidean2(0, 1, 0, 0)
+    var j = new BLADE.Euclidean2(0, 0, 1, 0)
+    var I = new BLADE.Euclidean2(0, 0, 0, 1)
 
     expect(u.mul(u).coordinate(0)).toBe(1);
     expect(u.mul(u).coordinate(1)).toBe(0);
@@ -136,10 +136,10 @@ describe('Cartesian2', function() {
   });
 
   it('Should implement wedge function', function() {
-    var u = new BLADE.Cartesian2(1, 0, 0, 0)
-    var i = new BLADE.Cartesian2(0, 1, 0, 0)
-    var j = new BLADE.Cartesian2(0, 0, 1, 0)
-    var I = new BLADE.Cartesian2(0, 0, 0, 1)
+    var u = new BLADE.Euclidean2(1, 0, 0, 0)
+    var i = new BLADE.Euclidean2(0, 1, 0, 0)
+    var j = new BLADE.Euclidean2(0, 0, 1, 0)
+    var I = new BLADE.Euclidean2(0, 0, 0, 1)
 
     expect(u.wedge(u).coordinate(0)).toBe(1);
     expect(u.wedge(u).coordinate(1)).toBe(0);
@@ -223,10 +223,10 @@ describe('Cartesian2', function() {
   });
 
   it('Should implement lshift function', function() {
-    var u = new BLADE.Cartesian2(1, 0, 0, 0)
-    var i = new BLADE.Cartesian2(0, 1, 0, 0)
-    var j = new BLADE.Cartesian2(0, 0, 1, 0)
-    var I = new BLADE.Cartesian2(0, 0, 0, 1)
+    var u = new BLADE.Euclidean2(1, 0, 0, 0)
+    var i = new BLADE.Euclidean2(0, 1, 0, 0)
+    var j = new BLADE.Euclidean2(0, 0, 1, 0)
+    var I = new BLADE.Euclidean2(0, 0, 0, 1)
 
     expect(u.lshift(u).coordinate(0)).toBe(1);
     expect(u.lshift(u).coordinate(1)).toBe(0);
@@ -310,10 +310,10 @@ describe('Cartesian2', function() {
   });
 
   it('Should implement rshift function', function() {
-    var u = new BLADE.Cartesian2(1, 0, 0, 0)
-    var i = new BLADE.Cartesian2(0, 1, 0, 0)
-    var j = new BLADE.Cartesian2(0, 0, 1, 0)
-    var I = new BLADE.Cartesian2(0, 0, 0, 1)
+    var u = new BLADE.Euclidean2(1, 0, 0, 0)
+    var i = new BLADE.Euclidean2(0, 1, 0, 0)
+    var j = new BLADE.Euclidean2(0, 0, 1, 0)
+    var I = new BLADE.Euclidean2(0, 0, 0, 1)
 
     expect(u.rshift(u).coordinate(0)).toBe(1);
     expect(u.rshift(u).coordinate(1)).toBe(0);
