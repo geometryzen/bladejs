@@ -241,7 +241,7 @@ describe("Euclidean3", function() {
   });
 
   describe("left contraction", function() {
-    it("square of any vector is a real scalar", function() {
+    it("", function() {
       expect(one.lshift(one)).toBeNear(one);
       expect(one.lshift(i)).toBeNear(i);
       expect(one.lshift(j)).toBeNear(j);
@@ -313,6 +313,82 @@ describe("Euclidean3", function() {
       expect(I.lshift(jk)).toBeNear(zero);            // 62
       expect(I.lshift(ki)).toBeNear(zero);            // 63
       expect(I.lshift(I)).toBeNear(zero.sub(one));    // 64
+    });
+  });
+
+  describe("right contraction", function() {
+    it("", function() {
+      expect(one.rshift(one)).toBeNear(one);          //  1
+      expect(one.rshift(i)).toBeNear(zero);           //  2
+      expect(one.rshift(j)).toBeNear(zero);           //  3
+      expect(one.rshift(k)).toBeNear(zero);           //  4
+      expect(one.rshift(ij)).toBeNear(zero);          //  5
+      expect(one.rshift(jk)).toBeNear(zero);          //  6
+      expect(one.rshift(ki)).toBeNear(zero);          //  7
+      expect(one.rshift(I)).toBeNear(zero);           //  8
+
+      expect(i.rshift(one)).toBeNear(i);              //  9
+      expect(i.rshift(i)).toBeNear(one);              // 10
+      expect(i.rshift(j)).toBeNear(zero);             // 11
+      expect(i.rshift(k)).toBeNear(zero);             // 12
+      expect(i.rshift(ij)).toBeNear(zero);            // 13
+      expect(i.rshift(jk)).toBeNear(zero);            // 14
+      expect(i.rshift(ki)).toBeNear(zero);            // 15
+      expect(i.rshift(I)).toBeNear(zero);             // 16
+
+      expect(j.rshift(one)).toBeNear(zero);           // 17
+      expect(j.rshift(i)).toBeNear(zero);             // 18
+      expect(j.rshift(j)).toBeNear(one);              // 19
+      expect(j.rshift(k)).toBeNear(zero);             // 20
+      expect(j.rshift(ij)).toBeNear(zero);            // 21
+      expect(j.rshift(jk)).toBeNear(zero);            // 22
+      expect(j.rshift(ki)).toBeNear(zero);            // 23
+      expect(j.rshift(I)).toBeNear(zero);             // 24
+
+      expect(k.rshift(one)).toBeNear(zero);           // 25
+      expect(k.rshift(i)).toBeNear(zero);             // 26
+      expect(k.rshift(j)).toBeNear(zero);             // 27
+      expect(k.rshift(k)).toBeNear(one);              // 28
+      expect(k.rshift(ij)).toBeNear(zero);            // 29
+      expect(k.rshift(jk)).toBeNear(zero);            // 30
+      expect(k.rshift(ki)).toBeNear(zero);            // 31
+      expect(k.rshift(I)).toBeNear(zero);             // 32
+
+      expect(ij.rshift(one)).toBeNear(ij);            // 33
+      expect(ij.rshift(i)).toBeNear(zero.sub(j));     // 34
+      expect(ij.rshift(j)).toBeNear(i);               // 35
+      expect(ij.rshift(k)).toBeNear(zero);            // 36
+      expect(ij.rshift(ij)).toBeNear(zero.sub(one));  // 37
+      expect(ij.rshift(jk)).toBeNear(zero);           // 38
+      expect(ij.rshift(ki)).toBeNear(zero);           // 39
+      expect(ij.rshift(I)).toBeNear(zero);            // 40
+
+      expect(jk.rshift(one)).toBeNear(jk);            // 41
+      expect(jk.rshift(i)).toBeNear(zero);            // 42
+      expect(jk.rshift(j)).toBeNear(zero.sub(k));     // 43
+      expect(jk.rshift(k)).toBeNear(j);               // 44
+      expect(jk.rshift(ij)).toBeNear(zero);           // 45
+      expect(jk.rshift(jk)).toBeNear(zero.sub(one));  // 46
+      expect(jk.rshift(ki)).toBeNear(zero);           // 47
+      expect(jk.rshift(I)).toBeNear(zero);            // 48
+
+      expect(ki.rshift(one)).toBeNear(ki);            // 49
+      expect(ki.rshift(i)).toBeNear(k);               // 50
+      expect(ki.rshift(j)).toBeNear(zero);            // 51
+      expect(ki.rshift(k)).toBeNear(zero.sub(i));     // 52
+      expect(ki.rshift(ij)).toBeNear(zero);           // 53
+      expect(ki.rshift(jk)).toBeNear(zero);           // 54
+      expect(ki.rshift(ki)).toBeNear(zero.sub(one));  // 55
+      expect(ki.rshift(I)).toBeNear(zero);            // 56
+
+      expect(I.rshift(one)).toBeNear(I);              // 57
+      expect(I.rshift(i)).toBeNear(jk);               // 58
+      expect(I.rshift(j)).toBeNear(ki);               // 59
+      expect(I.rshift(k)).toBeNear(ij);               // 60
+      expect(I.rshift(ij)).toBeNear(zero.sub(k));     // 61
+      expect(I.rshift(jk)).toBeNear(zero.sub(i));     // 62
+      expect(I.rshift(ki)).toBeNear(zero.sub(j));     // 63
+      expect(I.rshift(I)).toBeNear(zero.sub(one));    // 64
     });
   });
 });

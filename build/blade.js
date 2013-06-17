@@ -330,6 +330,26 @@
       return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
     };
 
+    Euclidean3.rshift = function(a, b) {
+      var xs;
+      xs = [0, 0, 0, 0, 0, 0, 0, 0];
+      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7];
+      xs[1] = +a[1] * b[0] + a[4] * b[2] - a[6] * b[3] - a[7] * b[5];
+      xs[2] = -a[4] * b[1] + a[5] * b[3] - a[7] * b[6];
+      xs[3] = -a[5] * b[2] + a[6] * b[1] - a[7] * b[4];
+      xs[4] = +a[4] * b[0] + a[7] * b[3];
+      xs[5] = +a[5] * b[0] + a[7] * b[1];
+      xs[6] = +a[6] * b[0] + a[7] * b[2];
+      xs[7] = +a[7] * b[0];
+      return xs;
+    };
+
+    Euclidean3.prototype.rshift = function(rhs) {
+      var xs;
+      xs = Euclidean3.rshift(this.xs, rhs.xs);
+      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
+    };
+
     Euclidean3.prototype.grade = function(index) {
       switch (index) {
         case 0:
