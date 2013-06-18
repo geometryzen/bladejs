@@ -1,11 +1,11 @@
 (function(scope, objName, modName) {
   'use strict';
-  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3, stringFromMultivector;
+  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3, stringFromCoordinates;
   EUCLIDEAN_2 = "Euclidean2";
   EUCLIDEAN_3 = "Euclidean3";
   BLADE = BLADE || {};
-  stringFromMultivector = function(m, labels) {
-    var append, coordinates, i, sb, str, _i, _ref;
+  stringFromCoordinates = function(coordinates, labels) {
+    var append, i, sb, str, _i, _ref;
     sb = [];
     append = function(number, label) {
       var n;
@@ -29,7 +29,6 @@
         }
       }
     };
-    coordinates = m.coordinates();
     for (i = _i = 0, _ref = coordinates.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
       append(coordinates[i], labels[i]);
     }
@@ -187,15 +186,15 @@
     };
 
     Euclidean2.prototype.toString = function() {
-      return stringFromMultivector(this, ["1", "e1", "e2", "e12"]);
+      return stringFromCoordinates(this._coordinates, ["1", "e1", "e2", "e12"]);
     };
 
     Euclidean2.prototype.toStringIJK = function() {
-      return stringFromMultivector(this, ["1", "i", "j", "I"]);
+      return stringFromCoordinates(this._coordinates, ["1", "i", "j", "I"]);
     };
 
     Euclidean2.prototype.toStringLATEX = function() {
-      return stringFromMultivector(this, ["1", "e_{1}", "e_{2}", "e_{12}"]);
+      return stringFromCoordinates(this._coordinates, ["1", "e_{1}", "e_{2}", "e_{12}"]);
     };
 
     return Euclidean2;
@@ -378,15 +377,15 @@
     };
 
     Euclidean3.prototype.toString = function() {
-      return stringFromMultivector(this, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"]);
+      return stringFromCoordinates(this._coordinates, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"]);
     };
 
     Euclidean3.prototype.toStringIJK = function() {
-      return stringFromMultivector(this, ["1", "i", "j", "k", "ij", "jk", "ki", "I"]);
+      return stringFromCoordinates(this._coordinates, ["1", "i", "j", "k", "ij", "jk", "ki", "I"]);
     };
 
     Euclidean3.prototype.toStringLATEX = function() {
-      return stringFromMultivector(this, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"]);
+      return stringFromCoordinates(this._coordinates, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"]);
     };
 
     return Euclidean3;

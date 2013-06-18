@@ -5,7 +5,7 @@
 
   BLADE = BLADE or {}
 
-  stringFromMultivector = (m, labels) ->
+  stringFromCoordinates = (coordinates, labels) ->
     sb = []
     append = (number, label) ->
       if number isnt 0
@@ -25,7 +25,6 @@
           if label isnt "1"
             sb.push "*"
             sb.push label
-    coordinates = m.coordinates()
     for i in [0..coordinates.length - 1]
       append coordinates[i], labels[i]
     if sb.length > 0
@@ -146,9 +145,9 @@
         else
           return Euclidean2.fromCartesian(0, 0, 0, 0)
 
-    toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e12"])
-    toStringIJK: () -> stringFromMultivector(@, ["1", "i", "j", "I"])
-    toStringLATEX: () -> stringFromMultivector(@, ["1", "e_{1}", "e_{2}", "e_{12}"])
+    toString: () -> stringFromCoordinates(@_coordinates, ["1", "e1", "e2", "e12"])
+    toStringIJK: () -> stringFromCoordinates(@_coordinates, ["1", "i", "j", "I"])
+    toStringLATEX: () -> stringFromCoordinates(@_coordinates, ["1", "e_{1}", "e_{2}", "e_{12}"])
 
   BLADE[EUCLIDEAN_2] = Euclidean2
 
@@ -294,9 +293,9 @@
         else
           return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, 0, 0)
 
-    toString: () -> stringFromMultivector(@, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"])
-    toStringIJK: () -> stringFromMultivector(@, ["1", "i", "j", "k", "ij", "jk", "ki", "I"])
-    toStringLATEX: () -> stringFromMultivector(@, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"])
+    toString: () -> stringFromCoordinates(@_coordinates, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"])
+    toStringIJK: () -> stringFromCoordinates(@_coordinates, ["1", "i", "j", "k", "ij", "jk", "ki", "I"])
+    toStringLATEX: () -> stringFromCoordinates(@_coordinates, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"])
 
   BLADE[EUCLIDEAN_3] = Euclidean3
 
