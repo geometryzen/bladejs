@@ -42,7 +42,8 @@
   Euclidean2ASM = function(stdlib, foreign, heap) {
     "use asm";
     var i32 = new stdlib.Int32Array(heap);
-    function add(a0, a1, a2, a3, b0, b1, b2, b3) {
+    function add(a0, a1, a2, a3, b0, b1, b2, b3, index) {
+      index = index|0;
       a0 = +a0;
       a1 = +a1;
       a2 = +a2;
@@ -51,11 +52,23 @@
       b1 = +b1;
       b2 = +b2;
       b3 = +b3;
-      var x0 = +(a0 + b0);
-      var x1 = +(a1 + b1);
-      var x2 = +(a2 + b2);
-      var x3 = +(a3 + b3);
-      return [x0, x1, x2, x3];
+      switch(index) {
+        case 0: {
+          return +(a0 + b0);
+        }
+        case 1: {
+          return +(a1 + b1);
+        }
+        case 2: {
+          return +(a2 + b2);
+        }
+        case 3: {
+          return +(a3 + b3);
+        }
+        default: {
+          return 0;
+        }
+      }
     };
     return {
       add: add
@@ -99,9 +112,13 @@
     };
 
     Euclidean2.add = function(a, b) {
-      var fast;
-      fast = Euclidean2ASM(window, {}, new ArrayBuffer(4 * 1024));
-      return fast.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3]);
+      var e2ga;
+      e2ga = Euclidean2ASM(window, {}, new ArrayBuffer(4 * 1024));
+      var x0 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0);
+      var x1 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1);
+      var x2 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2);
+      var x3 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3);
+      return [x0, x1, x2, x3];
     };
 
     Euclidean2.prototype.add = function(rhs) {
