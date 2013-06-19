@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 
     concat: {
       myproject: {
-        src: ['src/js/Euclidean2ASM.js', 'src/js/blade.js'],
+        src: ['src/js/blade.js'],
         dest: 'build/blade.js',
         separator: ';'
       }
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
 
     jasmine: {
       myproject: {
-        src: 'build/**/blade.js',
+        src: ['src/js/Euclidean2ASM.js', 'build/**/blade.js'],
         options: {
           specs: 'spec/**/*.spec.js'
         }
