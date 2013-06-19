@@ -33,6 +33,20 @@
       str = "0"
     return str
 
+  euclidean2ASM = () ->
+    "use asm"
+
+    add = (a0, a1, a2, a3, b0, b1, b2, b3) ->
+      a0 = +a0; a1 = +a1; a2 = +a2; a3 = +a3
+      b0 = +b0; b1 = +b1; b2 = +b2; b3 = +b3
+      x0 = +(a0 + b0)
+      x1 = +(a1 + b1)
+      x2 = +(a2 + b2)
+      x3 = +(a3 + b3)
+      return [x0, x1, x2, x3]
+
+    return add: add
+
   ###
     Euclidean2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
     The even subalgebra of this Geometric Algebra is isomorphic to the complex numbers.
@@ -63,12 +77,8 @@
           throw new Error "index must be in the range [0..3]"
 
     @add: (a, b) ->
-      xs = [0, 0, 0, 0]
-      xs[0] = a[0] + b[0]
-      xs[1] = a[1] + b[1]
-      xs[2] = a[2] + b[2]
-      xs[3] = a[3] + b[3]
-      return xs
+      fast = euclidean2ASM()
+      return fast.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3])
 
     add: (rhs) ->
       xs = Euclidean2.add(@_coordinates, rhs._coordinates)

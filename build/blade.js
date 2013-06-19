@@ -1,6 +1,6 @@
 (function(scope, objName, modName) {
   'use strict';
-  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3, stringFromCoordinates;
+  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3, euclidean2ASM, stringFromCoordinates;
   EUCLIDEAN_2 = "Euclidean2";
   EUCLIDEAN_3 = "Euclidean3";
   BLADE = BLADE || {};
@@ -38,6 +38,29 @@
       str = "0";
     }
     return str;
+  };
+  euclidean2ASM = function() {
+    "use asm";
+    var add;
+    add = function(a0, a1, a2, a3, b0, b1, b2, b3) {
+      var x0, x1, x2, x3;
+      a0 = +a0;
+      a1 = +a1;
+      a2 = +a2;
+      a3 = +a3;
+      b0 = +b0;
+      b1 = +b1;
+      b2 = +b2;
+      b3 = +b3;
+      x0 = +(a0 + b0);
+      x1 = +(a1 + b1);
+      x2 = +(a2 + b2);
+      x3 = +(a3 + b3);
+      return [x0, x1, x2, x3];
+    };
+    return {
+      add: add
+    };
   };
   /*
     Euclidean2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
@@ -77,13 +100,9 @@
     };
 
     Euclidean2.add = function(a, b) {
-      var xs;
-      xs = [0, 0, 0, 0];
-      xs[0] = a[0] + b[0];
-      xs[1] = a[1] + b[1];
-      xs[2] = a[2] + b[2];
-      xs[3] = a[3] + b[3];
-      return xs;
+      var fast;
+      fast = euclidean2ASM();
+      return fast.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3]);
     };
 
     Euclidean2.prototype.add = function(rhs) {

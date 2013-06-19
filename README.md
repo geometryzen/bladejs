@@ -1,4 +1,4 @@
-# blade.js
+# Blade.JS
 
 JavaScript Geometric Algebra library
 
@@ -8,18 +8,57 @@ Install nodejs
 
 Install grunt-cli globally via npm install grunt-cli
 
-git clone git@github.com:geometryzen/bladejs.git
+Clone the Blade.JS GitHub repository:
 
-cd bladejs
+  ```sh
+  $ git clone git@github.com:geometryzen/bladejs.git
+  ```
+
+Change to the Blade.JS directory:
+
+  ```sh
+  $ cd bladejs
+  ```
 
 ### Install project dependencies.
-bower install
+
+There are no dependencies at the moment, but we use Bower as the package management system.
+
+Bower is important for registering our library as a Bower package.
+
+  ```sh
+  $ bower install
+  ```
 
 ### Install local tools.
-npm install
+
+Node package manager is used to manage the provisioning of our tools such as Grunt contributions.
+
+  ```sh
+  $ npm install
+  ```
 
 ### Perform the build
-grunt
+
+The default command for building Blade.JS is
+
+  ```sh
+  $ grunt
+  ```
+
+This will create blade.js and blade.min.js in the build folder.
+
+In development it will be more convenient to have Continuous Integration with
+
+  ```sh
+  $ grunt watch
+  ```
+
+This will watch for changes to the main source file (blade.coffee) and will trigger the build process.
+
+## Commits and Tagging
+
+Because Blade.JS is provide as a Bower package, there are some obligations to manage the versions.
 
 ## Documentation
 _(Coming soon)_
