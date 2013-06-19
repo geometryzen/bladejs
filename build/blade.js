@@ -41,9 +41,8 @@
   };
   Euclidean2ASM = function(stdlib, foreign, heap) {
     "use asm";
-    var add, i32;
-    i32 = new stdlib.Int32Array(heap);
-    add = function(a0, a1, a2, a3, b0, b1, b2, b3) {
+    var i32 = new stdlib.Int32Array(heap);
+    function add(a0, a1, a2, a3, b0, b1, b2, b3) {
       var x0, x1, x2, x3;
       a0 = +a0;
       a1 = +a1;
