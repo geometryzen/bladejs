@@ -61,9 +61,17 @@ module.exports = function (grunt) {
       }
     },
 
+    copy: {
+      myproject: {
+        files: [
+          {flatten: true, src: ['src/js/bladeASM.js'], dest: 'build/bladeASM.js'}
+        ]
+      }
+    },
+
     jasmine: {
       myproject: {
-        src: ['src/js/bladeASM.js', 'build/**/blade.js'],
+        src: ['build/bladeASM.js', 'build/**/blade.js'],
         options: {
           specs: 'spec/**/*.spec.js'
         }
@@ -94,7 +102,7 @@ module.exports = function (grunt) {
     watch: {
       app: {
         files: ['src/**/*.coffee', 'spec/**/*.js'],
-        tasks: ['coffee:myproject', 'jshint:myproject', 'concat:myproject', 'uglify:myproject', 'jasmine:myproject']
+        tasks: ['coffee:myproject', 'jshint:myproject', 'concat:myproject', 'uglify:myproject', 'copy:myproject', 'jasmine:myproject']
       }
     },
   });
@@ -105,6 +113,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
   
@@ -114,6 +123,7 @@ module.exports = function (grunt) {
     'jshint:myproject',
     'concat:myproject',
     'uglify:myproject',
+    'copy:myproject',
     'jasmine:myproject'
     ]);
 };
