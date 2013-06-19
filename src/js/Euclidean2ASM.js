@@ -1,4 +1,4 @@
-Euclidean2ASM = function() {
+euclidean2ASM = function() {
   "use asm";
   function add(a0, a1, a2, a3, b0, b1, b2, b3, index) {
     a0 = +a0;
@@ -37,4 +37,4 @@ Euclidean2ASM = function() {
     add: add
   };
 };
-e2ga = Euclidean2ASM();
+e2ga = euclidean2ASM();
