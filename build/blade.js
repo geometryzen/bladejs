@@ -1,6 +1,46 @@
+Euclidean2ASM = function() {
+  "use asm";
+  function add(a0, a1, a2, a3, b0, b1, b2, b3, index) {
+    a0 = +a0;
+    a1 = +a1;
+    a2 = +a2;
+    a3 = +a3;
+    b0 = +b0;
+    b1 = +b1;
+    b2 = +b2;
+    b3 = +b3;
+    index = index|0;
+    var x = 0.0;
+    switch(~(~index)) {
+      case 0: {
+        x = +(a0 + b0);
+      }
+      break;
+      case 1: {
+        x = +(a1 + b1);
+      }
+      break;
+      case 2: {
+        x = +(a2 + b2);
+      }
+      break;
+      case 3: {
+        x = +(a3 + b3);
+      }
+      break;
+      default: {
+      }
+    }
+    return +x;
+  }
+  return {
+    add: add
+  };
+};
+e2ga = Euclidean2ASM();
 (function(scope, objName, modName) {
   'use strict';
-  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean2ASM, Euclidean3, stringFromCoordinates;
+  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3, stringFromCoordinates;
   EUCLIDEAN_2 = "Euclidean2";
   EUCLIDEAN_3 = "Euclidean3";
   BLADE = BLADE || {};
@@ -38,42 +78,6 @@
       str = "0";
     }
     return str;
-  };
-  Euclidean2ASM = function(stdlib, foreign, heap) {
-    "use asm";
-    var i32 = new stdlib.Int32Array(heap);
-    function add(a0, a1, a2, a3, b0, b1, b2, b3, index) {
-      a0 = +a0;
-      a1 = +a1;
-      a2 = +a2;
-      a3 = +a3;
-      b0 = +b0;
-      b1 = +b1;
-      b2 = +b2;
-      b3 = +b3;
-      index = index|0;
-      var x = 0.0;
-      switch(~index) {
-        case 0: {
-          x = +(a0 + b0);
-        }
-        case 1: {
-          x = +(a1 + b1);
-        }
-        case 2: {
-          x = +(a2 + b2);
-        }
-        case 3: {
-          x = +(a3 + b3);
-        }
-        default: {
-        }
-      }
-      return +x;
-    };
-    return {
-      add: add
-    };
   };
   /*
     Euclidean2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
@@ -113,12 +117,11 @@
     };
 
     Euclidean2.add = function(a, b) {
-      var e2ga;
-      e2ga = Euclidean2ASM(window, {}, new ArrayBuffer(4 * 1024));
-      var x0 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0);
-      var x1 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1);
-      var x2 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2);
-      var x3 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3);
+      var x0, x1, x2, x3;
+      x0 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0);
+      x1 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1);
+      x2 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2);
+      x3 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3);
       return [x0, x1, x2, x3];
     };
 

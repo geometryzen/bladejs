@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 
     concat: {
       myproject: {
-        src: ['src/js/blade.js'],
+        src: ['src/js/Euclidean2ASM.js', 'src/js/blade.js'],
         dest: 'build/blade.js',
         separator: ';'
       }

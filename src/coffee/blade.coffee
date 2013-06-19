@@ -33,24 +33,6 @@
       str = "0"
     return str
 
-  Euclidean2ASM = (stdlib, foreign, heap) ->
-    "use asm"
-    # Section for imports and module variables
-    i32 = new stdlib.Int32Array(heap)
-    #f64 = new stdlib.Float64Array(heap)
-
-    add = (a0, a1, a2, a3, b0, b1, b2, b3) ->
-      a0 = +a0; a1 = +a1; a2 = +a2; a3 = +a3
-      b0 = +b0; b1 = +b1; b2 = +b2; b3 = +b3
-      x0 = +(a0 + b0)
-      x1 = +(a1 + b1)
-      x2 = +(a2 + b2)
-      x3 = +(a3 + b3)
-      return [x0, x1, x2, x3]
-
-    # Export section.
-    return add: add
-
   ###
     Euclidean2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
     The even subalgebra of this Geometric Algebra is isomorphic to the complex numbers.
@@ -81,8 +63,11 @@
           throw new Error "index must be in the range [0..3]"
 
     @add: (a, b) ->
-      fast = Euclidean2ASM(window, {}, new ArrayBuffer(4 * 1024))
-      return fast.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3])
+      x0 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0)
+      x1 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1)
+      x2 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2)
+      x3 = e2ga.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3)
+      return [x0, x1, x2, x3]
 
     add: (rhs) ->
       xs = Euclidean2.add(@_coordinates, rhs._coordinates)
