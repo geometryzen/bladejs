@@ -39,9 +39,10 @@
     }
     return str;
   };
-  Euclidean2ASM = function() {
+  Euclidean2ASM = function(stdlib, foreign, heap) {
     "use asm";
-    var add;
+    var add, i32;
+    i32 = new stdlib.Int32Array(heap);
     add = function(a0, a1, a2, a3, b0, b1, b2, b3) {
       var x0, x1, x2, x3;
       a0 = +a0;
@@ -101,7 +102,7 @@
 
     Euclidean2.add = function(a, b) {
       var fast;
-      fast = Euclidean2ASM();
+      fast = Euclidean2ASM(window, {}, new ArrayBuffer(4 * 1024));
       return fast.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3]);
     };
 
