@@ -43,7 +43,6 @@
     "use asm";
     var i32 = new stdlib.Int32Array(heap);
     function add(a0, a1, a2, a3, b0, b1, b2, b3, index) {
-      index = index|0;
       a0 = +a0;
       a1 = +a1;
       a2 = +a2;
@@ -52,6 +51,7 @@
       b1 = +b1;
       b2 = +b2;
       b3 = +b3;
+      index = index|0;
       switch(index) {
         case 0: {
           return +(a0 + b0);
