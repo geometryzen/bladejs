@@ -52,23 +52,24 @@
       b2 = +b2;
       b3 = +b3;
       index = index|0;
+      var x = 0.0;
       switch(~index) {
         case 0: {
-          return +(a0 + b0);
+          x = +(a0 + b0);
         }
         case 1: {
-          return +(a1 + b1);
+          x = +(a1 + b1);
         }
         case 2: {
-          return +(a2 + b2);
+          x = +(a2 + b2);
         }
         case 3: {
-          return +(a3 + b3);
+          x = +(a3 + b3);
         }
         default: {
-          return 0;
         }
       }
+      return x;
     };
     return {
       add: add
