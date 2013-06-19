@@ -1,6 +1,6 @@
 (function(scope, objName, modName) {
   'use strict';
-  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3, euclidean2ASM, stringFromCoordinates;
+  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean2ASM, Euclidean3, stringFromCoordinates;
   EUCLIDEAN_2 = "Euclidean2";
   EUCLIDEAN_3 = "Euclidean3";
   BLADE = BLADE || {};
@@ -39,7 +39,7 @@
     }
     return str;
   };
-  euclidean2ASM = function() {
+  Euclidean2ASM = function() {
     "use asm";
     var add;
     add = function(a0, a1, a2, a3, b0, b1, b2, b3) {
@@ -101,7 +101,7 @@
 
     Euclidean2.add = function(a, b) {
       var fast;
-      fast = euclidean2ASM();
+      fast = Euclidean2ASM();
       return fast.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3]);
     };
 

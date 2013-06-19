@@ -33,7 +33,7 @@
       str = "0"
     return str
 
-  euclidean2ASM = () ->
+  Euclidean2ASM = () ->
     "use asm"
 
     add = (a0, a1, a2, a3, b0, b1, b2, b3) ->
@@ -77,7 +77,7 @@
           throw new Error "index must be in the range [0..3]"
 
     @add: (a, b) ->
-      fast = euclidean2ASM()
+      fast = Euclidean2ASM()
       return fast.add(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3])
 
     add: (rhs) ->

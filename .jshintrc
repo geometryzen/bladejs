@@ -10,7 +10,7 @@
   "forin": true,
   "immed": true,
   "latedef": true,
-  "newcap": true,
+  "newcap": false,
   "noarg": true,
   "noempty": false,
   "regexp": true,
