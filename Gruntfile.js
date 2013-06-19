@@ -63,7 +63,7 @@ module.exports = function (grunt) {
 
     jasmine: {
       myproject: {
-        src: ['src/js/Euclidean2ASM.js', 'build/**/blade.js'],
+        src: ['src/js/bladeASM.js', 'build/**/blade.js'],
         options: {
           specs: 'spec/**/*.spec.js'
         }
