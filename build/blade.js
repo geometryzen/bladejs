@@ -52,7 +52,7 @@
       b2 = +b2;
       b3 = +b3;
       index = index|0;
-      switch(index) {
+      switch(~index) {
         case 0: {
           return +(a0 + b0);
         }
