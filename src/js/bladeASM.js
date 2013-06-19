@@ -116,6 +116,6 @@ bladeASM = (function(/*stdlib, foreign, heap*/) {
   }
   // Export section.
   return {
-    "addEuclidean2": addEuclidean2, "subEuclidean2": subEuclidean2, "mulEuclidean2": mulEuclidean2
+    addEuclidean2: addEuclidean2, subEuclidean2: subEuclidean2, mulEuclidean2: mulEuclidean2
   };
 })(window, {}, new ArrayBuffer(4 * 1024));
