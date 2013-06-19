@@ -101,7 +101,7 @@ module.exports = function (grunt) {
 
     watch: {
       app: {
-        files: ['src/**/*.coffee', 'spec/**/*.js'],
+        files: ['src/**/*.coffee', 'src/js/bladeASM.js', 'spec/**/*.js'],
         tasks: ['coffee:myproject', 'jshint:myproject', 'concat:myproject', 'uglify:myproject', 'copy:myproject', 'jasmine:myproject']
       }
     },
