@@ -69,7 +69,7 @@
         default: {
         }
       }
-      return x;
+      return +x;
     };
     return {
       add: add
