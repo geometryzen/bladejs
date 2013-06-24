@@ -319,4 +319,4 @@
     scope[objName] = BLADE
 
   return
-)((if window then window else null), 'BLADE', 'blade')
+)((if (typeof window is 'object') then window else null), 'BLADE', 'blade')
