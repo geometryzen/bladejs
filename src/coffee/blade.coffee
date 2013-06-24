@@ -315,7 +315,7 @@
 
   # If there is a global object, that at least has a document property, then we assume that it is the
   # window object and install it in the window object as a property.
-  if typeof scope is "object" and typeof scope.document is "object"
+  if typeof scope is "object" and scope.document and typeof scope.document is "object"
     scope[objName] = BLADE
 
   return
