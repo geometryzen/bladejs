@@ -3,7 +3,7 @@
  *
  * This asm.js part is kept separate to avoid issues caused by JavaScript compression.
  */
-bladeASM = (function(/*stdlib, foreign, heap*/) {
+bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
   "use asm";
   // Section for imports and module variables.
 
@@ -118,4 +118,4 @@ bladeASM = (function(/*stdlib, foreign, heap*/) {
   return {
     addEuclidean2: addEuclidean2, subEuclidean2: subEuclidean2, mulEuclidean2: mulEuclidean2
   };
-})(window, {}, new ArrayBuffer(4 * 1024));
+})((typeof window === 'object') ? window : null, {}, new ArrayBuffer(4 * 1024));
