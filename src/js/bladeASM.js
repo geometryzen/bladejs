@@ -118,4 +118,4 @@ bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
   return {
     addEuclidean2: addEuclidean2, subEuclidean2: subEuclidean2, mulEuclidean2: mulEuclidean2
   };
-})((typeof window === 'object') ? window : null, {}, new ArrayBuffer(4 * 1024));
+})((typeof window === 'object') ? window : undefined, {}, new ArrayBuffer(4 * 1024));

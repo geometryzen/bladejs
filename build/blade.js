@@ -399,4 +399,4 @@
   if (typeof scope === "object" && scope.document && typeof scope.document === "object") {
     scope[objName] = BLADE;
   }
-})((typeof window === 'object' ? window : null), 'BLADE', 'blade');
+})((typeof window === 'object' ? window : void 0), 'BLADE', 'blade');
