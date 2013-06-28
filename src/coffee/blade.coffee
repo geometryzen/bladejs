@@ -71,10 +71,10 @@
       b1 = b[1]
       b2 = b[2]
       b3 = b[3]
-      x0 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
-      x1 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
-      x2 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
-      x3 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
+      x0 = bladeASM.addE2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.addE2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.addE2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.addE2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
       return [x0, x1, x2, x3]
 
     add: (rhs) ->
@@ -90,10 +90,10 @@
       b1 = b[1]
       b2 = b[2]
       b3 = b[3]
-      x0 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
-      x1 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
-      x2 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
-      x3 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
+      x0 = bladeASM.subE2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.subE2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.subE2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.subE2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
       return [x0, x1, x2, x3]
 
     sub: (rhs) ->
@@ -109,10 +109,10 @@
       b1 = b[1]
       b2 = b[2]
       b3 = b[3]
-      x0 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
-      x1 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
-      x2 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
-      x3 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
+      x0 = bladeASM.mulE2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.mulE2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.mulE2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.mulE2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
       return [x0, x1, x2, x3]
 
     mul: (rhs) ->
@@ -120,36 +120,63 @@
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @wedge: (a, b) ->
-      xs = [0, 0, 0, 0]
-      xs[0] = a[0] * b[0]
-      xs[1] = a[0] * b[1] + a[1] * b[0]
-      xs[2] = a[0] * b[2]               + a[2] * b[0]
-      xs[3] = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0]
-      return xs
+      a0 = a[0]
+      a1 = a[1]
+      a2 = a[2]
+      a3 = a[3]
+      b0 = b[0]
+      b1 = b[1]
+      b2 = b[2]
+      b3 = b[3]
+      x0 = bladeASM.extE2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.extE2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.extE2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.extE2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
+      return [x0, x1, x2, x3]
 
     wedge: (rhs) ->
       xs = Euclidean2.wedge(@_coordinates, rhs._coordinates)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @lshift: (a, b) ->
-      xs = [0, 0, 0, 0]
-      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3]
-      xs[1] = a[0] * b[1]               - a[2] * b[3]
-      xs[2] = a[0] * b[2] + a[1] * b[3]
-      xs[3] = a[0] * b[3]
-      return xs
+      a0 = a[0]
+      a1 = a[1]
+      a2 = a[2]
+      a3 = a[3]
+      b0 = b[0]
+      b1 = b[1]
+      b2 = b[2]
+      b3 = b[3]
+      x0 = bladeASM.lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
+      return [x0, x1, x2, x3]
 
     lshift: (rhs) ->
       xs = Euclidean2.lshift(@_coordinates, rhs._coordinates)
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @rshift: (a, b) ->
-      xs = [0, 0, 0, 0]
-      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3]
-      xs[1] =             - a[1] * b[0]               - a[3] * b[2]
-      xs[2] =                           - a[2] * b[0] + a[3] * b[1]
-      xs[3] =                                           a[3] * b[0]
-      return xs
+      a0 = a[0]
+      a1 = a[1]
+      a2 = a[2]
+      a3 = a[3]
+      b0 = b[0]
+      b1 = b[1]
+      b2 = b[2]
+      b3 = b[3]
+      x0 = bladeASM.rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
+      return [x0, x1, x2, x3]
+#      xs = [0, 0, 0, 0]
+#      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3]
+#      xs[1] =             - a[1] * b[0]               - a[3] * b[2]
+#      xs[2] =                           - a[2] * b[0] + a[3] * b[1]
+#      xs[3] =                                           a[3] * b[0]
+#      return xs
 
     rshift: (rhs) ->
       xs = Euclidean2.rshift(@_coordinates, rhs._coordinates)

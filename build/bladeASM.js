@@ -15,7 +15,7 @@ bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
   // a = i32[0]|0;
   // var b = 0.0;
   // b = +f64[0];
-  function addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
+  function addE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
     a0 = +a0;
     a1 = +a1;
     a2 = +a2;
@@ -48,7 +48,7 @@ bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
     }
     return +x;
   }
-  function subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
+  function subE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
     a0 = +a0;
     a1 = +a1;
     a2 = +a2;
@@ -81,7 +81,7 @@ bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
     }
     return +x;
   }
-  function mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
+  function mulE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
     a0 = +a0;
     a1 = +a1;
     a2 = +a2;
@@ -107,6 +107,105 @@ bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
       break;
       case 3: {
         x = +(a0 * b3 + a1 * b2 - a2 * b1 + a3 * b0);
+      }
+      break;
+      default: {
+      }
+    }
+    return +x;
+  }
+  function extE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
+    a0 = +a0;
+    a1 = +a1;
+    a2 = +a2;
+    a3 = +a3;
+    b0 = +b0;
+    b1 = +b1;
+    b2 = +b2;
+    b3 = +b3;
+    index = index|0;
+    var x = 0.0;
+    switch(~(~index)) {
+      case 0: {
+        x = +(a0 * b0);
+      }
+      break;
+      case 1: {
+        x = +(a0 * b1 + a1 * b0);
+      }
+      break;
+      case 2: {
+        x = +(a0 * b2           + a2 * b0);
+      }
+      break;
+      case 3: {
+        x = +(a0 * b3 + a1 * b2 - a2 * b1 + a3 * b0);
+      }
+      break;
+      default: {
+      }
+    }
+    return +x;
+  }
+  function lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
+    a0 = +a0;
+    a1 = +a1;
+    a2 = +a2;
+    a3 = +a3;
+    b0 = +b0;
+    b1 = +b1;
+    b2 = +b2;
+    b3 = +b3;
+    index = index|0;
+    var x = 0.0;
+    switch(~(~index)) {
+      case 0: {
+        x = +(a0 * b0 + a1 * b1 + a2 * b2 - a3 * b3);
+      }
+      break;
+      case 1: {
+        x = +(a0 * b1           - a2 * b3);
+      }
+      break;
+      case 2: {
+        x = +(a0 * b2 + a1 * b3);
+      }
+      break;
+      case 3: {
+        x = +(a0 * b3);
+      }
+      break;
+      default: {
+      }
+    }
+    return +x;
+  }
+  function rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
+    a0 = +a0;
+    a1 = +a1;
+    a2 = +a2;
+    a3 = +a3;
+    b0 = +b0;
+    b1 = +b1;
+    b2 = +b2;
+    b3 = +b3;
+    index = index|0;
+    var x = 0.0;
+    switch(~(~index)) {
+      case 0: {
+        x = +(a0 * b0 + a1 * b1 + a2 * b2 - a3 * b3);
+      }
+      break;
+      case 1: {
+        x = +(        - a1 * b0           - a3 * b2);
+      }
+      break;
+      case 2: {
+        x = +(                  - a2 * b0 + a3 * b1);
+      }
+      break;
+      case 3: {
+        x = +(                              a3 * b0);
       }
       break;
       default: {
@@ -458,6 +557,6 @@ bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
   }
   // Export section.
   return {
-    addEuclidean2: addEuclidean2, subEuclidean2: subEuclidean2, mulEuclidean2: mulEuclidean2, addE3: addE3, subE3: subE3, mulE3: mulE3, extE3: extE3, lcoE3: lcoE3, rcoE3: rcoE3
+    addE2:addE2, subE2:subE2, mulE2:mulE2, extE2:extE2, lcoE2:lcoE2, rcoE2:rcoE2, addE3:addE3, subE3:subE3, mulE3:mulE3, extE3:extE3, lcoE3:lcoE3, rcoE3:rcoE3
   };
 })((typeof window === 'object') ? window : undefined, {}, new ArrayBuffer(4 * 1024));
