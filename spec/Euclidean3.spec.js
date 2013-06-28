@@ -240,6 +240,82 @@ describe("Euclidean3", function() {
     });
   });
 
+  describe("exterior product", function() {
+    it("", function() {
+      expect(one.wedge(one)).toBeNear(one);
+      expect(one.wedge(i)).toBeNear(i);
+      expect(one.wedge(j)).toBeNear(j);
+      expect(one.wedge(k)).toBeNear(k);
+      expect(one.wedge(ij)).toBeNear(ij);
+      expect(one.wedge(jk)).toBeNear(jk);
+      expect(one.wedge(ki)).toBeNear(ki);
+      expect(one.wedge(I)).toBeNear(I);
+
+      expect(i.wedge(one)).toBeNear(i);
+      expect(i.wedge(i)).toBeNear(zero);
+      expect(i.wedge(j)).toBeNear(ij);
+      expect(i.wedge(k)).toBeNear(zero.sub(ki));
+      expect(i.wedge(ij)).toBeNear(zero);
+      expect(i.wedge(jk)).toBeNear(I);
+      expect(i.wedge(ki)).toBeNear(zero);
+      expect(i.wedge(I)).toBeNear(zero);
+
+      expect(j.wedge(one)).toBeNear(j);
+      expect(j.wedge(i)).toBeNear(zero.sub(ij));
+      expect(j.wedge(j)).toBeNear(zero);
+      expect(j.wedge(k)).toBeNear(jk);
+      expect(j.wedge(ij)).toBeNear(zero);
+      expect(j.wedge(jk)).toBeNear(zero);
+      expect(j.wedge(ki)).toBeNear(I);
+      expect(j.wedge(I)).toBeNear(zero);
+
+      expect(k.wedge(one)).toBeNear(k);
+      expect(k.wedge(i)).toBeNear(ki);
+      expect(k.wedge(j)).toBeNear(zero.sub(jk));
+      expect(k.wedge(k)).toBeNear(zero);
+      expect(k.wedge(ij)).toBeNear(I);
+      expect(k.wedge(jk)).toBeNear(zero);
+      expect(k.wedge(ki)).toBeNear(zero);
+      expect(k.wedge(I)).toBeNear(zero);
+
+      expect(ij.wedge(one)).toBeNear(ij);
+      expect(ij.wedge(i)).toBeNear(zero);
+      expect(ij.wedge(j)).toBeNear(zero);
+      expect(ij.wedge(k)).toBeNear(I);
+      expect(ij.wedge(ij)).toBeNear(zero);
+      expect(ij.wedge(jk)).toBeNear(zero);
+      expect(ij.wedge(ki)).toBeNear(zero);
+      expect(ij.wedge(I)).toBeNear(zero);
+
+      expect(jk.wedge(one)).toBeNear(jk);
+      expect(jk.wedge(i)).toBeNear(I);
+      expect(jk.wedge(j)).toBeNear(zero);
+      expect(jk.wedge(k)).toBeNear(zero);
+      expect(jk.wedge(ij)).toBeNear(zero);
+      expect(jk.wedge(jk)).toBeNear(zero);
+      expect(jk.wedge(ki)).toBeNear(zero);
+      expect(jk.wedge(I)).toBeNear(zero);
+
+      expect(ki.wedge(one)).toBeNear(ki);            // 49
+      expect(ki.wedge(i)).toBeNear(zero);            // 50
+      expect(ki.wedge(j)).toBeNear(I);               // 51
+      expect(ki.wedge(k)).toBeNear(zero);            // 52
+      expect(ki.wedge(ij)).toBeNear(zero);           // 53
+      expect(ki.wedge(jk)).toBeNear(zero);           // 54
+      expect(ki.wedge(ki)).toBeNear(zero);           // 55
+      expect(ki.wedge(I)).toBeNear(zero);            // 56
+
+      expect(I.wedge(one)).toBeNear(I);              // 57
+      expect(I.wedge(i)).toBeNear(zero);             // 58
+      expect(I.wedge(j)).toBeNear(zero);             // 59
+      expect(I.wedge(k)).toBeNear(zero);             // 60
+      expect(I.wedge(ij)).toBeNear(zero);            // 61
+      expect(I.wedge(jk)).toBeNear(zero);            // 62
+      expect(I.wedge(ki)).toBeNear(zero);            // 63
+      expect(I.wedge(I)).toBeNear(zero);             // 64
+    });
+  });
+
   describe("left contraction", function() {
     it("", function() {
       expect(one.lshift(one)).toBeNear(one);

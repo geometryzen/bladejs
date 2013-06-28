@@ -77,11 +77,19 @@
     };
 
     Euclidean2.add = function(a, b) {
-      var x0, x1, x2, x3;
-      x0 = bladeASM.addEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0);
-      x1 = bladeASM.addEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1);
-      x2 = bladeASM.addEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2);
-      x3 = bladeASM.addEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3);
+      var a0, a1, a2, a3, b0, b1, b2, b3, x0, x1, x2, x3;
+      a0 = a[0];
+      a1 = a[1];
+      a2 = a[2];
+      a3 = a[3];
+      b0 = b[0];
+      b1 = b[1];
+      b2 = b[2];
+      b3 = b[3];
+      x0 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0);
+      x1 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1);
+      x2 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2);
+      x3 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3);
       return [x0, x1, x2, x3];
     };
 
@@ -92,11 +100,19 @@
     };
 
     Euclidean2.sub = function(a, b) {
-      var x0, x1, x2, x3;
-      x0 = bladeASM.subEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0);
-      x1 = bladeASM.subEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1);
-      x2 = bladeASM.subEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2);
-      x3 = bladeASM.subEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3);
+      var a0, a1, a2, a3, b0, b1, b2, b3, x0, x1, x2, x3;
+      a0 = a[0];
+      a1 = a[1];
+      a2 = a[2];
+      a3 = a[3];
+      b0 = b[0];
+      b1 = b[1];
+      b2 = b[2];
+      b3 = b[3];
+      x0 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0);
+      x1 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1);
+      x2 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2);
+      x3 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3);
       return [x0, x1, x2, x3];
     };
 
@@ -107,11 +123,19 @@
     };
 
     Euclidean2.mul = function(a, b) {
-      var x0, x1, x2, x3;
-      x0 = bladeASM.mulEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0);
-      x1 = bladeASM.mulEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1);
-      x2 = bladeASM.mulEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2);
-      x3 = bladeASM.mulEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3);
+      var a0, a1, a2, a3, b0, b1, b2, b3, x0, x1, x2, x3;
+      a0 = a[0];
+      a1 = a[1];
+      a2 = a[2];
+      a3 = a[3];
+      b0 = b[0];
+      b1 = b[1];
+      b2 = b[2];
+      b3 = b[3];
+      x0 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0);
+      x1 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1);
+      x2 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2);
+      x3 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3);
       return [x0, x1, x2, x3];
     };
 
@@ -238,124 +262,99 @@
       }
     };
 
-    Euclidean3.add = function(a, b) {
-      var xs;
-      xs = [0, 0, 0, 0, 0, 0, 0, 0];
-      xs[0] = a[0] + b[0];
-      xs[1] = a[1] + b[1];
-      xs[2] = a[2] + b[2];
-      xs[3] = a[3] + b[3];
-      xs[4] = a[4] + b[4];
-      xs[5] = a[5] + b[5];
-      xs[6] = a[6] + b[6];
-      xs[7] = a[7] + b[7];
-      return xs;
+    Euclidean3.compute = function(f, a, b, coord, pack) {
+      var a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, x0, x1, x2, x3, x4, x5, x6, x7;
+      a0 = coord(a, 0);
+      a1 = coord(a, 1);
+      a2 = coord(a, 2);
+      a3 = coord(a, 3);
+      a4 = coord(a, 4);
+      a5 = coord(a, 5);
+      a6 = coord(a, 6);
+      a7 = coord(a, 7);
+      b0 = coord(b, 0);
+      b1 = coord(b, 1);
+      b2 = coord(b, 2);
+      b3 = coord(b, 3);
+      b4 = coord(b, 4);
+      b5 = coord(b, 5);
+      b6 = coord(b, 6);
+      b7 = coord(b, 7);
+      x0 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 0);
+      x1 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 1);
+      x2 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 2);
+      x3 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 3);
+      x4 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 4);
+      x5 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 5);
+      x6 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 6);
+      x7 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 7);
+      return pack(x0, x1, x2, x3, x4, x5, x6, x7);
     };
 
     Euclidean3.prototype.add = function(rhs) {
-      var xs;
-      xs = Euclidean3.add(this._coordinates, rhs._coordinates);
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
-    };
-
-    Euclidean3.sub = function(a, b) {
-      var xs;
-      xs = [0, 0, 0, 0, 0, 0, 0, 0];
-      xs[0] = a[0] - b[0];
-      xs[1] = a[1] - b[1];
-      xs[2] = a[2] - b[2];
-      xs[3] = a[3] - b[3];
-      xs[4] = a[4] - b[4];
-      xs[5] = a[5] - b[5];
-      xs[6] = a[6] - b[6];
-      xs[7] = a[7] - b[7];
-      return xs;
+      var coord, pack;
+      coord = function(x, n) {
+        return x[n];
+      };
+      pack = function(w, x, y, z, xy, yz, zx, xyz) {
+        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
+      };
+      return Euclidean3.compute(bladeASM.addE3, this._coordinates, rhs._coordinates, coord, pack);
     };
 
     Euclidean3.prototype.sub = function(rhs) {
-      var xs;
-      xs = Euclidean3.sub(this._coordinates, rhs._coordinates);
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
-    };
-
-    Euclidean3.mul = function(a, b) {
-      var xs;
-      xs = [0, 0, 0, 0, 0, 0, 0, 0];
-      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7];
-      xs[1] = a[0] * b[1] + a[1] * b[0] - a[2] * b[4] + a[3] * b[6] + a[4] * b[2] - a[5] * b[7] - a[6] * b[3] - a[7] * b[5];
-      xs[2] = a[0] * b[2] + a[1] * b[4] + a[2] * b[0] - a[3] * b[5] - a[4] * b[1] + a[5] * b[3] - a[6] * b[7] - a[7] * b[6];
-      xs[3] = a[0] * b[3] - a[1] * b[6] + a[2] * b[5] + a[3] * b[0] - a[4] * b[7] - a[5] * b[2] + a[6] * b[1] - a[7] * b[4];
-      xs[4] = a[0] * b[4] + a[1] * b[2] - a[2] * b[1] + a[3] * b[7] + a[4] * b[0] - a[5] * b[6] + a[6] * b[5] + a[7] * b[3];
-      xs[5] = a[0] * b[5] + a[1] * b[7] + a[2] * b[3] - a[3] * b[2] + a[4] * b[6] + a[5] * b[0] - a[6] * b[4] + a[7] * b[1];
-      xs[6] = a[0] * b[6] - a[1] * b[3] + a[2] * b[7] + a[3] * b[1] - a[4] * b[5] + a[5] * b[4] + a[6] * b[0] + a[7] * b[2];
-      xs[7] = a[0] * b[7] + a[1] * b[5] + a[2] * b[6] + a[3] * b[4] + a[4] * b[3] + a[5] * b[1] + a[6] * b[2] + a[7] * b[0];
-      return xs;
+      var coord, pack;
+      coord = function(x, n) {
+        return x[n];
+      };
+      pack = function(w, x, y, z, xy, yz, zx, xyz) {
+        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
+      };
+      return Euclidean3.compute(bladeASM.subE3, this._coordinates, rhs._coordinates, coord, pack);
     };
 
     Euclidean3.prototype.mul = function(rhs) {
-      var xs;
-      xs = Euclidean3.mul(this._coordinates, rhs._coordinates);
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
-    };
-
-    Euclidean3.wedge = function(a, b) {
-      var xs;
-      xs = [0, 0, 0, 0, 0, 0, 0, 0];
-      xs[0] = a[0] * b[0];
-      xs[1] = a[0] * b[1] + a[1] * b[0];
-      xs[2] = a[0] * b[2] + a[2] * b[0];
-      xs[3] = a[0] * b[3] + a[3] * b[0];
-      xs[4] = a[0] * b[4] + a[1] * b[2] - a[2] * b[1] + a[4] * b[0];
-      xs[5] = a[0] * b[5] + a[2] * b[3] - a[3] * b[2] + a[5] * b[0];
-      xs[6] = a[0] * b[6] - a[1] * b[3] + a[3] * b[1] + a[6] * b[0];
-      xs[7] = a[0] * b[7] + a[1] * b[5] + a[2] * b[6] + a[3] * b[4] + a[4] * b[3] + a[5] * b[1] + a[6] * b[2] + a[7] * b[0];
-      return xs;
+      var coord, pack;
+      coord = function(x, n) {
+        return x[n];
+      };
+      pack = function(w, x, y, z, xy, yz, zx, xyz) {
+        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
+      };
+      return Euclidean3.compute(bladeASM.mulE3, this._coordinates, rhs._coordinates, coord, pack);
     };
 
     Euclidean3.prototype.wedge = function(rhs) {
-      var xs;
-      xs = Euclidean3.wedge(this._coordinates, rhs._coordinates);
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
-    };
-
-    Euclidean3.lshift = function(a, b) {
-      var xs;
-      xs = [0, 0, 0, 0, 0, 0, 0, 0];
-      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7];
-      xs[1] = a[0] * b[1] - a[2] * b[4] + a[3] * b[6] - a[5] * b[7];
-      xs[2] = a[0] * b[2] + a[1] * b[4] - a[3] * b[5] - a[6] * b[7];
-      xs[3] = a[0] * b[3] - a[1] * b[6] + a[2] * b[5] - a[4] * b[7];
-      xs[4] = a[0] * b[4] + a[3] * b[7];
-      xs[5] = a[0] * b[5] + a[1] * b[7];
-      xs[6] = a[0] * b[6] + a[2] * b[7];
-      xs[7] = a[0] * b[7];
-      return xs;
+      var coord, pack;
+      coord = function(x, n) {
+        return x[n];
+      };
+      pack = function(w, x, y, z, xy, yz, zx, xyz) {
+        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
+      };
+      return Euclidean3.compute(bladeASM.extE3, this._coordinates, rhs._coordinates, coord, pack);
     };
 
     Euclidean3.prototype.lshift = function(rhs) {
-      var xs;
-      xs = Euclidean3.lshift(this._coordinates, rhs._coordinates);
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
-    };
-
-    Euclidean3.rshift = function(a, b) {
-      var xs;
-      xs = [0, 0, 0, 0, 0, 0, 0, 0];
-      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7];
-      xs[1] = +a[1] * b[0] + a[4] * b[2] - a[6] * b[3] - a[7] * b[5];
-      xs[2] = +a[2] * b[0] - a[4] * b[1] + a[5] * b[3] - a[7] * b[6];
-      xs[3] = +a[3] * b[0] - a[5] * b[2] + a[6] * b[1] - a[7] * b[4];
-      xs[4] = +a[4] * b[0] + a[7] * b[3];
-      xs[5] = +a[5] * b[0] + a[7] * b[1];
-      xs[6] = +a[6] * b[0] + a[7] * b[2];
-      xs[7] = +a[7] * b[0];
-      return xs;
+      var coord, pack;
+      coord = function(x, n) {
+        return x[n];
+      };
+      pack = function(w, x, y, z, xy, yz, zx, xyz) {
+        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
+      };
+      return Euclidean3.compute(bladeASM.lcoE3, this._coordinates, rhs._coordinates, coord, pack);
     };
 
     Euclidean3.prototype.rshift = function(rhs) {
-      var xs;
-      xs = Euclidean3.rshift(this._coordinates, rhs._coordinates);
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7]);
+      var coord, pack;
+      coord = function(x, n) {
+        return x[n];
+      };
+      pack = function(w, x, y, z, xy, yz, zx, xyz) {
+        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
+      };
+      return Euclidean3.compute(bladeASM.rcoE3, this._coordinates, rhs._coordinates, coord, pack);
     };
 
     Euclidean3.prototype.grade = function(index) {

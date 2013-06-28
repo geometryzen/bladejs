@@ -63,10 +63,18 @@
           throw new Error "index must be in the range [0..3]"
 
     @add: (a, b) ->
-      x0 = bladeASM.addEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0)
-      x1 = bladeASM.addEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1)
-      x2 = bladeASM.addEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2)
-      x3 = bladeASM.addEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3)
+      a0 = a[0]
+      a1 = a[1]
+      a2 = a[2]
+      a3 = a[3]
+      b0 = b[0]
+      b1 = b[1]
+      b2 = b[2]
+      b3 = b[3]
+      x0 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.addEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
       return [x0, x1, x2, x3]
 
     add: (rhs) ->
@@ -74,10 +82,18 @@
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @sub: (a, b) ->
-      x0 = bladeASM.subEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0)
-      x1 = bladeASM.subEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1)
-      x2 = bladeASM.subEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2)
-      x3 = bladeASM.subEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3)
+      a0 = a[0]
+      a1 = a[1]
+      a2 = a[2]
+      a3 = a[3]
+      b0 = b[0]
+      b1 = b[1]
+      b2 = b[2]
+      b3 = b[3]
+      x0 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.subEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
       return [x0, x1, x2, x3]
 
     sub: (rhs) ->
@@ -85,10 +101,18 @@
       return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3])
 
     @mul: (a, b) ->
-      x0 = bladeASM.mulEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 0)
-      x1 = bladeASM.mulEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 1)
-      x2 = bladeASM.mulEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 2)
-      x3 = bladeASM.mulEuclidean2(a[0], a[1], a[2], a[3], b[0], b[1], b[2], b[3], 3)
+      a0 = a[0]
+      a1 = a[1]
+      a2 = a[2]
+      a3 = a[3]
+      b0 = b[0]
+      b1 = b[1]
+      b2 = b[2]
+      b3 = b[3]
+      x0 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
+      x1 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
+      x2 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
+      x3 = bladeASM.mulEuclidean2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
       return [x0, x1, x2, x3]
 
     mul: (rhs) ->
@@ -181,101 +205,62 @@
         else
           throw new Error "index must be in the range [0..7]"
 
-    @add: (a, b) ->
-      xs = [0, 0, 0, 0, 0, 0, 0, 0]
-      xs[0] = a[0] + b[0]
-      xs[1] = a[1] + b[1]
-      xs[2] = a[2] + b[2]
-      xs[3] = a[3] + b[3]
-      xs[4] = a[4] + b[4]
-      xs[5] = a[5] + b[5]
-      xs[6] = a[6] + b[6]
-      xs[7] = a[7] + b[7]
-      return xs
+    @compute: (f, a, b, coord, pack) ->
+      a0 = coord(a, 0)
+      a1 = coord(a, 1)
+      a2 = coord(a, 2)
+      a3 = coord(a, 3)
+      a4 = coord(a, 4)
+      a5 = coord(a, 5)
+      a6 = coord(a, 6)
+      a7 = coord(a, 7)
+      b0 = coord(b, 0)
+      b1 = coord(b, 1)
+      b2 = coord(b, 2)
+      b3 = coord(b, 3)
+      b4 = coord(b, 4)
+      b5 = coord(b, 5)
+      b6 = coord(b, 6)
+      b7 = coord(b, 7)
+      x0 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 0)
+      x1 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 1)
+      x2 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 2)
+      x3 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 3)
+      x4 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 4)
+      x5 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 5)
+      x6 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 6)
+      x7 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 7)
+      return pack(x0, x1, x2, x3, x4, x5, x6, x7)
 
     add: (rhs) ->
-      xs = Euclidean3.add(@_coordinates, rhs._coordinates)
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
-
-    @sub: (a, b) ->
-      xs = [0, 0, 0, 0, 0, 0, 0, 0]
-      xs[0] = a[0] - b[0]
-      xs[1] = a[1] - b[1]
-      xs[2] = a[2] - b[2]
-      xs[3] = a[3] - b[3]
-      xs[4] = a[4] - b[4]
-      xs[5] = a[5] - b[5]
-      xs[6] = a[6] - b[6]
-      xs[7] = a[7] - b[7]
-      return xs
+      coord = (x,n) -> x[n]
+      pack = (w,x,y,z,xy,yz,zx,xyz) -> Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz)
+      return Euclidean3.compute(bladeASM.addE3, @_coordinates, rhs._coordinates, coord, pack)
 
     sub: (rhs) ->
-      xs = Euclidean3.sub(@_coordinates, rhs._coordinates)
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
-
-    @mul: (a, b) ->
-      xs = [0, 0, 0, 0, 0, 0, 0, 0]
-      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7]
-      xs[1] = a[0] * b[1] + a[1] * b[0] - a[2] * b[4] + a[3] * b[6] + a[4] * b[2] - a[5] * b[7] - a[6] * b[3] - a[7] * b[5]
-      xs[2] = a[0] * b[2] + a[1] * b[4] + a[2] * b[0] - a[3] * b[5] - a[4] * b[1] + a[5] * b[3] - a[6] * b[7] - a[7] * b[6]
-      xs[3] = a[0] * b[3] - a[1] * b[6] + a[2] * b[5] + a[3] * b[0] - a[4] * b[7] - a[5] * b[2] + a[6] * b[1] - a[7] * b[4]
-      xs[4] = a[0] * b[4] + a[1] * b[2] - a[2] * b[1] + a[3] * b[7] + a[4] * b[0] - a[5] * b[6] + a[6] * b[5] + a[7] * b[3]
-      xs[5] = a[0] * b[5] + a[1] * b[7] + a[2] * b[3] - a[3] * b[2] + a[4] * b[6] + a[5] * b[0] - a[6] * b[4] + a[7] * b[1]
-      xs[6] = a[0] * b[6] - a[1] * b[3] + a[2] * b[7] + a[3] * b[1] - a[4] * b[5] + a[5] * b[4] + a[6] * b[0] + a[7] * b[2]
-      xs[7] = a[0] * b[7] + a[1] * b[5] + a[2] * b[6] + a[3] * b[4] + a[4] * b[3] + a[5] * b[1] + a[6] * b[2] + a[7] * b[0]
-      return xs
+      coord = (x,n) -> x[n]
+      pack = (w,x,y,z,xy,yz,zx,xyz) -> Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz)
+      return Euclidean3.compute(bladeASM.subE3, @_coordinates, rhs._coordinates, coord, pack)
 
     mul: (rhs) ->
-      xs = Euclidean3.mul(@_coordinates, rhs._coordinates)
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
-
-    @wedge: (a, b) ->
-      xs = [0, 0, 0, 0, 0, 0, 0, 0]
-      xs[0] = a[0] * b[0]
-      xs[1] = a[0] * b[1] + a[1] * b[0]
-      xs[2] = a[0] * b[2]               + a[2] * b[0]
-      xs[3] = a[0] * b[3]                             + a[3] * b[0]
-      xs[4] = a[0] * b[4] + a[1] * b[2] - a[2] * b[1]               + a[4]* b[0]
-      xs[5] = a[0] * b[5]               + a[2] * b[3] - a[3] * b[2]              + a[5] * b[0]
-      xs[6] = a[0] * b[6] - a[1] * b[3]               + a[3] * b[1]                            + a[6] * b[0]
-      xs[7] = a[0] * b[7] + a[1] * b[5] + a[2] * b[6] + a[3] * b[4] + a[4]* b[3] + a[5] * b[1] + a[6] * b[2] + a[7] * b[0]
-      return xs
+      coord = (x,n) -> x[n]
+      pack = (w,x,y,z,xy,yz,zx,xyz) -> Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz)
+      return Euclidean3.compute(bladeASM.mulE3, @_coordinates, rhs._coordinates, coord, pack)
 
     wedge: (rhs) ->
-      xs = Euclidean3.wedge(@_coordinates, rhs._coordinates)
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
-
-    @lshift: (a, b) ->
-      xs = [0, 0, 0, 0, 0, 0, 0, 0]
-      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7]
-      xs[1] = a[0] * b[1]               - a[2] * b[4] + a[3] * b[6]               - a[5] * b[7]
-      xs[2] = a[0] * b[2] + a[1] * b[4]               - a[3] * b[5]                             - a[6] * b[7]
-      xs[3] = a[0] * b[3] - a[1] * b[6] + a[2] * b[5]               - a[4] * b[7]
-      xs[4] = a[0] * b[4]                             + a[3] * b[7]
-      xs[5] = a[0] * b[5] + a[1] * b[7]
-      xs[6] = a[0] * b[6]               + a[2] * b[7]
-      xs[7] = a[0] * b[7]
-      return xs
+      coord = (x,n) -> x[n]
+      pack = (w,x,y,z,xy,yz,zx,xyz) -> Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz)
+      return Euclidean3.compute(bladeASM.extE3, @_coordinates, rhs._coordinates, coord, pack)
 
     lshift: (rhs) ->
-      xs = Euclidean3.lshift(@_coordinates, rhs._coordinates)
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
-
-    @rshift: (a, b) ->
-      xs = [0, 0, 0, 0, 0, 0, 0, 0]
-      xs[0] = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7]
-      xs[1] =             + a[1] * b[0]                             + a[4] * b[2]               - a[6] * b[3] - a[7] * b[5]
-      xs[2] =                           + a[2] * b[0]               - a[4] * b[1] + a[5] * b[3]               - a[7] * b[6]
-      xs[3] =                                         + a[3] * b[0]               - a[5] * b[2] + a[6] * b[1] - a[7] * b[4]
-      xs[4] =                                                       + a[4] * b[0]                             + a[7] * b[3]
-      xs[5] =                                                                     + a[5] * b[0]               + a[7] * b[1]
-      xs[6] =                                                                                   + a[6] * b[0] + a[7] * b[2]
-      xs[7] =                                                                                                 + a[7] * b[0]
-      return xs
+      coord = (x,n) -> x[n]
+      pack = (w,x,y,z,xy,yz,zx,xyz) -> Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz)
+      return Euclidean3.compute(bladeASM.lcoE3, @_coordinates, rhs._coordinates, coord, pack)
 
     rshift: (rhs) ->
-      xs = Euclidean3.rshift(@_coordinates, rhs._coordinates)
-      return Euclidean3.fromCartesian(xs[0], xs[1], xs[2], xs[3], xs[4], xs[5], xs[6], xs[7])
+      coord = (x,n) -> x[n]
+      pack = (w,x,y,z,xy,yz,zx,xyz) -> Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz)
+      return Euclidean3.compute(bladeASM.rcoE3, @_coordinates, rhs._coordinates, coord, pack)
 
     grade: (index) ->
       switch index
