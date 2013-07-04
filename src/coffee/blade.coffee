@@ -6,34 +6,6 @@
 
   BLADE = BLADE or {}
 
-  stringFromCoordinates = (coordinates, labels) ->
-    sb = []
-    append = (number, label) ->
-      if number isnt 0
-        # Determine and conditionally add a sign.
-        if number >= 0
-          if sb.length > 0
-            sb.push "+"
-        else
-          sb.push "-"
-        # If the absolute value of the number is unity then we only need the label.
-        n = Math.abs number
-        if n is 1
-          sb.push label
-        else
-          sb.push n.toString()
-          # We only need the label if it contributes under multiplication.
-          if label isnt "1"
-            sb.push "*"
-            sb.push label
-    for i in [0..coordinates.length - 1]
-      append coordinates[i], labels[i]
-    if sb.length > 0
-      str = sb.join ""
-    else
-      str = "0"
-    return str
-
   ###
     Euclidean2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
     The even subalgebra of this Geometric Algebra is isomorphic to the complex numbers.
@@ -194,9 +166,9 @@
         else
           return Euclidean2.fromCartesian(0, 0, 0, 0)
 
-    toString: () -> stringFromCoordinates(@_coordinates, ["1", "e1", "e2", "e12"])
-    toStringIJK: () -> stringFromCoordinates(@_coordinates, ["1", "i", "j", "I"])
-    toStringLATEX: () -> stringFromCoordinates(@_coordinates, ["1", "e_{1}", "e_{2}", "e_{12}"])
+    toString: () -> bladeSTR.stringFromCoordinates(@_coordinates, ["1", "e1", "e2", "e12"])
+    toStringIJK: () -> bladeSTR.stringFromCoordinates(@_coordinates, ["1", "i", "j", "I"])
+    toStringLATEX: () -> bladeSTR.stringFromCoordinates(@_coordinates, ["1", "e_{1}", "e_{2}", "e_{12}"])
 
   BLADE[EUCLIDEAN_2] = Euclidean2
 
@@ -303,9 +275,9 @@
         else
           return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, 0, 0)
 
-    toString: () -> stringFromCoordinates(@_coordinates, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"])
-    toStringIJK: () -> stringFromCoordinates(@_coordinates, ["1", "i", "j", "k", "ij", "jk", "ki", "I"])
-    toStringLATEX: () -> stringFromCoordinates(@_coordinates, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"])
+    toString: () -> bladeSTR.stringFromCoordinates(@_coordinates, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"])
+    toStringIJK: () -> bladeSTR.stringFromCoordinates(@_coordinates, ["1", "i", "j", "k", "ij", "jk", "ki", "I"])
+    toStringLATEX: () -> bladeSTR.stringFromCoordinates(@_coordinates, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"])
 
   BLADE[EUCLIDEAN_3] = Euclidean3
 

@@ -1,44 +1,9 @@
 (function(scope, objName, modName) {
   'use strict';
-  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3, stringFromCoordinates;
+  var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3;
   EUCLIDEAN_2 = "Euclidean2";
   EUCLIDEAN_3 = "Euclidean3";
   BLADE = BLADE || {};
-  stringFromCoordinates = function(coordinates, labels) {
-    var append, i, sb, str, _i, _ref;
-    sb = [];
-    append = function(number, label) {
-      var n;
-      if (number !== 0) {
-        if (number >= 0) {
-          if (sb.length > 0) {
-            sb.push("+");
-          }
-        } else {
-          sb.push("-");
-        }
-        n = Math.abs(number);
-        if (n === 1) {
-          return sb.push(label);
-        } else {
-          sb.push(n.toString());
-          if (label !== "1") {
-            sb.push("*");
-            return sb.push(label);
-          }
-        }
-      }
-    };
-    for (i = _i = 0, _ref = coordinates.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-      append(coordinates[i], labels[i]);
-    }
-    if (sb.length > 0) {
-      str = sb.join("");
-    } else {
-      str = "0";
-    }
-    return str;
-  };
   /*
     Euclidean2 is a multivector for the Geometric Algebra of 2D Euclidean space with Cartesian coordinates.
     The even subalgebra of this Geometric Algebra is isomorphic to the complex numbers.
@@ -228,15 +193,15 @@
     };
 
     Euclidean2.prototype.toString = function() {
-      return stringFromCoordinates(this._coordinates, ["1", "e1", "e2", "e12"]);
+      return bladeSTR.stringFromCoordinates(this._coordinates, ["1", "e1", "e2", "e12"]);
     };
 
     Euclidean2.prototype.toStringIJK = function() {
-      return stringFromCoordinates(this._coordinates, ["1", "i", "j", "I"]);
+      return bladeSTR.stringFromCoordinates(this._coordinates, ["1", "i", "j", "I"]);
     };
 
     Euclidean2.prototype.toStringLATEX = function() {
-      return stringFromCoordinates(this._coordinates, ["1", "e_{1}", "e_{2}", "e_{12}"]);
+      return bladeSTR.stringFromCoordinates(this._coordinates, ["1", "e_{1}", "e_{2}", "e_{12}"]);
     };
 
     return Euclidean2;
@@ -394,15 +359,15 @@
     };
 
     Euclidean3.prototype.toString = function() {
-      return stringFromCoordinates(this._coordinates, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"]);
+      return bladeSTR.stringFromCoordinates(this._coordinates, ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"]);
     };
 
     Euclidean3.prototype.toStringIJK = function() {
-      return stringFromCoordinates(this._coordinates, ["1", "i", "j", "k", "ij", "jk", "ki", "I"]);
+      return bladeSTR.stringFromCoordinates(this._coordinates, ["1", "i", "j", "k", "ij", "jk", "ki", "I"]);
     };
 
     Euclidean3.prototype.toStringLATEX = function() {
-      return stringFromCoordinates(this._coordinates, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"]);
+      return bladeSTR.stringFromCoordinates(this._coordinates, ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"]);
     };
 
     return Euclidean3;

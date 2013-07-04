@@ -64,14 +64,15 @@ module.exports = function (grunt) {
     copy: {
       myproject: {
         files: [
-          {flatten: true, src: ['src/js/bladeASM.js'], dest: 'build/bladeASM.js'}
+          {flatten: true, src: ['src/js/bladeASM.js'], dest: 'build/bladeASM.js'},
+          {flatten: true, src: ['src/js/bladeSTR.js'], dest: 'build/bladeSTR.js'}
         ]
       }
     },
 
     jasmine: {
       myproject: {
-        src: ['build/bladeASM.js', 'build/**/blade.js'],
+        src: ['build/bladeASM.js', 'build/bladeSTR.js', 'build/**/blade.js'],
         options: {
           specs: 'spec/**/*.spec.js'
         }
@@ -101,7 +102,7 @@ module.exports = function (grunt) {
 
     watch: {
       app: {
-        files: ['src/**/*.coffee', 'src/js/bladeASM.js', 'spec/**/*.js'],
+        files: ['src/**/*.coffee', 'src/js/bladeASM.js', 'src/js/bladeSTR.js', 'spec/**/*.js'],
         tasks: ['coffee:myproject', 'jshint:myproject', 'concat:myproject', 'uglify:myproject', 'copy:myproject', 'jasmine:myproject']
       }
     },
