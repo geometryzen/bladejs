@@ -335,4 +335,4 @@
     scope[objName] = BLADE
 
   return
-)((if (typeof window is 'object') then window else undefined), 'BLADE', 'blade')
+)((if (typeof window is 'object') then window else (if (typeof module is 'object') then module else undefined)), 'BLADE', 'blade')
