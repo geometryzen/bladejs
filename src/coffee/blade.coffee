@@ -1,9 +1,6 @@
 ((scope, objName, modName)->
   'use strict'
 
-  if typeof scope is 'undefined'
-    throw new Error "scope must be defined."
-
   EUCLIDEAN_2 = "Euclidean2"
   EUCLIDEAN_3 = "Euclidean3"
 

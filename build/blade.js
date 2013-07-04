@@ -1,9 +1,6 @@
 (function(scope, objName, modName) {
   'use strict';
   var BLADE, EUCLIDEAN_2, EUCLIDEAN_3, Euclidean2, Euclidean3, stringFromCoordinates;
-  if (typeof scope === 'undefined') {
-    throw new Error("scope must be defined.");
-  }
   EUCLIDEAN_2 = "Euclidean2";
   EUCLIDEAN_3 = "Euclidean3";
   BLADE = BLADE || {};
