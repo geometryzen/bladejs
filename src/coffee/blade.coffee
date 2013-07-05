@@ -36,19 +36,19 @@
           throw new Error "index must be in the range [0..3]"
 
     @add: (a, b) ->
-      a0 = a[0]
-      a1 = a[1]
-      a2 = a[2]
-      a3 = a[3]
-      b0 = b[0]
-      b1 = b[1]
-      b2 = b[2]
-      b3 = b[3]
-      x0 = bladeASM.addE2(a0, a1, a2, a3, b0, b1, b2, b3, 0)
-      x1 = bladeASM.addE2(a0, a1, a2, a3, b0, b1, b2, b3, 1)
-      x2 = bladeASM.addE2(a0, a1, a2, a3, b0, b1, b2, b3, 2)
-      x3 = bladeASM.addE2(a0, a1, a2, a3, b0, b1, b2, b3, 3)
-      return [x0, x1, x2, x3]
+      a00 = a[0]
+      a01 = a[1]
+      a10 = a[2]
+      a11 = a[3]
+      b00 = b[0]
+      b01 = b[1]
+      b10 = b[2]
+      b11 = b[3]
+      x00 = e2gaASM.add00(a00, a01, a10, a11, b00, b01, b10, b11)
+      x01 = e2gaASM.add01(a00, a01, a10, a11, b00, b01, b10, b11)
+      x10 = e2gaASM.add10(a00, a01, a10, a11, b00, b01, b10, b11)
+      x11 = e2gaASM.add11(a00, a01, a10, a11, b00, b01, b10, b11)
+      return [x00, x01, x10, x11]
 
     add: (rhs) ->
       xs = Euclidean2.add(@_coordinates, rhs._coordinates)
