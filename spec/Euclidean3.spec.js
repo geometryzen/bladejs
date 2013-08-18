@@ -45,7 +45,7 @@ describe("Euclidean3", function() {
     });
   });
 
-  it('Should initialize coordinates', function() {
+  it('Construction', function() {
     var w = Math.random();
     var x = Math.random();
     var y = Math.random();

@@ -1,12 +1,12 @@
 {
   "name": "bladejs",
   "version": "0.0.50",
-  "main": "./build/blade.min.js",
   "description": "JavaScript Geometric Algebra library",
   "author": {
     "name": "David Holmes",
     "email": "david.geo.holmes@gmail.com"
   },
+  "main": "./build/blade.min.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/geometryzen/bladejs.git"

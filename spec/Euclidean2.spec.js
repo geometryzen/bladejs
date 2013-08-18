@@ -1,6 +1,6 @@
-describe("Euclidean2 suite", function() {
+describe("Euclidean2", function() {
 
-  it('Should initialize the coordinates', function() {
+  it('Construction', function() {
     var x0 = Math.random();
     var x1 = Math.random();
     var x2 = Math.random();
