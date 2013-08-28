@@ -3,8 +3,10 @@
  *
  * This asm.js part is kept separate to avoid issues caused by JavaScript compression.
  */
-bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
-  "use asm";
+(function() {
+this.BLADE = this.BLADE || {};
+this.BLADE.bladeASM = (function(stdlib, foreign, heap) {
+//"use asm";
   // Section for imports and module variables.
 
   // The following lines are by way of example only.
@@ -571,3 +573,4 @@ bladeASM = (function(/*stdlib*//*, foreign, heap*/) {
     rcoE3:rcoE3
   };
 })((typeof window === 'object') ? window : undefined, {}, new ArrayBuffer(4 * 1024));
+}).call(this);

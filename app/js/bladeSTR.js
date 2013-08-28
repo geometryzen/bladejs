@@ -1,4 +1,6 @@
-bladeSTR = (function() {
+(function() {
+this.BLADE = this.BLADE || {};
+this.BLADE.bladeSTR = (function() {
 
   "use strict";
 
@@ -42,3 +44,4 @@ bladeSTR = (function() {
     stringFromCoordinates: stringFromCoordinates
   };
 })();
+}).call(this);

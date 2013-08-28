@@ -1,5 +1,7 @@
-e2gaASM = (function(/*stdlib*//*, foreign, heap*/) {
-  "use asm";
+(function() {
+this.BLADE = this.BLADE || {};
+this.BLADE.e2gaASM = (function(stdlib, foreign, heap) {
+//"use asm";
   function add00(a00, a01, a10, a11, b00, b01, b10, b11) {
     a00 = +a00;
     a01 = +a01;
@@ -52,3 +54,4 @@ e2gaASM = (function(/*stdlib*//*, foreign, heap*/) {
     add11:add11
   };
 })((typeof window === 'object') ? window : undefined, {}, new ArrayBuffer(4 * 1024));
+}).call(this);
