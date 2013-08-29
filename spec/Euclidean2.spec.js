@@ -135,6 +135,147 @@ describe("Euclidean2", function() {
     expect(I.mul(I).coordinate(3)).toBe(0);
   });
 
+  it('div Euclidean2', function() {
+    var u = new BLADE.Euclidean2(1, 0, 0, 0)
+    var i = new BLADE.Euclidean2(0, 1, 0, 0)
+    var j = new BLADE.Euclidean2(0, 0, 1, 0)
+    var I = new BLADE.Euclidean2(0, 0, 0, 1)
+
+    expect(u.div(u).coordinate(0)).toBe(1);
+    expect(u.div(u).coordinate(1)).toBe(0);
+    expect(u.div(u).coordinate(2)).toBe(0);
+    expect(u.div(u).coordinate(3)).toBe(0);
+
+    expect(u.div(i).coordinate(0)).toBe(0);
+    expect(u.div(i).coordinate(1)).toBe(1);
+    expect(u.div(i).coordinate(2)).toBe(0);
+    expect(u.div(i).coordinate(3)).toBe(0);
+
+    expect(u.div(j).coordinate(0)).toBe(0);
+    expect(u.div(j).coordinate(1)).toBe(0);
+    expect(u.div(j).coordinate(2)).toBe(1);
+    expect(u.div(j).coordinate(3)).toBe(0);
+
+    expect(u.div(I).coordinate(0)).toBe(0);
+    expect(u.div(I).coordinate(1)).toBe(0);
+    expect(u.div(I).coordinate(2)).toBe(0);
+    expect(u.div(I).coordinate(3)).toBe(-1);
+
+    expect(i.div(u).coordinate(0)).toBe(0);
+    expect(i.div(u).coordinate(1)).toBe(1);
+    expect(i.div(u).coordinate(2)).toBe(0);
+    expect(i.div(u).coordinate(3)).toBe(0);
+
+    expect(i.div(i).coordinate(0)).toBe(1);
+    expect(i.div(i).coordinate(1)).toBe(0);
+    expect(i.div(i).coordinate(2)).toBe(0);
+    expect(i.div(i).coordinate(3)).toBe(0);
+
+    expect(i.div(j).coordinate(0)).toBe(0);
+    expect(i.div(j).coordinate(1)).toBe(0);
+    expect(i.div(j).coordinate(2)).toBe(0);
+    expect(i.div(j).coordinate(3)).toBe(1);
+
+    expect(i.div(I).coordinate(0)).toBe(0);
+    expect(i.div(I).coordinate(1)).toBe(0);
+    expect(i.div(I).coordinate(2)).toBe(-1);
+    expect(i.div(I).coordinate(3)).toBe(0);
+
+    expect(j.div(u).coordinate(0)).toBe(0);
+    expect(j.div(u).coordinate(1)).toBe(0);
+    expect(j.div(u).coordinate(2)).toBe(1);
+    expect(j.div(u).coordinate(3)).toBe(0);
+
+    expect(j.div(i).coordinate(0)).toBe(0);
+    expect(j.div(i).coordinate(1)).toBe(0);
+    expect(j.div(i).coordinate(2)).toBe(0);
+    expect(j.div(i).coordinate(3)).toBe(-1);
+
+    expect(j.div(j).coordinate(0)).toBe(1);
+    expect(j.div(j).coordinate(1)).toBe(0);
+    expect(j.div(j).coordinate(2)).toBe(0);
+    expect(j.div(j).coordinate(3)).toBe(0);
+
+    expect(j.div(I).coordinate(0)).toBe(0);
+    expect(j.div(I).coordinate(1)).toBe(1);
+    expect(j.div(I).coordinate(2)).toBe(0);
+    expect(j.div(I).coordinate(3)).toBe(0);
+
+    expect(I.div(u).coordinate(0)).toBe(0);
+    expect(I.div(u).coordinate(1)).toBe(0);
+    expect(I.div(u).coordinate(2)).toBe(0);
+    expect(I.div(u).coordinate(3)).toBe(1);
+
+    expect(I.div(i).coordinate(0)).toBe(0);
+    expect(I.div(i).coordinate(1)).toBe(0);
+    expect(I.div(i).coordinate(2)).toBe(-1);
+    expect(I.div(i).coordinate(3)).toBe(0);
+
+    expect(I.div(j).coordinate(0)).toBe(0);
+    expect(I.div(j).coordinate(1)).toBe(1);
+    expect(I.div(j).coordinate(2)).toBe(0);
+    expect(I.div(j).coordinate(3)).toBe(0);
+
+    expect(I.div(I).coordinate(0)).toBe(1);
+    expect(I.div(I).coordinate(1)).toBe(0);
+    expect(I.div(I).coordinate(2)).toBe(0);
+    expect(I.div(I).coordinate(3)).toBe(0);
+  });
+
+  it('div number', function() {
+    var u = new BLADE.Euclidean2(2, 0, 0, 0)
+    var i = new BLADE.Euclidean2(0, 2, 0, 0)
+    var j = new BLADE.Euclidean2(0, 0, 2, 0)
+    var I = new BLADE.Euclidean2(0, 0, 0, 2)
+
+    expect(u.div(2).coordinate(0)).toBe(1);
+    expect(u.div(2).coordinate(1)).toBe(0);
+    expect(u.div(2).coordinate(2)).toBe(0);
+    expect(u.div(2).coordinate(3)).toBe(0);
+
+    expect(i.div(2).coordinate(0)).toBe(0);
+    expect(i.div(2).coordinate(1)).toBe(1);
+    expect(i.div(2).coordinate(2)).toBe(0);
+    expect(i.div(2).coordinate(3)).toBe(0);
+
+    expect(j.div(2).coordinate(0)).toBe(0);
+    expect(j.div(2).coordinate(1)).toBe(0);
+    expect(j.div(2).coordinate(2)).toBe(1);
+    expect(j.div(2).coordinate(3)).toBe(0);
+
+    expect(I.div(2).coordinate(0)).toBe(0);
+    expect(I.div(2).coordinate(1)).toBe(0);
+    expect(I.div(2).coordinate(2)).toBe(0);
+    expect(I.div(2).coordinate(3)).toBe(1);
+  });
+
+  it('div 0', function() {
+    var u = new BLADE.Euclidean2(2, 0, 0, 0)
+    var i = new BLADE.Euclidean2(0, 2, 0, 0)
+    var j = new BLADE.Euclidean2(0, 0, 2, 0)
+    var I = new BLADE.Euclidean2(0, 0, 0, 2)
+
+    expect(u.div(0).coordinate(0)).toBe(Infinity);
+    expect(u.div(0).coordinate(1)).toBeNaN();
+    expect(u.div(0).coordinate(2)).toBeNaN();
+    expect(u.div(0).coordinate(3)).toBeNaN();
+
+    expect(i.div(0).coordinate(0)).toBe(0);
+    expect(i.div(0).coordinate(1)).toBe(Infinity);
+    expect(i.div(0).coordinate(2)).toBeNaN();
+    expect(i.div(0).coordinate(3)).toBeNaN();
+
+    expect(j.div(0).coordinate(0)).toBe(0);
+    expect(j.div(0).coordinate(1)).toBeNaN();
+    expect(j.div(0).coordinate(2)).toBe(Infinity);
+    expect(j.div(0).coordinate(3)).toBeNaN();
+
+    expect(I.div(0).coordinate(0)).toBe(0);
+    expect(I.div(0).coordinate(1)).toBeNaN();
+    expect(I.div(0).coordinate(2)).toBeNaN();
+    expect(I.div(0).coordinate(3)).toBe(Infinity);
+  });
+
   it('Should implement wedge function', function() {
     var u = new BLADE.Euclidean2(1, 0, 0, 0)
     var i = new BLADE.Euclidean2(0, 1, 0, 0)

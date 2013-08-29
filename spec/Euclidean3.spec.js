@@ -113,6 +113,35 @@ describe("Euclidean3", function() {
     expect(c.coordinate(7)).toBe(a.coordinate(7) - b.coordinate(7));
   });
 
+  it('div Euclidean3', function() {
+    var u  = new BLADE.Euclidean3(1, 0, 0, 0, 0, 0, 0, 0)
+    var i  = new BLADE.Euclidean3(0, 1, 0, 0, 0, 0, 0, 0)
+    var j  = new BLADE.Euclidean3(0, 0, 1, 0, 0, 0, 0, 0)
+    var k  = new BLADE.Euclidean3(0, 0, 0, 1, 0, 0, 0, 0)
+    var ij = new BLADE.Euclidean3(0, 0, 0, 0, 1, 0, 0, 0)
+    var jk = new BLADE.Euclidean3(0, 0, 0, 0, 0, 1, 0, 0)
+    var ki = new BLADE.Euclidean3(0, 0, 0, 0, 0, 0, 1, 0)
+    var I  = new BLADE.Euclidean3(0, 0, 0, 0, 0, 0, 0, 1)
+
+    expect(u.div(u).w).toBe(1);
+    expect(u.div(u).x).toBe(0);
+    expect(u.div(u).y).toBe(0);
+    expect(u.div(u).z).toBe(0);
+    expect(u.div(u).xy).toBe(0);
+    expect(u.div(u).yz).toBe(0);
+    expect(u.div(u).zx).toBe(0);
+    expect(u.div(u).xyz).toBe(0);
+
+//    expect(u.div(i).w).toBe(0);
+//    expect(u.div(i).x).toBe(1);
+//    expect(u.div(i).y).toBe(0);
+//    expect(u.div(i).z).toBe(0);
+//    expect(u.div(i).xy).toBe(0);
+//    expect(u.div(i).yz).toBe(0);
+//    expect(u.div(i).zx).toBe(0);
+//    expect(u.div(i).xyz).toBe(0);
+  });
+
   it('grade(index) function', function() {
     var m = new BLADE.Euclidean3(Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random());
 

@@ -75,15 +75,53 @@
 }).call(this);
 
 (function() {
-  var BLADE, Euclidean2;
+  var BLADE, Euclidean2, divide;
 
   this.BLADE = this.BLADE || {};
 
   BLADE = this.BLADE;
 
+  divide = function(a00, a01, a10, a11, b00, b01, b10, b11, m) {
+    var c00, c01, c10, c11, i00, i01, i10, i11, k00, m00, m01, m10, m11, r00, r01, r10, r11, s00, s01, s10, s11, x00, x01, x10, x11;
+
+    r00 = +b00;
+    r01 = +b01;
+    r10 = +b10;
+    r11 = -b11;
+    m00 = b00 * r00 + b01 * r01 + b10 * r10 - b11 * r11;
+    m01 = 0;
+    m10 = 0;
+    m11 = 0;
+    c00 = +m00;
+    c01 = -m01;
+    c10 = -m10;
+    c11 = -m11;
+    s00 = r00 * c00 + r01 * c01 + r10 * c10 - r11 * c11;
+    s01 = r00 * c01 + r01 * c00 - r10 * c11 + r11 * c10;
+    s10 = r00 * c10 + r01 * c11 + r10 * c00 - r11 * c01;
+    s11 = r00 * c11 + r01 * c10 - r10 * c01 + r11 * c00;
+    k00 = b00 * s00 + b01 * s01 + b10 * s10 - b11 * s11;
+    i00 = s00 / k00;
+    i01 = s01 / k00;
+    i10 = s10 / k00;
+    i11 = s11 / k00;
+    x00 = a00 * i00 + a01 * i01 + a10 * i10 - a11 * i11;
+    x01 = a00 * i01 + a01 * i00 - a10 * i11 + a11 * i10;
+    x10 = a00 * i10 + a01 * i11 + a10 * i00 - a11 * i01;
+    x11 = a00 * i11 + a01 * i10 - a10 * i01 + a11 * i00;
+    if (typeof m !== 'undefined') {
+      m.w = x00;
+      m.x = x01;
+      m.y = x10;
+      return m.xy = x11;
+    } else {
+      return new BLADE.Euclidean2(x00, x01, x10, x11);
+    }
+  };
+
   Euclidean2 = (function() {
     function Euclidean2(w, x, y, xy) {
-      this.w = w;
+      this.w = w || 0;
       this.x = x;
       this.y = y;
       this.xy = xy;
@@ -138,7 +176,7 @@
       var xs;
 
       xs = Euclidean2.add(this.coordinates(), rhs.coordinates());
-      return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3]);
+      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
     };
 
     Euclidean2.sub = function(a, b) {
@@ -163,7 +201,7 @@
       var xs;
 
       xs = Euclidean2.sub(this.coordinates(), rhs.coordinates());
-      return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3]);
+      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
     };
 
     Euclidean2.mul = function(a, b) {
@@ -187,8 +225,20 @@
     Euclidean2.prototype.mul = function(rhs) {
       var xs;
 
-      xs = Euclidean2.mul(this.coordinates(), rhs.coordinates());
-      return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3]);
+      if (typeof rhs === 'number') {
+        return new BLADE.Euclidean2(this.w * rhs, this.x * rhs, this.y * rhs, this.xy * rhs);
+      } else {
+        xs = Euclidean2.mul(this.coordinates(), rhs.coordinates());
+        return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
+      }
+    };
+
+    Euclidean2.prototype.div = function(rhs) {
+      if (typeof rhs === 'number') {
+        return new BLADE.Euclidean2(this.w / rhs, this.x / rhs, this.y / rhs, this.xy / rhs);
+      } else {
+        return divide(this.w, this.x, this.y, this.xy, rhs.w, rhs.x, rhs.y, rhs.xy, void 0);
+      }
     };
 
     Euclidean2.wedge = function(a, b) {
@@ -213,7 +263,7 @@
       var xs;
 
       xs = Euclidean2.wedge(this.coordinates(), rhs.coordinates());
-      return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3]);
+      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
     };
 
     Euclidean2.lshift = function(a, b) {
@@ -238,7 +288,7 @@
       var xs;
 
       xs = Euclidean2.lshift(this.coordinates(), rhs.coordinates());
-      return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3]);
+      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
     };
 
     Euclidean2.rshift = function(a, b) {
@@ -263,19 +313,19 @@
       var xs;
 
       xs = Euclidean2.rshift(this.coordinates(), rhs.coordinates());
-      return Euclidean2.fromCartesian(xs[0], xs[1], xs[2], xs[3]);
+      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
     };
 
     Euclidean2.prototype.grade = function(index) {
       switch (index) {
         case 0:
-          return Euclidean2.fromCartesian(this.w, 0, 0, 0);
+          return new BLADE.Euclidean2(this.w, 0, 0, 0);
         case 1:
-          return Euclidean2.fromCartesian(0, this.x, this.y, 0);
+          return new BLADE.Euclidean2(0, this.x, this.y, 0);
         case 2:
-          return Euclidean2.fromCartesian(0, 0, 0, this.xy);
+          return new BLADE.Euclidean2(0, 0, 0, this.xy);
         default:
-          return Euclidean2.fromCartesian(0, 0, 0, 0);
+          return new BLADE.Euclidean2(0, 0, 0, 0);
       }
     };
 
@@ -287,6 +337,10 @@
       y = this.y;
       xy = this.xy;
       return w * w + x * x + y * y + xy * xy;
+    };
+
+    Euclidean2.prototype.isNaN = function() {
+      return isNaN(this.w) || isNaN(this.x) || isNaN(this.y) || isNaN(this.xy);
     };
 
     Euclidean2.prototype.toString = function() {
@@ -310,11 +364,134 @@
 }).call(this);
 
 (function() {
-  var BLADE, Euclidean3;
+  var BLADE, Euclidean3, divide, mulE3;
 
   this.BLADE = this.BLADE || {};
 
   BLADE = this.BLADE;
+
+  mulE3 = function(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, index) {
+    var x;
+
+    a0 = +a0;
+    a1 = +a1;
+    a2 = +a2;
+    a3 = +a3;
+    a4 = +a4;
+    a5 = +a5;
+    a6 = +a6;
+    a7 = +a7;
+    b0 = +b0;
+    b1 = +b1;
+    b2 = +b2;
+    b3 = +b3;
+    b4 = +b4;
+    b5 = +b5;
+    b6 = +b6;
+    b7 = +b7;
+    index = index | 0;
+    x = 0.0;
+    switch (~(~index)) {
+      case 0:
+        x = +(a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3 - a4 * b4 - a5 * b5 - a6 * b6 - a7 * b7);
+        break;
+      case 1:
+        x = +(a0 * b1 + a1 * b0 - a2 * b4 + a3 * b6 + a4 * b2 - a5 * b7 - a6 * b3 - a7 * b5);
+        break;
+      case 2:
+        x = +(a0 * b2 + a1 * b4 + a2 * b0 - a3 * b5 - a4 * b1 + a5 * b3 - a6 * b7 - a7 * b6);
+        break;
+      case 3:
+        x = +(a0 * b3 - a1 * b6 + a2 * b5 + a3 * b0 - a4 * b7 - a5 * b2 + a6 * b1 - a7 * b4);
+        break;
+      case 4:
+        x = +(a0 * b4 + a1 * b2 - a2 * b1 + a3 * b7 + a4 * b0 - a5 * b6 + a6 * b5 + a7 * b3);
+        break;
+      case 5:
+        x = +(a0 * b5 + a1 * b7 + a2 * b3 - a3 * b2 + a4 * b6 + a5 * b0 - a6 * b4 + a7 * b1);
+        break;
+      case 6:
+        x = +(a0 * b6 - a1 * b3 + a2 * b7 + a3 * b1 - a4 * b5 + a5 * b4 + a6 * b0 + a7 * b2);
+        break;
+      case 7:
+        x = +(a0 * b7 + a1 * b5 + a2 * b6 + a3 * b4 + a4 * b3 + a5 * b1 + a6 * b2 + a7 * b0);
+    }
+    return +x;
+  };
+
+  divide = function(a000, a001, a010, a011, a100, a101, a110, a111, b000, b001, b010, b011, b100, b101, b110, b111, dst) {
+    var c000, c001, c010, c011, c100, c101, c110, c111, i000, i001, i010, i011, i100, i101, i110, i111, k000, m000, m001, m010, m011, m100, m101, m110, m111, r000, r001, r010, r011, r100, r101, r110, r111, s000, s001, s010, s011, s100, s101, s110, s111, w, x, x000, x001, x010, x011, x100, x101, x110, x111, xy, xyz, y, yz, z, zx;
+
+    r000 = +b000;
+    r001 = +b001;
+    r010 = +b010;
+    r011 = -b011;
+    r100 = +b100;
+    r101 = -b101;
+    r110 = -b110;
+    r111 = -b111;
+    m000 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, r000, r001, r010, r100, r011, r110, -r101, r111, 0);
+    m001 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, r000, r001, r010, r100, r011, r110, -r101, r111, 1);
+    m010 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, r000, r001, r010, r100, r011, r110, -r101, r111, 2);
+    m011 = 0;
+    m100 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, r000, r001, r010, r100, r011, r110, -r101, r111, 3);
+    m101 = 0;
+    m110 = 0;
+    m111 = 0;
+    c000 = +m000;
+    c001 = -m001;
+    c010 = -m010;
+    c011 = -m011;
+    c100 = -m100;
+    c101 = -m101;
+    c110 = -m110;
+    c111 = +m111;
+    s000 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 0);
+    s001 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 1);
+    s010 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 2);
+    s011 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 4);
+    s100 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 3);
+    s101 = -mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 6);
+    s110 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 5);
+    s111 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 7);
+    k000 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, s000, s001, s010, s100, s011, s110, -s101, s111, 0);
+    i000 = s000 / k000;
+    i001 = s001 / k000;
+    i010 = s010 / k000;
+    i011 = s011 / k000;
+    i100 = s100 / k000;
+    i101 = s101 / k000;
+    i110 = s110 / k000;
+    i111 = s111 / k000;
+    x000 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 0);
+    x001 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 1);
+    x010 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 2);
+    x011 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 4);
+    x100 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 3);
+    x101 = -mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 6);
+    x110 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 5);
+    x111 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 7);
+    w = x000;
+    x = x001;
+    y = x010;
+    z = x100;
+    xy = x011;
+    yz = x110;
+    zx = -x101;
+    xyz = x111;
+    if (typeof dst !== 'undefined') {
+      dst.w = w;
+      dst.x = x;
+      dst.y = y;
+      dst.z = z;
+      dst.xy = xy;
+      dst.yz = yz;
+      dst.zx = zx;
+      return dst.xyz = xyz;
+    } else {
+      return new BLADE.Euclidean3(w, x, y, z, xy, yz, zx, xyz);
+    }
+  };
 
   Euclidean3 = (function() {
     function Euclidean3(w, x, y, z, xy, yz, zx, xyz) {
@@ -425,6 +602,14 @@
       return Euclidean3.compute(BLADE.bladeASM.mulE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
     };
 
+    Euclidean3.prototype.div = function(rhs) {
+      if (typeof rhs === 'number') {
+        return new BLADE.Euclidean3(this.w / rhs, this.x / rhs, this.y / rhs, this.z / rhs, this.xy / rhs, this.yz / rhs, this.zx / rhs, this.xyz / rhs);
+      } else {
+        return divide(this.w, this.x, this.y, this.xy, this.z, -this.zx, this.yz, this.xyz, rhs.w, rhs.x, rhs.y, rhs.xy, rhs.z, -rhs.zx, rhs.yz, rhs.xyz, void 0);
+      }
+    };
+
     Euclidean3.prototype.wedge = function(rhs) {
       var coord, pack;
 
@@ -474,6 +659,29 @@
         default:
           return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, 0);
       }
+    };
+
+    Euclidean3.prototype.dot = function(vector) {
+      return this.x * vector.x + this.y * vector.y + this.z * vector.z;
+    };
+
+    Euclidean3.prototype.cross = function(vector) {
+      var x, x1, x2, y, y1, y2, z, z1, z2;
+
+      x1 = this.x;
+      y1 = this.y;
+      z1 = this.z;
+      x2 = vector.x;
+      y2 = vector.y;
+      z2 = vector.z;
+      x = y1 * z2 - z1 * y2;
+      y = z1 * x2 - x1 * z2;
+      z = x1 * y2 - y1 * x2;
+      return new BLADE.Euclidean3(0, x, y, z, 0, 0, 0, 0);
+    };
+
+    Euclidean3.prototype.length = function() {
+      return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
     };
 
     Euclidean3.prototype.toString = function() {
