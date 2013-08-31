@@ -30,11 +30,13 @@
   };
 
   Dimensions = (function() {
-    function Dimensions(mass, length, time) {
+    function Dimensions(mass, length, time, charge) {
       if (typeof mass === 'number') {
         this.M = new BLADE.Rational(mass, 1);
-      } else {
+      } else if (mass instanceof BLADE.Rational) {
         this.M = mass;
+      } else {
+        throw new Error("mass must be a Rational or number");
       }
       if (typeof length === 'number') {
         this.L = new BLADE.Rational(length, 1);
@@ -46,22 +48,29 @@
       } else {
         this.T = time;
       }
+      if (typeof charge === 'number') {
+        this.Q = new BLADE.Rational(charge, 1);
+      } else if (charge instanceof BLADE.Rational) {
+        this.Q = charge;
+      } else {
+        throw new Error("charge must be a Rational or number");
+      }
     }
 
     Dimensions.prototype.mul = function(rhs) {
-      return new BLADE.Dimensions(this.M.add(rhs.M), this.L.add(rhs.L), this.T.add(rhs.T));
+      return new BLADE.Dimensions(this.M.add(rhs.M), this.L.add(rhs.L), this.T.add(rhs.T), this.Q.add(rhs.Q));
     };
 
     Dimensions.prototype.div = function(rhs) {
-      return new BLADE.Dimensions(this.M.sub(rhs.M), this.L.sub(rhs.L), this.T.sub(rhs.T));
+      return new BLADE.Dimensions(this.M.sub(rhs.M), this.L.sub(rhs.L), this.T.sub(rhs.T), this.Q.sub(rhs.Q));
     };
 
     Dimensions.prototype.pow = function(exponent) {
-      return new BLADE.Dimensions(this.M.mul(exponent), this.L.mul(exponent), this.T.mul(exponent));
+      return new BLADE.Dimensions(this.M.mul(exponent), this.L.mul(exponent), this.T.mul(exponent), this.Q.mul(exponent));
     };
 
     Dimensions.prototype.toString = function() {
-      return [stringify(this.M, 'M'), stringify(this.L, 'L'), stringify(this.T, 'T')].filter(function(x) {
+      return [stringify(this.M, 'M'), stringify(this.L, 'L'), stringify(this.T, 'T'), stringify(this.Q, 'Q')].filter(function(x) {
         return typeof x === 'string';
       }).join(" * ");
     };
@@ -1043,7 +1052,7 @@
       var scaleString, unitsString;
 
       scaleString = this.scale === 1 ? "" : "" + this.scale + " * ";
-      unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2])].filter(function(x) {
+      unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2]), stringify(this.dimensions.Q, this.labels[3])].filter(function(x) {
         return typeof x === 'string';
       }).join(" ");
       return "" + scaleString + unitsString;

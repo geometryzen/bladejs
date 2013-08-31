@@ -37,7 +37,7 @@ class Unit
       throw new Error("Illegal Argument for div: " + rhs)
   toString: ()->
     scaleString = if @scale is 1 then "" else "#{@scale} * "
-    unitsString = [stringify(@dimensions.M, @labels[0]), stringify(@dimensions.L, @labels[1]), stringify(@dimensions.T, @labels[2])].filter((x) -> typeof x is 'string').join(" ")
+    unitsString = [stringify(@dimensions.M, @labels[0]), stringify(@dimensions.L, @labels[1]), stringify(@dimensions.T, @labels[2]), stringify(@dimensions.Q, @labels[3])].filter((x) -> typeof x is 'string').join(" ")
     return "#{scaleString}#{unitsString}"
 
 @BLADE.Unit = Unit

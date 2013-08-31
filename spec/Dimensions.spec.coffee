@@ -4,27 +4,33 @@ describe "Dimensions", () ->
     M = new BLADE.Rational(1,1)
     L = new BLADE.Rational(2,1)
     T = new BLADE.Rational(3,1)
-    d = new BLADE.Dimensions(M, L, T)
+    Q = new BLADE.Rational(4,1)
+    d = new BLADE.Dimensions(M, L, T, Q)
     expect(d.M.numer).toBe(1)
     expect(d.M.denom).toBe(1)
     expect(d.L.numer).toBe(2)
     expect(d.L.denom).toBe(1)
     expect(d.T.numer).toBe(3)
     expect(d.T.denom).toBe(1)
+    expect(d.Q.numer).toBe(4)
+    expect(d.Q.denom).toBe(1)
 
   it "Construction(number)", () ->
-    d = new BLADE.Dimensions(1, 2, 3)
+    d = new BLADE.Dimensions(1, 2, 3, 4)
     expect(d.M.numer).toBe(1)
     expect(d.M.denom).toBe(1)
     expect(d.L.numer).toBe(2)
     expect(d.L.denom).toBe(1)
     expect(d.T.numer).toBe(3)
     expect(d.T.denom).toBe(1)
+    expect(d.Q.numer).toBe(4)
+    expect(d.Q.denom).toBe(1)
 
   it "mul", () ->
-    M = new BLADE.Dimensions(1, 0, 0)
-    L = new BLADE.Dimensions(0, 1, 0)
-    T = new BLADE.Dimensions(0, 0, 1)
+    M = new BLADE.Dimensions(1, 0, 0, 0)
+    L = new BLADE.Dimensions(0, 1, 0, 0)
+    T = new BLADE.Dimensions(0, 0, 1, 0)
+    Q = new BLADE.Dimensions(0, 0, 0, 1)
     N = M.mul(L).mul(T).mul(T)
     expect(N.M.numer).toBe(1)
     expect(N.M.denom).toBe(1)
@@ -34,9 +40,9 @@ describe "Dimensions", () ->
     expect(N.T.denom).toBe(1)
 
   it "div", () ->
-    M = new BLADE.Dimensions(1, 0, 0)
-    L = new BLADE.Dimensions(0, 1, 0)
-    T = new BLADE.Dimensions(0, 0, 1)
+    M = new BLADE.Dimensions(1, 0, 0, 0)
+    L = new BLADE.Dimensions(0, 1, 0, 0)
+    T = new BLADE.Dimensions(0, 0, 1, 0)
     N = M.mul(L).div(T.mul(T))
     expect(N.M.numer).toBe(1)
     expect(N.M.denom).toBe(1)
@@ -46,7 +52,7 @@ describe "Dimensions", () ->
     expect(N.T.denom).toBe(1)
 
   it "pow", () ->
-    base = new BLADE.Dimensions(1, 2, 3)
+    base = new BLADE.Dimensions(1, 2, 3, 4)
     x = base.pow(2)
     expect(x.M.numer).toBe(2)
     expect(x.M.denom).toBe(1)
@@ -54,6 +60,8 @@ describe "Dimensions", () ->
     expect(x.L.denom).toBe(1)
     expect(x.T.numer).toBe(6)
     expect(x.T.denom).toBe(1)
+    expect(x.Q.numer).toBe(8)
+    expect(x.Q.denom).toBe(1)
 
     expect(base.M.numer).toBe(1)
     expect(base.M.denom).toBe(1)
@@ -61,6 +69,12 @@ describe "Dimensions", () ->
     expect(base.L.denom).toBe(1)
     expect(base.T.numer).toBe(3)
     expect(base.T.denom).toBe(1)
+    expect(base.Q.numer).toBe(4)
+    expect(base.Q.denom).toBe(1)
 
   it "toString", () ->
-    expect("#{new BLADE.Dimensions(new BLADE.Rational(0, 1), new BLADE.Rational(1, 1), new BLADE.Rational(-2, 1))}").toBe("L * T ** -2")
+    expect("#{new BLADE.Dimensions(new BLADE.Rational(1, 1), new BLADE.Rational(0, 1), new BLADE.Rational(0, 1), new BLADE.Rational(0, 1))}").toBe("M")
+    expect("#{new BLADE.Dimensions(new BLADE.Rational(0, 1), new BLADE.Rational(1, 1), new BLADE.Rational(0, 1), new BLADE.Rational(0, 1))}").toBe("L")
+    expect("#{new BLADE.Dimensions(new BLADE.Rational(0, 1), new BLADE.Rational(0, 1), new BLADE.Rational(1, 1), new BLADE.Rational(0, 1))}").toBe("T")
+    expect("#{new BLADE.Dimensions(new BLADE.Rational(0, 1), new BLADE.Rational(0, 1), new BLADE.Rational(0, 1), new BLADE.Rational(1, 1))}").toBe("Q")
+    expect("#{new BLADE.Dimensions(new BLADE.Rational(0, 1), new BLADE.Rational(1, 1), new BLADE.Rational(-2, 1), new BLADE.Rational(0, 1))}").toBe("L * T ** -2")
