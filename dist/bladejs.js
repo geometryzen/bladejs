@@ -53,9 +53,23 @@
       } else if (charge instanceof BLADE.Rational) {
         this.Q = charge;
       } else {
-        throw new Error("charge must be a Rational or number");
+        throw {
+          name: "DimensionError",
+          message: "charge must be a Rational or number"
+        };
       }
     }
+
+    Dimensions.prototype.compatible = function(rhs) {
+      if (this.M.equals(rhs.M) && this.L.equals(rhs.L) && this.T.equals(rhs.T) && this.Q.equals(rhs.Q)) {
+        return this;
+      } else {
+        throw {
+          name: "DimensionError",
+          message: "Dimensions must be equal +(" + this + ", " + rhs + ")"
+        };
+      }
+    };
 
     Dimensions.prototype.mul = function(rhs) {
       return new BLADE.Dimensions(this.M.add(rhs.M), this.L.add(rhs.L), this.T.add(rhs.T), this.Q.add(rhs.Q));
@@ -790,6 +804,22 @@
       }
     }
 
+    Measure.prototype.add = function(rhs) {
+      if (rhs instanceof BLADE.Measure) {
+        return new BLADE.Measure(this.quantity.add(rhs.quantity), this.uom.compatible(rhs.uom));
+      } else {
+        throw new Error("...");
+      }
+    };
+
+    Measure.prototype.sub = function(rhs) {
+      if (rhs instanceof BLADE.Measure) {
+        return new BLADE.Measure(this.quantity.sub(rhs.quantity), this.uom.compatible(rhs.uom));
+      } else {
+        throw new Error("...");
+      }
+    };
+
     Measure.prototype.mul = function(rhs) {
       if (rhs instanceof BLADE.Measure) {
         return new BLADE.Measure(this.quantity.mul(rhs.quantity), this.uom.mul(rhs.uom));
@@ -979,6 +1009,14 @@
       return new BLADE.Rational(this.numer * rhs.denom, this.denom * rhs.numer);
     };
 
+    Rational.prototype.equals = function(other) {
+      if (other instanceof BLADE.Rational) {
+        return (this.numer * other.denom) === (this.denom * other.numer);
+      } else {
+        return false;
+      }
+    };
+
     Rational.prototype.toString = function() {
       return "" + this.numer + "/" + this.denom;
     };
@@ -1019,6 +1057,33 @@
       this.dimensions = dimensions;
       this.labels = labels;
     }
+
+    Unit.prototype.compatible = function(rhs) {
+      var dimensions;
+
+      if (rhs instanceof Unit) {
+        dimensions = this.dimensions.compatible(rhs.dimensions);
+        return this["this"];
+      } else {
+        throw new Error("Illegal Argument for Unit.compatible: " + rhs);
+      }
+    };
+
+    Unit.prototype.add = function(rhs) {
+      if (rhs instanceof Unit) {
+        return new BLADE.Unit(this.scale + rhs.scale, this.dimensions.compatible(rhs.dimensions), this.labels);
+      } else {
+        throw new Error("Illegal Argument for Unit.add: " + rhs);
+      }
+    };
+
+    Unit.prototype.sub = function(rhs) {
+      if (rhs instanceof Unit) {
+        return new BLADE.Unit(this.scale - rhs.scale, this.dimensions.compatible(rhs.dimensions), this.labels);
+      } else {
+        throw new Error("Illegal Argument for Unit.sub: " + rhs);
+      }
+    };
 
     Unit.prototype.mul = function(rhs) {
       if (typeof rhs === 'number') {

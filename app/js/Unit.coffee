@@ -16,6 +16,22 @@ class Unit
     @scale = scale
     @dimensions = dimensions
     @labels = labels
+  compatible: (rhs) ->
+    if rhs instanceof Unit
+      dimensions = @dimensions.compatible(rhs.dimensions)
+      return @this
+    else
+      throw new Error("Illegal Argument for Unit.compatible: " + rhs)
+  add: (rhs) ->
+    if rhs instanceof Unit
+      return new BLADE.Unit(@scale + rhs.scale, @dimensions.compatible(rhs.dimensions), @labels)
+    else
+      throw new Error("Illegal Argument for Unit.add: " + rhs)
+  sub: (rhs) ->
+    if rhs instanceof Unit
+      return new BLADE.Unit(@scale - rhs.scale, @dimensions.compatible(rhs.dimensions), @labels)
+    else
+      throw new Error("Illegal Argument for Unit.sub: " + rhs)
   mul: (rhs) ->
     if typeof rhs is 'number'
       return new BLADE.Unit(@scale * rhs, @dimensions, @labels)

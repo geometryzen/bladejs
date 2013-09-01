@@ -9,6 +9,16 @@ class Measure
     else
       @quantity = quantity.mul(scale)
       @uom = new BLADE.Unit(1, uom.dimensions, uom.labels)
+  add: (rhs) ->
+    if rhs instanceof BLADE.Measure
+      return new BLADE.Measure(@quantity.add(rhs.quantity), @uom.compatible(rhs.uom))
+    else
+      throw new Error("...")
+  sub: (rhs) ->
+    if rhs instanceof BLADE.Measure
+      return new BLADE.Measure(@quantity.sub(rhs.quantity), @uom.compatible(rhs.uom))
+    else
+      throw new Error("...")
   mul: (rhs) ->
     if rhs instanceof BLADE.Measure
       return new BLADE.Measure(@quantity.mul(rhs.quantity), @uom.mul(rhs.uom))

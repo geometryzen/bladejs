@@ -33,8 +33,12 @@ class Dimensions
     else if charge instanceof BLADE.Rational
       @Q = charge
     else
-     throw new Error("charge must be a Rational or number")
-#    @Q = new BLADE.Rational(0, 1);
+     throw name: "DimensionError", message: "charge must be a Rational or number"
+  compatible: (rhs) ->
+    if @M.equals(rhs.M) and @L.equals(rhs.L) and @T.equals(rhs.T) and @Q.equals(rhs.Q)
+      return @
+    else
+      throw name: "DimensionError", message: "Dimensions must be equal +(#{@}, #{rhs})"
   mul: (rhs) ->
     return new BLADE.Dimensions(@M.add(rhs.M), @L.add(rhs.L), @T.add(rhs.T), @Q.add(rhs.Q))
   div: (rhs) ->

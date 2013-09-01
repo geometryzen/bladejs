@@ -1,5 +1,7 @@
 @BLADE = @BLADE or {}
+
 BLADE = @BLADE
+
 gcd = (a,b) ->
   if a < 0
     a = -a
@@ -47,6 +49,11 @@ class Rational
       return new BLADE.Rational(@numer * rhs.numer, @denom * rhs.denom)
   div: (rhs) ->
     return new BLADE.Rational(@numer * rhs.denom, @denom * rhs.numer)
+  equals: (other) ->
+    if other instanceof BLADE.Rational
+      return (@numer * other.denom) is (@denom * other.numer)
+    else
+      return false
   toString: ()-> "#{@numer}/#{@denom}"
 
 @BLADE.Rational = Rational
