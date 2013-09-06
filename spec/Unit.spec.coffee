@@ -9,10 +9,12 @@ describe "Unit", () ->
     meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
     second   = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0), ["kg", "m", "s", "C"])
     coulomb  = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 1), ["kg", "m", "s", "C"])
+    dimensionless = new BLADE.Unit(1234, new BLADE.Dimensions(0, 0, 0, 0), ["kg", "m", "s", "C"])
     expect(meter.toString()).toBe("m")
     expect(kilogram.toString()).toBe("kg")
     expect(second.toString()).toBe("s")
     expect(coulomb.toString()).toBe("C")
+    expect(dimensionless.toString()).toBe("1234")
 
   it "mul", () ->
     meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
@@ -27,7 +29,7 @@ describe "Unit", () ->
     angstrom  = nanometer.mul(1e-1)
 
     expect(meter.toString()).toBe("m")
-    expect(centimeter.toString()).toBe("0.01 * m")
+    expect(centimeter.toString()).toBe("0.01 m")
     expect(inch.scale).toBeCloseTo(0.0254)
     expect(foot.scale).toBeCloseTo(0.3048)
     expect(yard.scale).toBeCloseTo(0.9144)
@@ -55,7 +57,7 @@ describe "Unit", () ->
     centimeter = meter.div(100)
 
     expect(meter.toString()).toBe("m")
-    expect(centimeter.toString()).toBe("0.01 * m")
+    expect(centimeter.toString()).toBe("0.01 m")
 
   it "div by Unit", () ->
     meter     = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])

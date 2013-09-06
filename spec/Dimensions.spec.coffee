@@ -72,6 +72,13 @@ describe "Dimensions", () ->
     expect(base.Q.numer).toBe(4)
     expect(base.Q.denom).toBe(1)
 
+  it "dimensionless", ->
+    expect(new BLADE.Dimensions(0, 0, 0, 0).dimensionless()).toBe true
+    expect(new BLADE.Dimensions(1, 0, 0, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 1, 0, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 1, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 0, 1).dimensionless()).toBe false
+
   it "toString", () ->
     expect("#{new BLADE.Dimensions(new BLADE.Rational(1, 1), new BLADE.Rational(0, 1), new BLADE.Rational(0, 1), new BLADE.Rational(0, 1))}").toBe("M")
     expect("#{new BLADE.Dimensions(new BLADE.Rational(0, 1), new BLADE.Rational(1, 1), new BLADE.Rational(0, 1), new BLADE.Rational(0, 1))}").toBe("L")

@@ -1,4 +1,4 @@
-/* bladejs - 0.0.50
+/* bladejs - 0.9.0
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -81,6 +81,10 @@
 
     Dimensions.prototype.pow = function(exponent) {
       return new BLADE.Dimensions(this.M.mul(exponent), this.L.mul(exponent), this.T.mul(exponent), this.Q.mul(exponent));
+    };
+
+    Dimensions.prototype.dimensionless = function() {
+      return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero();
     };
 
     Dimensions.prototype.toString = function() {
@@ -1009,6 +1013,10 @@
       return new BLADE.Rational(this.numer * rhs.denom, this.denom * rhs.numer);
     };
 
+    Rational.prototype.isZero = function() {
+      return this.numer === 0;
+    };
+
     Rational.prototype.equals = function(other) {
       if (other instanceof BLADE.Rational) {
         return (this.numer * other.denom) === (this.denom * other.numer);
@@ -1114,13 +1122,14 @@
     };
 
     Unit.prototype.toString = function() {
-      var scaleString, unitsString;
+      var operatorStr, scaleString, unitsString;
 
-      scaleString = this.scale === 1 ? "" : "" + this.scale + " * ";
+      operatorStr = this.scale === 1 || this.dimensions.dimensionless() ? "" : " ";
+      scaleString = this.scale === 1 ? "" : "" + this.scale;
       unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2]), stringify(this.dimensions.Q, this.labels[3])].filter(function(x) {
         return typeof x === 'string';
       }).join(" ");
-      return "" + scaleString + unitsString;
+      return "" + scaleString + operatorStr + unitsString;
     };
 
     return Unit;

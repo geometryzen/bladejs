@@ -52,8 +52,9 @@ class Unit
     else
       throw new Error("Illegal Argument for div: " + rhs)
   toString: ()->
-    scaleString = if @scale is 1 then "" else "#{@scale} * "
+    operatorStr = if @scale is 1 or @dimensions.dimensionless() then "" else " "
+    scaleString = if @scale is 1 then "" else "#{@scale}"
     unitsString = [stringify(@dimensions.M, @labels[0]), stringify(@dimensions.L, @labels[1]), stringify(@dimensions.T, @labels[2]), stringify(@dimensions.Q, @labels[3])].filter((x) -> typeof x is 'string').join(" ")
-    return "#{scaleString}#{unitsString}"
+    return "#{scaleString}#{operatorStr}#{unitsString}"
 
 @BLADE.Unit = Unit

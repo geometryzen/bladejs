@@ -49,6 +49,7 @@ class Rational
       return new BLADE.Rational(@numer * rhs.numer, @denom * rhs.denom)
   div: (rhs) ->
     return new BLADE.Rational(@numer * rhs.denom, @denom * rhs.numer)
+  isZero: -> @numer is 0
   equals: (other) ->
     if other instanceof BLADE.Rational
       return (@numer * other.denom) is (@denom * other.numer)

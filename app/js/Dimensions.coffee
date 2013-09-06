@@ -45,6 +45,7 @@ class Dimensions
     return new BLADE.Dimensions(@M.sub(rhs.M), @L.sub(rhs.L), @T.sub(rhs.T), @Q.sub(rhs.Q))
   pow: (exponent) ->
     return new BLADE.Dimensions(@M.mul(exponent), @L.mul(exponent), @T.mul(exponent), @Q.mul(exponent))
+  dimensionless: -> @M.isZero() and @L.isZero() and @T.isZero() and @Q.isZero()
   toString: ()->
     [stringify(@M, 'M'), stringify(@L, 'L'), stringify(@T, 'T'), stringify(@Q, 'Q')].filter((x) -> typeof x is 'string').join(" * ")
 
