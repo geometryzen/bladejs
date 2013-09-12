@@ -1,4 +1,4 @@
-/* bladejs - 0.9.55
+/* bladejs - 0.9.57
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -843,6 +843,14 @@
         return new BLADE.Measure(this.quantity, this.uom.div(rhs));
       } else {
         throw new Error("Measure.div(rhs): rhs must be a [Measure, Unit]");
+      }
+    };
+
+    Measure.prototype.wedge = function(rhs) {
+      if (rhs instanceof BLADE.Measure) {
+        return new BLADE.Measure(this.quantity.wedge(rhs.quantity), this.uom.mul(rhs.uom));
+      } else {
+        throw new Error("Measure.wedge(rhs): rhs must be a Measure");
       }
     };
 

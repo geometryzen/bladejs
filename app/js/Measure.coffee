@@ -35,6 +35,11 @@ class Measure
       return new BLADE.Measure(@quantity, @uom.div(rhs))
     else
       throw new Error("Measure.div(rhs): rhs must be a [Measure, Unit]")
+  wedge: (rhs) ->
+    if rhs instanceof BLADE.Measure
+      return new BLADE.Measure(@quantity.wedge(rhs.quantity), @uom.mul(rhs.uom))
+    else
+      throw new Error("Measure.wedge(rhs): rhs must be a Measure")
   toString: () ->
     return "#{@quantity} #{@uom}"
 
