@@ -1,4 +1,4 @@
-/* bladejs - 0.9.0
+/* bladejs - 0.9.55
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -1071,7 +1071,7 @@
 
       if (rhs instanceof Unit) {
         dimensions = this.dimensions.compatible(rhs.dimensions);
-        return this["this"];
+        return this;
       } else {
         throw new Error("Illegal Argument for Unit.compatible: " + rhs);
       }

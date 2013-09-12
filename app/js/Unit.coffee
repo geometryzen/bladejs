@@ -19,7 +19,7 @@ class Unit
   compatible: (rhs) ->
     if rhs instanceof Unit
       dimensions = @dimensions.compatible(rhs.dimensions)
-      return @this
+      return @
     else
       throw new Error("Illegal Argument for Unit.compatible: " + rhs)
   add: (rhs) ->
