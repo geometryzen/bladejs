@@ -812,7 +812,7 @@
       if (rhs instanceof BLADE.Measure) {
         return new BLADE.Measure(this.quantity.add(rhs.quantity), this.uom.compatible(rhs.uom));
       } else {
-        throw new Error("...");
+        throw new Error("Measure.add(rhs): rhs must be a Measure.");
       }
     };
 
@@ -820,7 +820,7 @@
       if (rhs instanceof BLADE.Measure) {
         return new BLADE.Measure(this.quantity.sub(rhs.quantity), this.uom.compatible(rhs.uom));
       } else {
-        throw new Error("...");
+        throw new Error("Measure.sub(rhs): rhs must be a Measure.");
       }
     };
 
@@ -829,8 +829,10 @@
         return new BLADE.Measure(this.quantity.mul(rhs.quantity), this.uom.mul(rhs.uom));
       } else if (rhs instanceof BLADE.Unit) {
         return new BLADE.Measure(this.quantity, this.uom.mul(rhs));
+      } else if (typeof rhs === 'number') {
+        return new BLADE.Measure(this.quantity.mul(rhs), this.uom);
       } else {
-        throw new Error("...");
+        throw new Error("Measure.mul(rhs): rhs must be a [Measure, Unit, number]");
       }
     };
 
@@ -840,7 +842,7 @@
       } else if (rhs instanceof BLADE.Unit) {
         return new BLADE.Measure(this.quantity, this.uom.div(rhs));
       } else {
-        throw new Error("...");
+        throw new Error("Measure.div(rhs): rhs must be a [Measure, Unit]");
       }
     };
 
