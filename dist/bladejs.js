@@ -841,8 +841,10 @@
         return new BLADE.Measure(this.quantity.div(rhs.quantity), this.uom.div(rhs.uom));
       } else if (rhs instanceof BLADE.Unit) {
         return new BLADE.Measure(this.quantity, this.uom.div(rhs));
+      } else if (typeof rhs === 'number') {
+        return new BLADE.Measure(this.quantity.div(rhs), this.uom);
       } else {
-        throw new Error("Measure.div(rhs): rhs must be a [Measure, Unit]");
+        throw new Error("Measure.div(rhs): rhs must be a [Measure, Unit, number]");
       }
     };
 

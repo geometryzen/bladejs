@@ -1,5 +1,3 @@
 # Blade.JS
 
-JavaScript Geometric Algebra library
-
-## Getting Started
+JavaScript Geometric Algebra, Physics, Engineering and Computer Graphics library.

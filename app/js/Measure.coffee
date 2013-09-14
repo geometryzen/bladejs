@@ -33,8 +33,10 @@ class Measure
       return new BLADE.Measure(@quantity.div(rhs.quantity), @uom.div(rhs.uom))
     else if rhs instanceof BLADE.Unit
       return new BLADE.Measure(@quantity, @uom.div(rhs))
+    else if typeof rhs is 'number'
+      return new BLADE.Measure @quantity.div(rhs), @uom
     else
-      throw new Error("Measure.div(rhs): rhs must be a [Measure, Unit]")
+      throw new Error("Measure.div(rhs): rhs must be a [Measure, Unit, number]")
   wedge: (rhs) ->
     if rhs instanceof BLADE.Measure
       return new BLADE.Measure(@quantity.wedge(rhs.quantity), @uom.mul(rhs.uom))
