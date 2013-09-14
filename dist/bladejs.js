@@ -1,4 +1,4 @@
-/* bladejs - 0.9.57
+/* bladejs - 0.9.60
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -620,13 +620,17 @@
     Euclidean3.prototype.mul = function(rhs) {
       var coord, pack;
 
-      coord = function(x, n) {
-        return x[n];
-      };
-      pack = function(w, x, y, z, xy, yz, zx, xyz) {
-        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
-      };
-      return Euclidean3.compute(BLADE.bladeASM.mulE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
+      if (typeof rhs === 'number') {
+        return new BLADE.Euclidean3(this.w * rhs, this.x * rhs, this.y * rhs, this.z * rhs, this.xy * rhs, this.yz * rhs, this.zx * rhs, this.xyz * rhs);
+      } else {
+        coord = function(x, n) {
+          return x[n];
+        };
+        pack = function(w, x, y, z, xy, yz, zx, xyz) {
+          return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
+        };
+        return Euclidean3.compute(BLADE.bladeASM.mulE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
+      }
     };
 
     Euclidean3.prototype.div = function(rhs) {

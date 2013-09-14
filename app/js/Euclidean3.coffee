@@ -197,9 +197,12 @@ class Euclidean3
     return Euclidean3.compute(BLADE.bladeASM.subE3, [@w, @x, @y, @z, @xy, @yz, @zx, @xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack)
 
   mul: (rhs) ->
-    coord = (x,n) -> x[n]
-    pack = (w,x,y,z,xy,yz,zx,xyz) -> Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz)
-    return Euclidean3.compute(BLADE.bladeASM.mulE3, [@w, @x, @y, @z, @xy, @yz, @zx, @xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack)
+    if typeof rhs is 'number'
+      return new BLADE.Euclidean3(@w * rhs, @x * rhs, @y * rhs, @z * rhs, @xy * rhs, @yz * rhs, @zx * rhs, @xyz * rhs)
+    else
+      coord = (x,n) -> x[n]
+      pack = (w,x,y,z,xy,yz,zx,xyz) -> Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz)
+      return Euclidean3.compute(BLADE.bladeASM.mulE3, [@w, @x, @y, @z, @xy, @yz, @zx, @xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack)
   div: (rhs) ->
     if typeof rhs is 'number'
       return new BLADE.Euclidean3(@w / rhs, @x / rhs, @y / rhs, @z / rhs, @xy / rhs, @yz / rhs, @zx / rhs, @xyz / rhs)
