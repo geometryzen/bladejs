@@ -1,23 +1,31 @@
 describe "Unit", () ->
 
+  labels = ["kg", "m", "s", "C", "K", "mol", "cd"]
+
   it "Construction", () ->
-    meter = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
+    meter = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
     expect(meter.scale).toBe(1)
 
   it "toString", () ->
-    kilogram = new BLADE.Unit(1, new BLADE.Dimensions(1, 0, 0, 0), ["kg", "m", "s", "C"])
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
-    second   = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0), ["kg", "m", "s", "C"])
-    coulomb  = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 1), ["kg", "m", "s", "C"])
-    dimensionless = new BLADE.Unit(1234, new BLADE.Dimensions(0, 0, 0, 0), ["kg", "m", "s", "C"])
+    kilogram = new BLADE.Unit(1, new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0), labels)
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
+    second   = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), labels)
+    coulomb  = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0), labels)
+    kelvin   = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0), labels)
+    mole     = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0), labels)
+    candela  = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1), labels)
+    dimensionless = new BLADE.Unit(1234, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0), labels)
     expect(meter.toString()).toBe("m")
     expect(kilogram.toString()).toBe("kg")
     expect(second.toString()).toBe("s")
     expect(coulomb.toString()).toBe("C")
+    expect(kelvin.toString()).toBe("K")
+    expect(mole.toString()).toBe("mol")
+    expect(candela.toString()).toBe("cd")
     expect(dimensionless.toString()).toBe("1234")
 
   it "mul", () ->
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
     centimeter = meter.mul(0.01)
     inch = centimeter.mul(2.54)
     foot = inch.mul(12)
@@ -40,12 +48,12 @@ describe "Unit", () ->
     expect(angstrom.scale  * 1e10).toBeCloseTo(1)
 
   it "mul by number", () ->
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
     yard = meter.mul(2.54*36/100)
 
   it "mul by Unit", () ->
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
-    second    = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0), ["kg", "m", "s", "C"])
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
+    second    = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), labels)
     areaUnit = meter.mul(second)
 
     expect(meter.toString()).toBe("m")
@@ -53,15 +61,15 @@ describe "Unit", () ->
     expect(areaUnit.toString()).toBe("m s")
 
   it "div by number", () ->
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
     centimeter = meter.div(100)
 
     expect(meter.toString()).toBe("m")
     expect(centimeter.toString()).toBe("0.01 m")
 
   it "div by Unit", () ->
-    meter     = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
-    second    = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0), ["kg", "m", "s", "C"])
+    meter     = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
+    second    = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), labels)
     speedUnit = meter.div(second)
 
     expect(meter.toString()).toBe("m")
@@ -69,7 +77,7 @@ describe "Unit", () ->
     expect(speedUnit.toString()).toBe("m s ** -1")
 
   it "pow by number", () ->
-    meter  = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0), ["kg", "m", "s", "C"])
+    meter  = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
     square = meter.pow(2)
 
     expect(meter.toString()).toBe("m")

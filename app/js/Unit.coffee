@@ -13,6 +13,8 @@ stringify = (rational, label) ->
 
 class Unit
   constructor: (scale, dimensions, labels) ->
+    if labels.length isnt 7
+      throw new Error("Expecting 7 elements in the labels array.")
     @scale = scale
     @dimensions = dimensions
     @labels = labels
@@ -54,7 +56,7 @@ class Unit
   toString: ()->
     operatorStr = if @scale is 1 or @dimensions.dimensionless() then "" else " "
     scaleString = if @scale is 1 then "" else "#{@scale}"
-    unitsString = [stringify(@dimensions.M, @labels[0]), stringify(@dimensions.L, @labels[1]), stringify(@dimensions.T, @labels[2]), stringify(@dimensions.Q, @labels[3])].filter((x) -> typeof x is 'string').join(" ")
+    unitsString = [stringify(@dimensions.M, @labels[0]), stringify(@dimensions.L, @labels[1]), stringify(@dimensions.T, @labels[2]), stringify(@dimensions.Q, @labels[3]), stringify(@dimensions.temperature, @labels[4]), stringify(@dimensions.amount, @labels[5]), stringify(@dimensions.intensity, @labels[6])].filter((x) -> typeof x is 'string').join(" ")
     return "#{scaleString}#{operatorStr}#{unitsString}"
 
 @BLADE.Unit = Unit
