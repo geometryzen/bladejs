@@ -64,7 +64,7 @@ class Dimensions
     if @M.equals(rhs.M) and @L.equals(rhs.L) and @T.equals(rhs.T) and @Q.equals(rhs.Q) and @temperature.equals(rhs.temperature) and @amount.equals(rhs.amount) and @intensity.equals(rhs.intensity)
       return @
     else
-      throw name: "DimensionError", message: "Dimensions must be equal +(#{@}, #{rhs})"
+      throw name: "DimensionError", message: "Dimensions must be equal (#{@}, #{rhs})"
 
   mul: (rhs) ->
     return new BLADE.Dimensions(@M.add(rhs.M), @L.add(rhs.L), @T.add(rhs.T), @Q.add(rhs.Q), @temperature.add(rhs.temperature), @amount.add(rhs.amount), @intensity.add(rhs.intensity))

@@ -143,12 +143,12 @@ describe "Dimensions", () ->
     expect(amount.compatible(amount)).toBe amount
     expect(intensity.compatible(intensity)).toBe intensity
 
-    expect(-> one.compatible(length)).toThrow(new Error("Dimensions must be equal +(, length)"))
-    expect(-> one.compatible(time)).toThrow(new Error("Dimensions must be equal +(, time)"))
-    expect(-> one.compatible(charge)).toThrow(new Error("Dimensions must be equal +(, charge)"))
-    expect(-> one.compatible(temperature)).toThrow(new Error("Dimensions must be equal +(, thermodynamic temperature)"))
-    expect(-> one.compatible(amount)).toThrow(new Error("Dimensions must be equal +(, amount of substance)"))
-    expect(-> one.compatible(intensity)).toThrow(new Error("Dimensions must be equal +(, luminous intensity)"))
+    expect(-> one.compatible(length)).toThrow(new Error("Dimensions must be equal (, length)"))
+    expect(-> one.compatible(time)).toThrow(new Error("Dimensions must be equal (, time)"))
+    expect(-> one.compatible(charge)).toThrow(new Error("Dimensions must be equal (, charge)"))
+    expect(-> one.compatible(temperature)).toThrow(new Error("Dimensions must be equal (, thermodynamic temperature)"))
+    expect(-> one.compatible(amount)).toThrow(new Error("Dimensions must be equal (, amount of substance)"))
+    expect(-> one.compatible(intensity)).toThrow(new Error("Dimensions must be equal (, luminous intensity)"))
 
   it "dimensionless", ->
     expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0).dimensionless()).toBe true

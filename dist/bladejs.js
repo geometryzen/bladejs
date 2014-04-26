@@ -1,4 +1,4 @@
-/* bladejs - 0.9.63
+/* bladejs - 0.9.64
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -96,7 +96,7 @@
       } else {
         throw {
           name: "DimensionError",
-          message: "Dimensions must be equal +(" + this + ", " + rhs + ")"
+          message: "Dimensions must be equal (" + this + ", " + rhs + ")"
         };
       }
     };
