@@ -11,10 +11,11 @@ describe "Unit", () ->
     expect(BLADE.UNIT_METER.toString()).toBe("m")
     expect(BLADE.UNIT_KILOGRAM.toString()).toBe("kg")
     expect(BLADE.UNIT_SECOND.toString()).toBe("s")
-    expect(BLADE.UNIT_COULOMB.toString()).toBe("C")
+    expect(BLADE.UNIT_AMPERE.toString()).toBe("s ** -1 C")
     expect(BLADE.UNIT_KELVIN.toString()).toBe("K")
     expect(BLADE.UNIT_MOLE.toString()).toBe("mol")
     expect(BLADE.UNIT_CANDELA.toString()).toBe("cd")
+    expect(BLADE.UNIT_COULOMB.toString()).toBe("C")
     expect(dimensionless.toString()).toBe("1234")
 
   it "mul", () ->
