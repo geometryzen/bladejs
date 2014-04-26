@@ -1,4 +1,4 @@
-/* bladejs - 0.9.61
+/* bladejs - 0.9.62
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -1186,6 +1186,22 @@
   })();
 
   this.BLADE.Unit = Unit;
+
+  this.BLADE.UNIT_SYMBOLS = ["kg", "m", "s", "C", "K", "mol", "cd"];
+
+  this.BLADE.UNIT_KILOGRAM = new Unit(1, new this.BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_METER = new Unit(1, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_SECOND = new Unit(1, new this.BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_COULOMB = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_KELVIN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_MOLE = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_CANDELA = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
 
 }).call(this);
 

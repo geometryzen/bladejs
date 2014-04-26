@@ -7,21 +7,14 @@ describe "Unit", () ->
     expect(meter.scale).toBe(1)
 
   it "toString", () ->
-    kilogram = new BLADE.Unit(1, new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0), labels)
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
-    second   = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), labels)
-    coulomb  = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0), labels)
-    kelvin   = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0), labels)
-    mole     = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0), labels)
-    candela  = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1), labels)
     dimensionless = new BLADE.Unit(1234, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0), labels)
-    expect(meter.toString()).toBe("m")
-    expect(kilogram.toString()).toBe("kg")
-    expect(second.toString()).toBe("s")
-    expect(coulomb.toString()).toBe("C")
-    expect(kelvin.toString()).toBe("K")
-    expect(mole.toString()).toBe("mol")
-    expect(candela.toString()).toBe("cd")
+    expect(BLADE.UNIT_METER.toString()).toBe("m")
+    expect(BLADE.UNIT_KILOGRAM.toString()).toBe("kg")
+    expect(BLADE.UNIT_SECOND.toString()).toBe("s")
+    expect(BLADE.UNIT_COULOMB.toString()).toBe("C")
+    expect(BLADE.UNIT_KELVIN.toString()).toBe("K")
+    expect(BLADE.UNIT_MOLE.toString()).toBe("mol")
+    expect(BLADE.UNIT_CANDELA.toString()).toBe("cd")
     expect(dimensionless.toString()).toBe("1234")
 
   it "mul", () ->

@@ -60,3 +60,11 @@ class Unit
     return "#{scaleString}#{operatorStr}#{unitsString}"
 
 @BLADE.Unit = Unit
+@BLADE.UNIT_SYMBOLS = ["kg","m","s","C","K","mol","cd"]
+@BLADE.UNIT_KILOGRAM = new Unit(1, new @BLADE.Dimensions(1,0,0,0,0,0,0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_METER    = new Unit(1, new @BLADE.Dimensions(0,1,0,0,0,0,0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_SECOND   = new Unit(1, new @BLADE.Dimensions(0,0,1,0,0,0,0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_COULOMB  = new Unit(1, new @BLADE.Dimensions(0,0,0,1,0,0,0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_KELVIN   = new Unit(1, new @BLADE.Dimensions(0,0,0,0,1,0,0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_MOLE     = new Unit(1, new @BLADE.Dimensions(0,0,0,0,0,1,0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_CANDELA  = new Unit(1, new @BLADE.Dimensions(0,0,0,0,0,0,1), @BLADE.UNIT_SYMBOLS)
