@@ -71,12 +71,14 @@ class Unit
 
 @BLADE.Unit = Unit
 @BLADE.UNIT_SYMBOLS = ["kg","m","s","C","K","mol","cd", "rad"]
-@BLADE.UNIT_KILOGRAM = new Unit(1, new @BLADE.Dimensions(1,0, 0,0,0,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_METER    = new Unit(1, new @BLADE.Dimensions(0,1, 0,0,0,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_SECOND   = new Unit(1, new @BLADE.Dimensions(0,0, 1,0,0,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_AMPERE   = new Unit(1, new @BLADE.Dimensions(0,0,-1,1,0,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_KELVIN   = new Unit(1, new @BLADE.Dimensions(0,0, 0,0,1,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_MOLE     = new Unit(1, new @BLADE.Dimensions(0,0, 0,0,0,1,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_CANDELA  = new Unit(1, new @BLADE.Dimensions(0,0, 0,0,0,0,1,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_COULOMB  = new Unit(1, new @BLADE.Dimensions(0,0, 0,1,0,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_RADIAN   = new Unit(1, new @BLADE.Dimensions(0,0, 0,0,0,0,0,1), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_DIMLESS  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_KILOGRAM = new Unit(1, new @BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_METER    = new Unit(1, new @BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_SECOND   = new Unit(1, new @BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_AMPERE   = new Unit(1, new @BLADE.Dimensions(0, 0,-1, 1, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_KELVIN   = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_MOLE     = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_CANDELA  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_COULOMB  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_RADIAN   = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_DEGREE   = new Unit(180/Math.PI, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)

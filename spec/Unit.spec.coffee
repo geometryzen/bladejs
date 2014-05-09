@@ -8,6 +8,7 @@ describe "Unit", () ->
 
   it "toString", () ->
     dimensionless = new BLADE.Unit(1234, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0), labels)
+    expect(BLADE.UNIT_DIMLESS.toString()).toBe("")
     expect(BLADE.UNIT_METER.toString()).toBe("m")
     expect(BLADE.UNIT_KILOGRAM.toString()).toBe("kg")
     expect(BLADE.UNIT_SECOND.toString()).toBe("s")
@@ -17,6 +18,7 @@ describe "Unit", () ->
     expect(BLADE.UNIT_CANDELA.toString()).toBe("cd")
     expect(BLADE.UNIT_COULOMB.toString()).toBe("C")
     expect(BLADE.UNIT_RADIAN.toString()).toBe("rad")
+    expect(BLADE.UNIT_DEGREE.toString()).toBe("57.29577951308232 rad")
     expect(dimensionless.toString()).toBe("1234")
 
   it "mul", () ->

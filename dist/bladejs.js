@@ -1,4 +1,4 @@
-/* bladejs - 0.9.64
+/* bladejs - 0.9.67
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -1198,7 +1198,7 @@
 
       operatorStr = this.scale === 1 || this.dimensions.dimensionless() ? "" : " ";
       scaleString = this.scale === 1 ? "" : "" + this.scale;
-      unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2]), stringify(this.dimensions.Q, this.labels[3]), stringify(this.dimensions.temperature, this.labels[4]), stringify(this.dimensions.amount, this.labels[5]), stringify(this.dimensions.intensity, this.labels[6])].filter(function(x) {
+      unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2]), stringify(this.dimensions.Q, this.labels[3]), stringify(this.dimensions.temperature, this.labels[4]), stringify(this.dimensions.amount, this.labels[5]), stringify(this.dimensions.intensity, this.labels[6]), stringify(this.dimensions.angle, this.labels[7])].filter(function(x) {
         return typeof x === 'string';
       }).join(" ");
       return "" + scaleString + operatorStr + unitsString;
@@ -1210,23 +1210,29 @@
 
   this.BLADE.Unit = Unit;
 
-  this.BLADE.UNIT_SYMBOLS = ["kg", "m", "s", "C", "K", "mol", "cd"];
+  this.BLADE.UNIT_SYMBOLS = ["kg", "m", "s", "C", "K", "mol", "cd", "rad"];
 
-  this.BLADE.UNIT_KILOGRAM = new Unit(1, new this.BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_DIMLESS = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_METER = new Unit(1, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_KILOGRAM = new Unit(1, new this.BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_SECOND = new Unit(1, new this.BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_METER = new Unit(1, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_AMPERE = new Unit(1, new this.BLADE.Dimensions(0, 0, -1, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_SECOND = new Unit(1, new this.BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_KELVIN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_AMPERE = new Unit(1, new this.BLADE.Dimensions(0, 0, -1, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_MOLE = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_KELVIN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_CANDELA = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_MOLE = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_COULOMB = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_CANDELA = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_COULOMB = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_RADIAN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_DEGREE = new Unit(180 / Math.PI, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
 
 }).call(this);
 
