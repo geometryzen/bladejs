@@ -1,4 +1,4 @@
-/* bladejs - 0.9.67
+/* bladejs - 0.9.68
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -1232,7 +1232,7 @@
 
   this.BLADE.UNIT_RADIAN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_DEGREE = new Unit(180 / Math.PI, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_DEGREE = new Unit(Math.PI / 180, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
 
 }).call(this);
 

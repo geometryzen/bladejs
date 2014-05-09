@@ -81,4 +81,4 @@ class Unit
 @BLADE.UNIT_CANDELA  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0), @BLADE.UNIT_SYMBOLS)
 @BLADE.UNIT_COULOMB  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
 @BLADE.UNIT_RADIAN   = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_DEGREE   = new Unit(180/Math.PI, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_DEGREE   = new Unit(Math.PI/180, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
