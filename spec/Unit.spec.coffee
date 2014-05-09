@@ -1,13 +1,13 @@
 describe "Unit", () ->
 
-  labels = ["kg", "m", "s", "C", "K", "mol", "cd"]
+  labels = ["kg", "m", "s", "C", "K", "mol", "cd", "rad"]
 
   it "Construction", () ->
-    meter = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
+    meter = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), labels)
     expect(meter.scale).toBe(1)
 
   it "toString", () ->
-    dimensionless = new BLADE.Unit(1234, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0), labels)
+    dimensionless = new BLADE.Unit(1234, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0), labels)
     expect(BLADE.UNIT_METER.toString()).toBe("m")
     expect(BLADE.UNIT_KILOGRAM.toString()).toBe("kg")
     expect(BLADE.UNIT_SECOND.toString()).toBe("s")
@@ -16,10 +16,11 @@ describe "Unit", () ->
     expect(BLADE.UNIT_MOLE.toString()).toBe("mol")
     expect(BLADE.UNIT_CANDELA.toString()).toBe("cd")
     expect(BLADE.UNIT_COULOMB.toString()).toBe("C")
+    expect(BLADE.UNIT_RADIAN.toString()).toBe("rad")
     expect(dimensionless.toString()).toBe("1234")
 
   it "mul", () ->
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), labels)
     centimeter = meter.mul(0.01)
     inch = centimeter.mul(2.54)
     foot = inch.mul(12)
@@ -42,12 +43,12 @@ describe "Unit", () ->
     expect(angstrom.scale  * 1e10).toBeCloseTo(1)
 
   it "mul by number", () ->
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), labels)
     yard = meter.mul(2.54*36/100)
 
   it "mul by Unit", () ->
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
-    second    = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), labels)
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), labels)
+    second    = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0), labels)
     areaUnit = meter.mul(second)
 
     expect(meter.toString()).toBe("m")
@@ -55,15 +56,15 @@ describe "Unit", () ->
     expect(areaUnit.toString()).toBe("m s")
 
   it "div by number", () ->
-    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
+    meter    = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), labels)
     centimeter = meter.div(100)
 
     expect(meter.toString()).toBe("m")
     expect(centimeter.toString()).toBe("0.01 m")
 
   it "div by Unit", () ->
-    meter     = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
-    second    = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), labels)
+    meter     = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), labels)
+    second    = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0), labels)
     speedUnit = meter.div(second)
 
     expect(meter.toString()).toBe("m")
@@ -71,8 +72,10 @@ describe "Unit", () ->
     expect(speedUnit.toString()).toBe("m s ** -1")
 
   it "pow by number", () ->
-    meter  = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), labels)
+    meter  = new BLADE.Unit(1, new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), labels)
     square = meter.pow(2)
+    radian = new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), labels)
 
     expect(meter.toString()).toBe("m")
     expect(square.toString()).toBe("m ** 2")
+    expect(radian.toString()).toBe("rad")

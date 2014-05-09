@@ -8,7 +8,8 @@ describe "Dimensions", () ->
     temperature = new BLADE.Rational(5,1)
     amount = new BLADE.Rational(6,1)
     intensity = new BLADE.Rational(7,1)
-    d = new BLADE.Dimensions(M, L, T, Q, temperature, amount, intensity)
+    angle = new BLADE.Rational(8,1)
+    d = new BLADE.Dimensions(M, L, T, Q, temperature, amount, intensity, angle)
     expect(d.M.numer).toBe(1)
     expect(d.M.denom).toBe(1)
     expect(d.L.numer).toBe(2)
@@ -23,9 +24,11 @@ describe "Dimensions", () ->
     expect(d.amount.denom).toBe(1)
     expect(d.intensity.numer).toBe(7)
     expect(d.intensity.denom).toBe(1)
+    expect(d.angle.numer).toBe(8)
+    expect(d.angle.denom).toBe(1)
 
   it "Construction(number)", () ->
-    d = new BLADE.Dimensions(1, 2, 3, 4, 5, 6, 7)
+    d = new BLADE.Dimensions(1, 2, 3, 4, 5, 6, 7, 8)
     expect(d.M.numer).toBe(1)
     expect(d.M.denom).toBe(1)
     expect(d.L.numer).toBe(2)
@@ -40,16 +43,19 @@ describe "Dimensions", () ->
     expect(d.amount.denom).toBe(1)
     expect(d.intensity.numer).toBe(7)
     expect(d.intensity.denom).toBe(1)
+    expect(d.angle.numer).toBe(8)
+    expect(d.angle.denom).toBe(1)
 
   it "mul", () ->
-    M = new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0)
-    L = new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0)
-    T = new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0)
-    Q = new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0)
-    temperature = new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0)
-    amount = new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0)
-    intensity = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1)
-    N = M.mul(L).mul(T).mul(Q).mul(temperature).mul(amount).mul(intensity)
+    M = new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0)
+    L = new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0)
+    T = new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0)
+    Q = new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0)
+    temperature = new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0)
+    amount = new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0)
+    intensity = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0)
+    angle = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1)
+    N = M.mul(L).mul(T).mul(Q).mul(temperature).mul(amount).mul(intensity).mul(angle)
     expect(N.M.numer).toBe(1)
     expect(N.M.denom).toBe(1)
     expect(N.L.numer).toBe(1)
@@ -62,17 +68,20 @@ describe "Dimensions", () ->
     expect(N.amount.denom).toBe(1)
     expect(N.intensity.numer).toBe(1)
     expect(N.intensity.denom).toBe(1)
+    expect(N.angle.numer).toBe(1)
+    expect(N.angle.denom).toBe(1)
 
   it "div", () ->
-    one = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0)
-    M = new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0)
-    L = new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0)
-    T = new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0)
-    Q = new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0)
-    temperature = new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0)
-    amount = new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0)
-    intensity = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1)
-    N = one.div(M).div(L).div(T).div(Q).div(temperature).div(amount).div(intensity)
+    one = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0)
+    M = new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0)
+    L = new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0)
+    T = new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0)
+    Q = new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0)
+    temperature = new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0)
+    amount = new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0)
+    intensity = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0)
+    angle = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1)
+    N = one.div(M).div(L).div(T).div(Q).div(temperature).div(amount).div(intensity).div(angle)
     expect(N.M.numer).toBe(-1)
     expect(N.M.denom).toBe(1)
     expect(N.L.numer).toBe(-1)
@@ -87,9 +96,11 @@ describe "Dimensions", () ->
     expect(N.amount.denom).toBe(1)
     expect(N.intensity.numer).toBe(-1)
     expect(N.intensity.denom).toBe(1)
+    expect(N.angle.numer).toBe(-1)
+    expect(N.angle.denom).toBe(1)
 
   it "pow", () ->
-    base = new BLADE.Dimensions(1, 2, 3, 4, 5, 6, 7)
+    base = new BLADE.Dimensions(1, 2, 3, 4, 5, 6, 7, 8)
     x = base.pow(2)
     expect(x.M.numer).toBe(2)
     expect(x.M.denom).toBe(1)
@@ -105,6 +116,8 @@ describe "Dimensions", () ->
     expect(x.amount.denom).toBe(1)
     expect(x.intensity.numer).toBe(14)
     expect(x.intensity.denom).toBe(1)
+    expect(x.angle.numer).toBe(16)
+    expect(x.angle.denom).toBe(1)
 
     expect(base.M.numer).toBe(1)
     expect(base.M.denom).toBe(1)
@@ -120,17 +133,20 @@ describe "Dimensions", () ->
     expect(base.amount.denom).toBe(1)
     expect(base.intensity.numer).toBe(7)
     expect(base.intensity.denom).toBe(1)
+    expect(base.angle.numer).toBe(8)
+    expect(base.angle.denom).toBe(1)
 
   it "compatible", () ->
-    one    = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0)
-    all    = new BLADE.Dimensions(1, 1, 1, 1, 1, 1, 1)
-    mass   = new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0)
-    length = new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0)
-    time = new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0)
-    charge = new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0)
-    temperature = new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0)
-    amount = new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0)
-    intensity = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1)
+    one    = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0)
+    all    = new BLADE.Dimensions(1, 1, 1, 1, 1, 1, 1, 0)
+    mass   = new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0)
+    length = new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0)
+    time = new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0)
+    charge = new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0)
+    temperature = new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0)
+    amount = new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0)
+    intensity = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0)
+    angle = new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1)
 
     expect(one.compatible(one)).toBe one
     expect(all.compatible(all)).toBe all
@@ -142,6 +158,7 @@ describe "Dimensions", () ->
     expect(temperature.compatible(temperature)).toBe temperature
     expect(amount.compatible(amount)).toBe amount
     expect(intensity.compatible(intensity)).toBe intensity
+    expect(angle.compatible(angle)).toBe angle
 
     expect(-> one.compatible(length)).toThrow(new Error("Dimensions must be equal (, length)"))
     expect(-> one.compatible(time)).toThrow(new Error("Dimensions must be equal (, time)"))
@@ -149,24 +166,27 @@ describe "Dimensions", () ->
     expect(-> one.compatible(temperature)).toThrow(new Error("Dimensions must be equal (, thermodynamic temperature)"))
     expect(-> one.compatible(amount)).toThrow(new Error("Dimensions must be equal (, amount of substance)"))
     expect(-> one.compatible(intensity)).toThrow(new Error("Dimensions must be equal (, luminous intensity)"))
+    expect(-> one.compatible(angle)).toThrow(new Error("Dimensions must be equal (, angle)"))
 
   it "dimensionless", ->
-    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0).dimensionless()).toBe true
-    expect(new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0).dimensionless()).toBe false
-    expect(new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0).dimensionless()).toBe false
-    expect(new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0).dimensionless()).toBe false
-    expect(new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0).dimensionless()).toBe false
-    expect(new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0).dimensionless()).toBe false
-    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0).dimensionless()).toBe false
-    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0).dimensionless()).toBe true
+    expect(new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1).dimensionless()).toBe false
 
   it "toString", () ->
-    expect("#{new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0)}").toBe("mass")
-    expect("#{new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0)}").toBe("length")
-    expect("#{new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0)}").toBe("time")
-    expect("#{new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0)}").toBe("charge")
-    expect("#{new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0)}").toBe("thermodynamic temperature")
-    expect("#{new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0)}").toBe("amount of substance")
-    expect("#{new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1)}").toBe("luminous intensity")
+    expect("#{new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0)}").toBe("mass")
+    expect("#{new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0)}").toBe("length")
+    expect("#{new BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0)}").toBe("time")
+    expect("#{new BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0)}").toBe("charge")
+    expect("#{new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0)}").toBe("thermodynamic temperature")
+    expect("#{new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0)}").toBe("amount of substance")
+    expect("#{new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0)}").toBe("luminous intensity")
+    expect("#{new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1)}").toBe("angle")
 
-    expect("#{new BLADE.Dimensions(0, 1, new BLADE.Rational(-2, 1), 0, 0, 0, 0)}").toBe("length * time ** -2")
+    expect("#{new BLADE.Dimensions(0, 1, new BLADE.Rational(-2, 1), 0, 0, 0, 0, 0)}").toBe("length * time ** -2")

@@ -30,23 +30,36 @@
   };
 
   Dimensions = (function() {
-    function Dimensions(mass, length, time, charge, temperature, amount, intensity) {
+    function Dimensions(mass, length, time, charge, temperature, amount, intensity, angle) {
       if (typeof mass === 'number') {
         this.M = new BLADE.Rational(mass, 1);
       } else if (mass instanceof BLADE.Rational) {
         this.M = mass;
       } else {
-        throw new Error("mass must be a Rational or number");
+        throw {
+          name: "DimensionError",
+          message: "mass must be a Rational or number"
+        };
       }
       if (typeof length === 'number') {
         this.L = new BLADE.Rational(length, 1);
-      } else {
+      } else if (length instanceof BLADE.Rational) {
         this.L = length;
+      } else {
+        throw {
+          name: "DimensionError",
+          message: "length must be a Rational or number"
+        };
       }
       if (typeof time === 'number') {
         this.T = new BLADE.Rational(time, 1);
-      } else {
+      } else if (time instanceof BLADE.Rational) {
         this.T = time;
+      } else {
+        throw {
+          name: "DimensionError",
+          message: "time must be a Rational or number"
+        };
       }
       if (typeof charge === 'number') {
         this.Q = new BLADE.Rational(charge, 1);
@@ -88,10 +101,20 @@
           message: "(luminous) intensity must be a Rational or number"
         };
       }
+      if (typeof angle === 'number') {
+        this.angle = new BLADE.Rational(angle, 1);
+      } else if (angle instanceof BLADE.Rational) {
+        this.angle = angle;
+      } else {
+        throw {
+          name: "DimensionError",
+          message: "angle must be a Rational or number"
+        };
+      }
     }
 
     Dimensions.prototype.compatible = function(rhs) {
-      if (this.M.equals(rhs.M) && this.L.equals(rhs.L) && this.T.equals(rhs.T) && this.Q.equals(rhs.Q) && this.temperature.equals(rhs.temperature) && this.amount.equals(rhs.amount) && this.intensity.equals(rhs.intensity)) {
+      if (this.M.equals(rhs.M) && this.L.equals(rhs.L) && this.T.equals(rhs.T) && this.Q.equals(rhs.Q) && this.temperature.equals(rhs.temperature) && this.amount.equals(rhs.amount) && this.intensity.equals(rhs.intensity) && this.angle.equals(rhs.angle)) {
         return this;
       } else {
         throw {
@@ -102,23 +125,23 @@
     };
 
     Dimensions.prototype.mul = function(rhs) {
-      return new BLADE.Dimensions(this.M.add(rhs.M), this.L.add(rhs.L), this.T.add(rhs.T), this.Q.add(rhs.Q), this.temperature.add(rhs.temperature), this.amount.add(rhs.amount), this.intensity.add(rhs.intensity));
+      return new BLADE.Dimensions(this.M.add(rhs.M), this.L.add(rhs.L), this.T.add(rhs.T), this.Q.add(rhs.Q), this.temperature.add(rhs.temperature), this.amount.add(rhs.amount), this.intensity.add(rhs.intensity), this.angle.add(rhs.angle));
     };
 
     Dimensions.prototype.div = function(rhs) {
-      return new BLADE.Dimensions(this.M.sub(rhs.M), this.L.sub(rhs.L), this.T.sub(rhs.T), this.Q.sub(rhs.Q), this.temperature.sub(rhs.temperature), this.amount.sub(rhs.amount), this.intensity.sub(rhs.intensity));
+      return new BLADE.Dimensions(this.M.sub(rhs.M), this.L.sub(rhs.L), this.T.sub(rhs.T), this.Q.sub(rhs.Q), this.temperature.sub(rhs.temperature), this.amount.sub(rhs.amount), this.intensity.sub(rhs.intensity), this.angle.sub(rhs.angle));
     };
 
     Dimensions.prototype.pow = function(exponent) {
-      return new BLADE.Dimensions(this.M.mul(exponent), this.L.mul(exponent), this.T.mul(exponent), this.Q.mul(exponent), this.temperature.mul(exponent), this.amount.mul(exponent), this.intensity.mul(exponent));
+      return new BLADE.Dimensions(this.M.mul(exponent), this.L.mul(exponent), this.T.mul(exponent), this.Q.mul(exponent), this.temperature.mul(exponent), this.amount.mul(exponent), this.intensity.mul(exponent), this.angle.mul(exponent));
     };
 
     Dimensions.prototype.dimensionless = function() {
-      return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero() && this.temperature.isZero() && this.amount.isZero() && this.intensity.isZero();
+      return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero() && this.temperature.isZero() && this.amount.isZero() && this.intensity.isZero() && this.angle.isZero();
     };
 
     Dimensions.prototype.toString = function() {
-      return [stringify(this.M, 'mass'), stringify(this.L, 'length'), stringify(this.T, 'time'), stringify(this.Q, 'charge'), stringify(this.temperature, 'thermodynamic temperature'), stringify(this.amount, 'amount of substance'), stringify(this.intensity, 'luminous intensity')].filter(function(x) {
+      return [stringify(this.M, 'mass'), stringify(this.L, 'length'), stringify(this.T, 'time'), stringify(this.Q, 'charge'), stringify(this.temperature, 'thermodynamic temperature'), stringify(this.amount, 'amount of substance'), stringify(this.intensity, 'luminous intensity'), stringify(this.angle, 'angle')].filter(function(x) {
         return typeof x === 'string';
       }).join(" * ");
     };
@@ -1107,7 +1130,7 @@
 
   Unit = (function() {
     function Unit(scale, dimensions, labels) {
-      if (labels.length !== 7) {
+      if (labels.length !== 8) {
         throw new Error("Expecting 7 elements in the labels array.");
       }
       this.scale = scale;
