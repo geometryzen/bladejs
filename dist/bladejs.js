@@ -1,4 +1,4 @@
-/* bladejs - 0.9.68
+/* bladejs - 0.9.69
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -137,6 +137,10 @@
     };
 
     Dimensions.prototype.dimensionless = function() {
+      return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero() && this.temperature.isZero() && this.amount.isZero() && this.intensity.isZero();
+    };
+
+    Dimensions.prototype.isZero = function() {
       return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero() && this.temperature.isZero() && this.amount.isZero() && this.intensity.isZero() && this.angle.isZero();
     };
 
@@ -1131,7 +1135,7 @@
   Unit = (function() {
     function Unit(scale, dimensions, labels) {
       if (labels.length !== 8) {
-        throw new Error("Expecting 7 elements in the labels array.");
+        throw new Error("Expecting 8 elements in the labels array.");
       }
       this.scale = scale;
       this.dimensions = dimensions;
@@ -1196,7 +1200,7 @@
     Unit.prototype.toString = function() {
       var operatorStr, scaleString, unitsString;
 
-      operatorStr = this.scale === 1 || this.dimensions.dimensionless() ? "" : " ";
+      operatorStr = this.scale === 1 || this.dimensions.isZero() ? "" : " ";
       scaleString = this.scale === 1 ? "" : "" + this.scale;
       unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2]), stringify(this.dimensions.Q, this.labels[3]), stringify(this.dimensions.temperature, this.labels[4]), stringify(this.dimensions.amount, this.labels[5]), stringify(this.dimensions.intensity, this.labels[6]), stringify(this.dimensions.angle, this.labels[7])].filter(function(x) {
         return typeof x === 'string';
@@ -1231,6 +1235,8 @@
   this.BLADE.UNIT_COULOMB = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
   this.BLADE.UNIT_RADIAN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_TAU = new Unit(2 * Math.PI, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
 
   this.BLADE.UNIT_DEGREE = new Unit(Math.PI / 180, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
 

@@ -18,6 +18,7 @@ describe "Unit", () ->
     expect(BLADE.UNIT_CANDELA.toString()).toBe("cd")
     expect(BLADE.UNIT_COULOMB.toString()).toBe("C")
     expect(BLADE.UNIT_RADIAN.toString()).toBe("rad")
+    expect(BLADE.UNIT_TAU.toString()).toBe("6.283185307179586 rad")
     expect(BLADE.UNIT_DEGREE.toString()).toBe("0.017453292519943295 rad")
     expect(dimensionless.toString()).toBe("1234")
 

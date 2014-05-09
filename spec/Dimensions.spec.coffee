@@ -177,7 +177,7 @@ describe "Dimensions", () ->
     expect(new BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0).dimensionless()).toBe false
     expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0).dimensionless()).toBe false
     expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0).dimensionless()).toBe false
-    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1).dimensionless()).toBe false
+    expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1).dimensionless()).toBe true
 
   it "toString", () ->
     expect("#{new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0)}").toBe("mass")

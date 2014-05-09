@@ -86,7 +86,9 @@ class Dimensions
   pow: (exponent) ->
     return new BLADE.Dimensions(@M.mul(exponent), @L.mul(exponent), @T.mul(exponent), @Q.mul(exponent), @temperature.mul(exponent), @amount.mul(exponent), @intensity.mul(exponent), @angle.mul(exponent))
 
-  dimensionless: -> @M.isZero() and @L.isZero() and @T.isZero() and @Q.isZero() and @temperature.isZero() and @amount.isZero() and @intensity.isZero() and @angle.isZero()
+  dimensionless: -> @M.isZero() and @L.isZero() and @T.isZero() and @Q.isZero() and @temperature.isZero() and @amount.isZero() and @intensity.isZero()
+
+  isZero: -> @M.isZero() and @L.isZero() and @T.isZero() and @Q.isZero() and @temperature.isZero() and @amount.isZero() and @intensity.isZero() and @angle.isZero()
 
   toString: ()->
     [

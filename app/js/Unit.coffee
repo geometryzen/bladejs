@@ -14,7 +14,7 @@ stringify = (rational, label) ->
 class Unit
   constructor: (scale, dimensions, labels) ->
     if labels.length isnt 8
-      throw new Error("Expecting 7 elements in the labels array.")
+      throw new Error("Expecting 8 elements in the labels array.")
     @scale = scale
     @dimensions = dimensions
     @labels = labels
@@ -54,7 +54,7 @@ class Unit
     else
       throw new Error("Illegal Argument for div: " + rhs)
   toString: ()->
-    operatorStr = if @scale is 1 or @dimensions.dimensionless() then "" else " "
+    operatorStr = if @scale is 1 or @dimensions.isZero() then "" else " "
     scaleString = if @scale is 1 then "" else "#{@scale}"
     unitsString =
       [
@@ -81,4 +81,5 @@ class Unit
 @BLADE.UNIT_CANDELA  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0), @BLADE.UNIT_SYMBOLS)
 @BLADE.UNIT_COULOMB  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
 @BLADE.UNIT_RADIAN   = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_TAU      = new Unit(2 * Math.PI, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
 @BLADE.UNIT_DEGREE   = new Unit(Math.PI/180, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
