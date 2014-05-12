@@ -13,7 +13,10 @@ stringify = (rational, label) ->
   "#{label} ** #{rational}"
 
 class Dimensions
-  constructor: (mass, length, time, charge, temperature, amount, intensity, angle) ->
+  constructor: (mass, length, time, charge, temperature, amount, intensity, unknown) ->
+
+    if arguments.length isnt 7
+      throw name: "DimensionError", message: "Expecting 7 arguments"
 
     if typeof mass is 'number'
       @M = new BLADE.Rational(mass, 1)
@@ -64,31 +67,24 @@ class Dimensions
     else
      throw name: "DimensionError", message: "(luminous) intensity must be a Rational or number"
 
-    if typeof angle is 'number'
-      @angle = new BLADE.Rational(angle, 1)
-    else if angle instanceof BLADE.Rational
-      @angle = angle
-    else
-     throw name: "DimensionError", message: "angle must be a Rational or number"
-
   compatible: (rhs) ->
-    if @M.equals(rhs.M) and @L.equals(rhs.L) and @T.equals(rhs.T) and @Q.equals(rhs.Q) and @temperature.equals(rhs.temperature) and @amount.equals(rhs.amount) and @intensity.equals(rhs.intensity) and @angle.equals(rhs.angle)
+    if @M.equals(rhs.M) and @L.equals(rhs.L) and @T.equals(rhs.T) and @Q.equals(rhs.Q) and @temperature.equals(rhs.temperature) and @amount.equals(rhs.amount) and @intensity.equals(rhs.intensity)
       return @
     else
       throw name: "DimensionError", message: "Dimensions must be equal (#{@}, #{rhs})"
 
   mul: (rhs) ->
-    return new BLADE.Dimensions(@M.add(rhs.M), @L.add(rhs.L), @T.add(rhs.T), @Q.add(rhs.Q), @temperature.add(rhs.temperature), @amount.add(rhs.amount), @intensity.add(rhs.intensity), @angle.add(rhs.angle))
+    return new BLADE.Dimensions @M.add(rhs.M), @L.add(rhs.L), @T.add(rhs.T), @Q.add(rhs.Q), @temperature.add(rhs.temperature), @amount.add(rhs.amount), @intensity.add(rhs.intensity)
 
   div: (rhs) ->
-    return new BLADE.Dimensions(@M.sub(rhs.M), @L.sub(rhs.L), @T.sub(rhs.T), @Q.sub(rhs.Q), @temperature.sub(rhs.temperature), @amount.sub(rhs.amount), @intensity.sub(rhs.intensity), @angle.sub(rhs.angle))
+    return new BLADE.Dimensions @M.sub(rhs.M), @L.sub(rhs.L), @T.sub(rhs.T), @Q.sub(rhs.Q), @temperature.sub(rhs.temperature), @amount.sub(rhs.amount), @intensity.sub(rhs.intensity)
 
   pow: (exponent) ->
-    return new BLADE.Dimensions(@M.mul(exponent), @L.mul(exponent), @T.mul(exponent), @Q.mul(exponent), @temperature.mul(exponent), @amount.mul(exponent), @intensity.mul(exponent), @angle.mul(exponent))
+    return new BLADE.Dimensions @M.mul(exponent), @L.mul(exponent), @T.mul(exponent), @Q.mul(exponent), @temperature.mul(exponent), @amount.mul(exponent), @intensity.mul(exponent)
 
   dimensionless: -> @M.isZero() and @L.isZero() and @T.isZero() and @Q.isZero() and @temperature.isZero() and @amount.isZero() and @intensity.isZero()
 
-  isZero: -> @M.isZero() and @L.isZero() and @T.isZero() and @Q.isZero() and @temperature.isZero() and @amount.isZero() and @intensity.isZero() and @angle.isZero()
+  isZero: -> @M.isZero() and @L.isZero() and @T.isZero() and @Q.isZero() and @temperature.isZero() and @amount.isZero() and @intensity.isZero()
 
   toString: ()->
     [
@@ -98,8 +94,7 @@ class Dimensions
       stringify(@Q, 'charge'),
       stringify(@temperature, 'thermodynamic temperature'),
       stringify(@amount, 'amount of substance'),
-      stringify(@intensity, 'luminous intensity'),
-      stringify(@angle, 'angle')
+      stringify(@intensity, 'luminous intensity')
       ].filter((x) -> typeof x is 'string').join(" * ")
 
 @BLADE.Dimensions = Dimensions
