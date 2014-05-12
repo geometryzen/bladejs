@@ -160,6 +160,23 @@ describe "Dimensions", () ->
     expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0).dimensionless()).toBe false
     expect(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1).dimensionless()).toBe false
 
+  it "negative", ->
+    dims = new BLADE.Dimensions(1, 2, 3, 4, 5, 6, 7).negative()
+    expect(dims.M.numer).toBe(-1)
+    expect(dims.M.denom).toBe(1)
+    expect(dims.L.numer).toBe(-2)
+    expect(dims.L.denom).toBe(1)
+    expect(dims.T.numer).toBe(-3)
+    expect(dims.T.denom).toBe(1)
+    expect(dims.Q.numer).toBe(-4)
+    expect(dims.Q.denom).toBe(1)
+    expect(dims.temperature.numer).toBe(-5)
+    expect(dims.temperature.denom).toBe(1)
+    expect(dims.amount.numer).toBe(-6)
+    expect(dims.amount.denom).toBe(1)
+    expect(dims.intensity.numer).toBe(-7)
+    expect(dims.intensity.denom).toBe(1)
+
   it "toString", () ->
     expect("#{new BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0)}").toBe("mass")
     expect("#{new BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0)}").toBe("length")

@@ -83,3 +83,15 @@ describe "Unit", () ->
 
     expect(meter.toString()).toBe("m")
     expect(square.toString()).toBe("m ** 2")
+
+  it "inverse", () ->
+    dimensionless = new BLADE.Unit(1234, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0), labels)
+    expect(BLADE.UNIT_DIMLESS.inverse().toString()).toBe("")
+    expect(BLADE.UNIT_METER.inverse().toString()).toBe("m ** -1")
+    expect(BLADE.UNIT_KILOGRAM.inverse().toString()).toBe("kg ** -1")
+    expect(BLADE.UNIT_SECOND.inverse().toString()).toBe("s ** -1")
+    expect(BLADE.UNIT_AMPERE.inverse().toString()).toBe("s C ** -1")
+    expect(BLADE.UNIT_KELVIN.inverse().toString()).toBe("K ** -1")
+    expect(BLADE.UNIT_MOLE.inverse().toString()).toBe("mol ** -1")
+    expect(BLADE.UNIT_CANDELA.inverse().toString()).toBe("cd ** -1")
+

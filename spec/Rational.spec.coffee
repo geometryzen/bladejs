@@ -67,23 +67,24 @@ describe "Rational", () ->
     x = new BLADE.Rational(1, 3)
     y = new BLADE.Rational(2, 1)
     sum = x.mul(y)
-    expect(sum.numer).toBe(2)
-    expect(sum.denom).toBe(3)
-    expect(x.numer).toBe(1)
-    expect(x.denom).toBe(3)
-    expect(y.numer).toBe(2)
-    expect(y.denom).toBe(1)
+    expect(sum.numer).toBe 2
+    expect(sum.denom).toBe 3
+    expect(x.numer).toBe 1
+    expect(x.denom).toBe 3
+    expect(y.numer).toBe 2
+    expect(y.denom).toBe 1
 
-  it "div", () ->
+  it "negative() should change the sign of the numerator", () ->
     x = new BLADE.Rational(1, 3)
-    y = new BLADE.Rational(2, 1)
-    sum = x.div(y)
-    expect(sum.numer).toBe(1)
-    expect(sum.denom).toBe(6)
-    expect(x.numer).toBe(1)
-    expect(x.denom).toBe(3)
-    expect(y.numer).toBe(2)
-    expect(y.denom).toBe(1)
+    n = x.negative()
+    expect(x.numer).toBe +1
+    expect(n.numer).toBe -1
+
+  it "negative() should leave the denominator unchanged", () ->
+    x = new BLADE.Rational(1, 3)
+    n = x.negative()
+    expect(x.denom).toBe +3
+    expect(n.denom).toBe +3
 
   it "toString", () ->
     x = new BLADE.Rational(1, 2)

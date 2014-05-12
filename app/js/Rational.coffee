@@ -34,25 +34,29 @@ class Rational
     @denom = d / g
   add: (rhs) ->
     if typeof rhs is 'number'
-      return new BLADE.Rational(@numer + @denom * rhs, @denom)
+      return new BLADE.Rational @numer + @denom * rhs, @denom
     else
-      return new BLADE.Rational(@numer * rhs.denom + @denom * rhs.numer, @denom * rhs.denom)
+      return new BLADE.Rational @numer * rhs.denom + @denom * rhs.numer, @denom * rhs.denom
   sub: (rhs) ->
     if typeof rhs is 'number'
-      return new BLADE.Rational(@numer - @denom * rhs, @denom)
+      return new BLADE.Rational @numer - @denom * rhs, @denom
     else
-      return new BLADE.Rational(@numer * rhs.denom - @denom * rhs.numer, @denom * rhs.denom)
+      return new BLADE.Rational @numer * rhs.denom - @denom * rhs.numer, @denom * rhs.denom
   mul: (rhs) ->
     if typeof rhs is 'number'
-      return new BLADE.Rational(@numer * rhs, @denom)
+      return new BLADE.Rational @numer * rhs, @denom
     else
-      return new BLADE.Rational(@numer * rhs.numer, @denom * rhs.denom)
+      return new BLADE.Rational @numer * rhs.numer, @denom * rhs.denom
   div: (rhs) ->
-    return new BLADE.Rational(@numer * rhs.denom, @denom * rhs.numer)
+    if typeof rhs is 'number'
+      return new BLADE.Rational @numer, @denom * rhs
+    else
+      return new BLADE.Rational @numer * rhs.denom, @denom * rhs.numer
   isZero: -> @numer is 0
+  negative: -> return new BLADE.Rational -@numer, @denom
   equals: (other) ->
     if other instanceof BLADE.Rational
-      return (@numer * other.denom) is (@denom * other.numer)
+      return @numer * other.denom is @denom * other.numer
     else
       return false
   toString: ()-> "#{@numer}/#{@denom}"

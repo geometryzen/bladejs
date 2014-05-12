@@ -53,7 +53,10 @@ class Unit
       return new BLADE.Unit(Math.pow(@scale, rhs), @dimensions.pow(rhs), @labels)
     else
       throw new Error("Illegal Argument for div: " + rhs)
-  toString: ()->
+
+  inverse: -> return new BLADE.Unit(1/@scale, @dimensions.negative(), @labels)
+
+  toString: ->
     operatorStr = if @scale is 1 or @dimensions.isZero() then "" else " "
     scaleString = if @scale is 1 then "" else "#{@scale}"
     unitsString =

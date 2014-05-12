@@ -86,6 +86,9 @@ class Dimensions
 
   isZero: -> @M.isZero() and @L.isZero() and @T.isZero() and @Q.isZero() and @temperature.isZero() and @amount.isZero() and @intensity.isZero()
 
+  negative: ->
+    return new BLADE.Dimensions @M.negative(), @L.negative(), @T.negative(), @Q.negative(), @temperature.negative(), @amount.negative(), @intensity.negative()
+
   toString: ()->
     [
       stringify(@M, 'mass'),
