@@ -1,4 +1,4 @@
-/* bladejs - 0.9.71
+/* bladejs - 0.9.72
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -769,7 +769,19 @@
     };
 
     Euclidean3.prototype.length = function() {
-      return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+      return Math.sqrt(this.w * this.w + this.x * this.x + this.y * this.y + this.z * this.z + this.xy * this.xy + this.yz * this.yz + this.zx * this.zx + this.xyz * this.xyz);
+    };
+
+    Euclidean3.prototype.norm = function() {
+      return new BLADE.Euclidean3(Math.sqrt(this.w * this.w + this.x * this.x + this.y * this.y + this.z * this.z + this.xy * this.xy + this.yz * this.yz + this.zx * this.zx + this.xyz * this.xyz), 0, 0, 0, 0, 0, 0, 0);
+    };
+
+    Euclidean3.prototype.quad = function() {
+      return new BLADE.Euclidean3(this.w * this.w + this.x * this.x + this.y * this.y + this.z * this.z + this.xy * this.xy + this.yz * this.yz + this.zx * this.zx + this.xyz * this.xyz, 0, 0, 0, 0, 0, 0, 0);
+    };
+
+    Euclidean3.prototype.sqrt = function() {
+      return new BLADE.Euclidean3(Math.sqrt(this.w), 0, 0, 0, 0, 0, 0, 0);
     };
 
     Euclidean3.prototype.toString = function() {

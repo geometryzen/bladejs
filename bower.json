@@ -1,7 +1,7 @@
 {
   "name": "bladejs",
-  "version": "0.9.71",
-  "description": "JavaScript Geometric Algebra library",
+  "version": "0.9.72",
+  "description": "JavaScript Geometric Algebra library.",
   "author":
   {
     "name": "David Holmes",

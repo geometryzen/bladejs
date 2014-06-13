@@ -236,7 +236,7 @@ class Euclidean3
       else
         return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, 0)
 
-  dot: (vector) -> 
+  dot: (vector) ->
     return @x * vector.x + @y * vector.y + @z * vector.z
 
   cross: (vector) ->
@@ -252,7 +252,16 @@ class Euclidean3
     return new BLADE.Euclidean3(0, x, y, z, 0, 0, 0, 0)
 
   length: () ->
-    return Math.sqrt(@x * @x + @y * @y + @z * @z)
+    return Math.sqrt(@w * @w + @x * @x + @y * @y + @z * @z + @xy * @xy + @yz * @yz + @zx * @zx + @xyz * @xyz)
+
+  norm: () ->
+    return new BLADE.Euclidean3(Math.sqrt(@w * @w + @x * @x + @y * @y + @z * @z + @xy * @xy + @yz * @yz + @zx * @zx + @xyz * @xyz), 0, 0, 0, 0, 0, 0, 0)
+
+  quad: () ->
+    return new BLADE.Euclidean3(@w * @w + @x * @x + @y * @y + @z * @z + @xy * @xy + @yz * @yz + @zx * @zx + @xyz * @xyz, 0, 0, 0, 0, 0, 0, 0)
+
+  sqrt: () ->
+    return new BLADE.Euclidean3(Math.sqrt(@w), 0, 0, 0, 0, 0, 0, 0)
 
   toString: () -> BLADE.bladeSTR.stringFromCoordinates([@w, @x, @y, @z, @xy, @yz, @zx, @xyz], ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"])
   toStringIJK: () -> BLADE.bladeSTR.stringFromCoordinates([@w, @x, @y, @z, @xy, @yz, @zx, @xyz], ["1", "i", "j", "k", "ij", "jk", "ki", "I"])
